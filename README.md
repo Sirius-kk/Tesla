@@ -1,7 +1,5 @@
 # tesla
 
-![](C:\Users\Administrator\Desktop\tesla\public\img\teslalogoo.jpg)
-
 ## Project setup
 ```
 npm install
