@@ -5,7 +5,7 @@
         <!-- 左侧部分开始 -->
         <div class="left">
           <div class="img_logo">
-            <img src="../../public/img/logo.jpg" />
+            <img src="../../public/img/header/logo.jpg" />
           </div>
           <div></div>
           <div>在线商城</div>
