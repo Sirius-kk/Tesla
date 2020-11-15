@@ -31,10 +31,10 @@
         <!-- 右侧部分开始 -->
         <div class="right">
           <div class="shopping">
-            <img src="../../public/img/shopping.png" />
+            <img src="../../public/img/header/shopping.png" />
           </div>
           <div class="search">
-            <img src="../../public/img/search.png" />
+            <img src="../../public/img/header/search.png" />
           </div>
           <div>登录</div>
         </div>
@@ -57,7 +57,7 @@
             <p>旅行充电</p>
           </div>
           <span class="middle_down_img">
-            <img src="../../public/img/kard_1.jpg" />
+            <img src="../../public/img/header/kard_1.jpg" />
             <h1>Model 3 地毯脚垫套装</h1>
           </span>
         </div>
@@ -93,7 +93,7 @@
             </ul>
           </div>
           <span class="middle_down_img">
-            <img src="../../public/img/kard_2.jpg" />
+            <img src="../../public/img/header/kard_2.jpg" />
             <h1>家庭充电服务包 (国标)</h1>
           </span>
         </div>
