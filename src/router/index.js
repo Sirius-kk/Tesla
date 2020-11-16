@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+/* 导入商品列表模块 */
+import product_list from '../views/Product_list.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +11,10 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/pro_list',
+    component: product_list
   },
   {
     path: '/about',
