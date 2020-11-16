@@ -249,8 +249,8 @@ export default {
   border-bottom: 5px solid #999;
 }
 .menu_21 div {
-  width: 24%;
   margin-right: 24px;
+  width: 24%;
 }
 .menu_22 > div {
   width: 15%;

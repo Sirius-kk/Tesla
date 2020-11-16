@@ -1,5 +1,6 @@
 <template>
   <div>
+    <my-header></my-header>
     <!-- 页面开始 -->
     <!-- 一级标题+容器开始 -->
     <div class="container">
@@ -8,15 +9,27 @@
       <div v-for="(t2, i1) of title2" :key="i1">
         <div class="t2">{{ t2 }}</div>
         <!-- 商品块开始 -->
-        <div v-for="(pro, i2) of product" :key="i2">
-          <div class="pro_all">
-            <!-- 单个商品开始 -->
-            <div class="product">
-              {{ pro.cont }}
+        <ul class="pro_all">
+          <!-- 单个商品开始 -->
+          <li v-for="(pro, i2) of product" :key="i2" class="product">
+            <div class="pro_cont">
+              <div class="pro_img">
+                <a href="#">
+                  <img v-if="true" src="" alt="">
+                  <img v-else src="" alt="">
+                </a>
+              </div>
+              <div class="pro_buy">
+                <button>立即购买</button>
+              </div>
+              <!-- <div class="pro_detail"></div> -->
             </div>
-            <!-- 单个商品结束 -->
-          </div>
-        </div>
+            <div class="pro_title"></div>
+            <div class="pro_price"></div>
+            {{ pro.cont }}
+          </li>
+          <!-- 单个商品结束 -->
+        </ul>
         <!-- 商品块结束 -->
       </div>
       <!-- 二级标题+容器结束 -->
@@ -26,24 +39,57 @@
   </div>
 </template>
 <style scoped>
+* {
+  box-sizing: border-box;
+}
 .container {
-  padding: 10px 30px;
+  padding: 0px 24px;
 }
 .t1 {
+  padding-top: 40px;
   font-size: 26px;
+  font-weight: 700;
   color: #f00;
 }
 .t2 {
+  margin-top: 40px;
   font-size: 22px;
   color: #f0f;
 }
 .pro_all {
-  width: 100vw;
-  padding: 5px 10px;
+  margin: 15px 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+.pro_all::after {
+  content: "";
 }
 .product {
-  width: 33%;
-  height: 100px;
+  width: 30%;
+  margin: 25px 0;
+}
+.pro_cont {
+  position: relative;
+  margin-bottom: 4px;
+}
+.pro_img>a {
+  display: block;
+}
+.pro_img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.pro_buy {
+  height: 20%;
+  padding: 8% 4%;
+  display: flex;
+  justify-content: center;
+}
+.pro_buy button {
+  display: block;
 }
 </style>
 <script>
