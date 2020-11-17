@@ -21,7 +21,6 @@ DROP TABLE IF EXISTS ts_index_rotationPicture;
 /*创建主页轮播图片数据表'ts_index_rotationPicture'*/
 CREATE TABLE ts_index_rotationPicture (
   indexr_id TINYINT PRIMARY KEY AUTO_INCREMENT,          #主页轮播图片详情编号
-  indexr_title VARCHAR(45),     #图片标题
   indexr_tables VARCHAR(30),    #图片来源数据表
   indexr_pid TINYINT            #产品详情编号
 );
@@ -78,7 +77,7 @@ CREATE TABLE ts_activity_product(
   afamily_id TINYINT,         #所属型号家族编号
   aclass VARCHAR(10),         #产品分类
   atitle VARCHAR(30),         #主标题
-  aprice DECIMAL(10,2),       #价格
+  aprice VARCHAR(30),         #价格
   atype VARCHAR(50),          #类型
   acolor VARCHAR(15),         #颜色
   asize VARCHAR(15),          #尺寸
@@ -95,7 +94,7 @@ CREATE TABLE ts_charge_product(
   cfamily_id TINYINT,         #所属型号家族编号
   cclass VARCHAR(10),         #产品分类
   ctitle VARCHAR(30),         #主标题
-  cprice DECIMAL(10,2),       #价格
+  cprice VARCHAR(30),         #价格
   ctype VARCHAR(50),          #类型
   ccolor VARCHAR(15),         #颜色
   csize VARCHAR(15),          #尺寸
@@ -112,7 +111,7 @@ CREATE TABLE ts_part_product(
   pfamily_id TINYINT,         #所属型号家族编号
   pclass VARCHAR(10),         #产品分类1
   ptitle VARCHAR(30),         #主标题
-  pprice DECIMAL(10,2),       #价格
+  pprice VARCHAR(30),         #价格
   ptype VARCHAR(50),          #类型
   pcolor VARCHAR(15),         #颜色
   psize VARCHAR(15),          #尺寸
@@ -129,7 +128,7 @@ CREATE TABLE ts_dress_product(
   dfamily_id TINYINT,         #所属型号家族编号
   dclass VARCHAR(10),         #产品分类
   dtitle VARCHAR(30),         #主标题
-  dprice DECIMAL(10,2),       #价格
+  dprice VARCHAR(30),         #价格
   dtype VARCHAR(50),          #类型
   dcolor VARCHAR(5),          #颜色
   dsize VARCHAR(5),           #尺寸
@@ -146,7 +145,7 @@ CREATE TABLE ts_surround_product(
   sfamily_id TINYINT,         #所属型号家族编号
   sclass VARCHAR(10),         #产品分类
   stitle VARCHAR(30),         #主标题
-  sprice DECIMAL(10,2),       #价格
+  sprice VARCHAR(30),         #价格
   dtype VARCHAR(50),          #类型
   scolor VARCHAR(5),          #颜色
   dsize VARCHAR(5),           #尺寸
@@ -215,7 +214,7 @@ INSERT INTO ts_activity_product VALUES
   1,
   NULL,
   'Model 3 车主专属福利',
-  0.00,
+  '0',
   NULL,
   NULL,
   NULL,
@@ -244,7 +243,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   1,
   NULL,
   '家庭充电服务包 (国标)',
-  8000.00,
+  '8000',
   NULL,
   NULL,
   NULL,
@@ -271,7 +270,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   1,
   NULL,
   '充电线缆整理器',
-  275.00,
+  '275',
   NULL,
   NULL,
   NULL,
@@ -287,7 +286,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   1,
   NULL,
   '家庭充电服务包 (欧标)',
-  8000.00,
+  '8000',
   NULL,
   NULL,
   NULL,
@@ -314,7 +313,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   2,
   NULL,
   '移动充电连接器 (国标)',
-  2550.00,
+  '2550',
   NULL,
   NULL,
   NULL,
@@ -324,7 +323,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   2,
   NULL,
   '移动充电连接器 (欧标)',
-  4775.00,
+  '4775',
   NULL,
   NULL,
   NULL,
@@ -334,7 +333,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   2,
   NULL,
   '国标直流(DC)适配器',
-  2750.00,
+  '2750',
   NULL,
   NULL,
   NULL,
@@ -344,7 +343,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   2,
   NULL,
   '国标交流(AC)适配器',
-  2750.00,
+  '2750',
   NULL,
   NULL,
   NULL,
@@ -358,7 +357,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '畅销商品',
   'Model S 固定式玻璃车顶遮阳帘',
-  580.00,
+  '580',
   NULL,
   NULL,
   NULL,
@@ -370,7 +369,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '畅销商品',
   'Model S 全天候脚垫套装',
-  2160.00,
+  '2160',
   NULL,
   NULL,
   NULL,
@@ -380,10 +379,10 @@ INSERT INTO ts_part_product VALUES
           '{p1:"1019290-00-B_0.jpg",p2:"1019290-00-B_1.jpg",p3:"1019290-00-B_2.jpg",p4:"1019290-00-B_3.jpg",p5:"1019290-00-B_4.jpg"}'),
   /* Model S  类型编号: 2  内饰 */
   (NULL,
-  2,
+  1,
   '内饰',
   'Model S/X 快速连接手机底座',
-  '300.00-350.00',
+  '300-350',
   '{t1:"iPhone",t2:"USB-C",t3:"Micro USB"}',
   NULL,
   NULL,
@@ -392,10 +391,10 @@ INSERT INTO ts_part_product VALUES
 				</div>','part_inner11.jpg','part_inner12.jpg',
         '{p11:"1060583-00-B_0.jpg",p12:"1060583-00-B_0.png",p2:"1060583-00-B_1.png",p3:"1060583-00-B_2.png",p4:"1060583-00-B_3.png"}'),
   (NULL,
-  2,
+  1,
   '内饰',
   'Model S/X 手机无线充电器',
-  875.00,
+  '875',
   NULL,
   NULL,
   NULL,
@@ -405,18 +404,34 @@ INSERT INTO ts_part_product VALUES
     'part_inner21.jpg','part_inner22.jpg',
     '{p1:"1562264-00-A_0.jpg",p2:"1562264-00-A_1.jpg",p3:"1562264-00-A_2.jpg",p4:"1562264-00-A_3.jpg",p5:"1562264-00-A_4.jpg"}'),
   (NULL,
-  2,
+  1,
   '内饰',
   'Model S 硅胶钥匙带',
-  145.00,
+  '145',
   NULL,
   NULL,
   NULL,
   '<p>定制款 Tesla 通用钥匙带，适用于所有车型的遥控钥匙。钥匙带为硅胶材质，饰以 Tesla "T" Logo，钥匙圈为金属材质，外观简洁，使用方便。</p> <p><em>注意：产品不包括遥控钥匙。</em></p>',
-  'part_inner31.jpg','part_inner32.jpg',
-  '{p1:"1490875-00-A_3.jpg",p2:"1490875-00-A_0.jpg",p3:"1490875-00-A_0.jpg",p4:"1490875-00-A_2.jpg"}');
-  /* Model S  类型编号: 3  外观 */
-  -- (NULL,3,);
+  'part_inner31.jpg',
+  'part_inner32.jpg',
+  '{p1:"1490875-00-A_3.jpg",p2:"1490875-00-A_0.jpg",p3:"1490875-00-A_0.jpg",p4:"1490875-00-A_2.jpg"}'),
+  /* Model S  类型编号: 1  外观 */
+  (NULL,
+  1,
+  '外观',
+  'Model S 车衣 (国标)',
+  '3090-3200',
+  '{t1:"室内",t2:"室外"}',
+  NULL,
+  NULL,
+  '<h3>室内车衣</h3> <p>弹力缎面，像手套一样贴合车身，可有效防止漆面刮擦或尘埃积聚。充电端口处有专门的开口，可正常连接充电器。通风网孔在充电时有利于车辆散热。</p>
+					<p> 特色： </p> <ul> <li>丝滑黑色缎面</li> <li>内层材质柔软</li> </ul> <p> 包含： </p>
+					<ul> <li>1 个车衣</li> <li>1 个收纳袋</li> </ul> <br><br> <h3>户外车衣</h3> <p>保护您的爱车免受恶劣天气等户外因素的影响。车衣中间层采用热塑性聚氨酯材料，里层和外层采用机织聚酯材料，透气性和耐水性俱佳。充电端口处有专门的开口，可正常连接充电器。通风网孔在充电时有利于车辆散热。</p><p>
+					</p><p> 特色： </p> <ul> <li>外层结实耐用</li> <li>内层材质柔软</li> <li>防盗钢丝锁</li> </ul>
+					<p> 包含： </p> <ul> <li>1 个车衣</li> <li>1 个收纳袋</li> </ul>',
+  '',
+  '',
+  '{p1:"1017723-00-A_0.jpg"}');
 /* 还有好多........ */
   
 /* ***************************************************** */
