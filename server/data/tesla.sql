@@ -166,8 +166,8 @@ CREATE TABLE ts_surround_product(
 
 /* *******************主页图片详情数据表****************** */
 INSERT INTO ts_index_rotationPicture VALUES
-  (NULL,2,'ts_charge_product','charge_home21.jpg'),
-  (NULL,7,'ts_charge_product','charge_travel41.jpg');
+  (NULL,'ts_charge_product',2),
+  (NULL,'ts_charge_product',7);
   -- (NULL,'floor1_2.jpg'),
   -- (NULL,'floor1_3.jpg'),
   -- (NULL,'floor2_1.jpg'),
