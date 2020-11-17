@@ -15,11 +15,13 @@
             <div class="pro_cont">
               <div class="pro_img">
                 <a href="#">
-                  <img v-if="true" src="" alt="">
-                  <img v-else src="" alt="">
+                  <img v-if="true" src="" alt="" />
+                  <img v-else src="" alt="" />
                 </a>
               </div>
               <div class="pro_buy">
+                <button>查看详情</button>
+                <div></div>
                 <button>立即购买</button>
               </div>
               <!-- <div class="pro_detail"></div> -->
@@ -65,22 +67,29 @@
 }
 .pro_all::after {
   content: "";
+  width: 30%;
+  margin: 25px 0;
 }
 .product {
   width: 30%;
   margin: 25px 0;
+  /* ****************************** */
+  height: 556.5px;
+  background: cornflowerblue;
+  /* ****************************** */
 }
 .pro_cont {
   position: relative;
   margin-bottom: 4px;
 }
-.pro_img>a {
+.pro_img > a {
   display: block;
 }
 .pro_img img {
   position: absolute;
   top: 0;
   left: 0;
+  height: 556.5px;
 }
 .pro_buy {
   height: 20%;
@@ -90,6 +99,17 @@
 }
 .pro_buy button {
   display: block;
+  font-size: 18px;
+  cursor: pointer;
+  background: #fff;
+  border: 0;
+  font-weight: 700;
+  text-align: center;
+  width: 50%;
+}
+.pro_buy div {
+  width: 1px;
+  background: #999;
 }
 </style>
 <script>
