@@ -6,12 +6,20 @@ import store from './store'
 import ElementUI from 'element-ui';
 /* 导入ElementUI样式表 */
 import 'element-ui/lib/theme-chalk/index.css';
+/* 引入axios模块 */
+import axios from "axios";
+
 /* 导入Myheader模块 */
 import myheader from "./components/Myheader.vue";
 
 Vue.config.productionTip = false
 /* 添加ElementUI为Vue公共组件 */
 Vue.use(ElementUI);
+/* 把axios添加为Vue的原型对象,供全局使用 */
+Vue.prototype.axios=axios;
+/* 配置axios基础路径 */
+axios.defaults.baseURL="/api";
+
 /* 把myheader转成全局组件 */
 Vue.component("my-header",myheader);
 
