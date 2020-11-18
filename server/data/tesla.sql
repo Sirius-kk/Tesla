@@ -79,8 +79,8 @@ CREATE TABLE ts_activity_product(
   atitle VARCHAR(30),         #主标题
   aprice VARCHAR(30),         #价格
   atype VARCHAR(50),          #类型
-  acolor VARCHAR(15),         #颜色
-  asize VARCHAR(15),          #尺寸
+  acolor VARCHAR(50),         #颜色
+  asize VARCHAR(50),          #尺寸
   adesc VARCHAR(200),         #商品描述
   apic VARCHAR(50),           #图片
   apic2 VARCHAR(50),          #切换图片
@@ -96,8 +96,8 @@ CREATE TABLE ts_charge_product(
   ctitle VARCHAR(30),         #主标题
   cprice VARCHAR(30),         #价格
   ctype VARCHAR(50),          #类型
-  ccolor VARCHAR(15),         #颜色
-  csize VARCHAR(15),          #尺寸
+  ccolor VARCHAR(50),         #颜色
+  csize VARCHAR(50),          #尺寸
   cdesc VARCHAR(500),         #商品描述
   cpic VARCHAR(50),           #图片
   cpic2 VARCHAR(50),          #切换图片
@@ -113,8 +113,8 @@ CREATE TABLE ts_part_product(
   ptitle VARCHAR(30),         #主标题
   pprice VARCHAR(30),         #价格
   ptype VARCHAR(50),          #类型
-  pcolor VARCHAR(15),         #颜色
-  psize VARCHAR(15),          #尺寸
+  pcolor VARCHAR(50),         #颜色
+  psize VARCHAR(50),          #尺寸
   pdesc VARCHAR(200),         #商品描述
   ppic VARCHAR(50),           #图片
   ppic2 VARCHAR(50),          #切换图片
@@ -130,8 +130,8 @@ CREATE TABLE ts_dress_product(
   dtitle VARCHAR(30),         #主标题
   dprice VARCHAR(30),         #价格
   dtype VARCHAR(50),          #类型
-  dcolor VARCHAR(5),          #颜色
-  dsize VARCHAR(5),           #尺寸
+  dcolor VARCHAR(50),         #颜色
+  dsize VARCHAR(50),          #尺寸
   ddesc VARCHAR(200),         #商品描述
   dpic VARCHAR(50),           #图片
   dpic2 VARCHAR(50),          #切换图片
@@ -147,8 +147,8 @@ CREATE TABLE ts_surround_product(
   stitle VARCHAR(30),         #主标题
   sprice VARCHAR(30),         #价格
   dtype VARCHAR(50),          #类型
-  scolor VARCHAR(5),          #颜色
-  dsize VARCHAR(5),           #尺寸
+  scolor VARCHAR(50),          #颜色
+  dsize VARCHAR(50),           #尺寸
   sdesc VARCHAR(200),         #商品描述
   spic VARCHAR(50),           #图片
   spic2 VARCHAR(50),          #切换图片
@@ -166,7 +166,13 @@ CREATE TABLE ts_surround_product(
 /* *******************主页图片详情数据表****************** */
 INSERT INTO ts_index_rotationPicture VALUES
   (NULL,'ts_charge_product',2),
-  (NULL,'ts_charge_product',7);
+  (NULL,'ts_charge_product',7),
+  (NULL,'ts_part_product',6),
+  (NULL,'ts_part_product',5),
+  (NULL,'ts_part_product',12),
+  (NULL,'ts_dress_product',1),
+  (NULL,'ts_dress_product',2),
+  (NULL,'ts_surround_product',1);
   -- (NULL,'floor1_2.jpg'),
   -- (NULL,'floor1_3.jpg'),
   -- (NULL,'floor2_1.jpg'),
@@ -214,7 +220,7 @@ INSERT INTO ts_activity_product VALUES
   1,
   NULL,
   'Model 3 车主专属福利',
-  '0',
+  '{p1:"0"}',
   NULL,
   NULL,
   NULL,
@@ -244,7 +250,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   1,
   NULL,
   '家庭充电服务包 (国标)',
-  '8000',
+  '{p1:"8000"}',
   NULL,
   NULL,
   NULL,
@@ -272,7 +278,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   1,
   NULL,
   '充电线缆整理器',
-  '275',
+  '{p1:"275"}',
   NULL,
   NULL,
   NULL,
@@ -289,7 +295,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   1,
   NULL,
   '家庭充电服务包 (欧标)',
-  '8000',
+  '{p1:"8000"}',
   NULL,
   NULL,
   NULL,
@@ -317,7 +323,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   2,
   NULL,
   '移动充电连接器 (国标)',
-  '2550',
+  '{p1:"2550"}',
   NULL,
   NULL,
   NULL,
@@ -328,7 +334,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   2,
   NULL,
   '移动充电连接器 (欧标)',
-  '4775',
+  '{p1:"4750"}',
   NULL,
   NULL,
   NULL,
@@ -341,7 +347,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   2,
   NULL,
   '国标直流(DC)适配器',
-  '2750',
+  '{p1:"2750"}',
   NULL,
   NULL,
   NULL,
@@ -354,7 +360,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   2,
   NULL,
   '国标交流(AC)适配器',
-  '2750',
+  '{p1:"2750"}',
   NULL,
   NULL,
   NULL,
@@ -369,7 +375,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '畅销商品',
   'Model S 固定式玻璃车顶遮阳帘',
-  '580',
+  '{p1:"580"}',
   NULL,
   NULL,
   NULL,
@@ -382,7 +388,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '畅销商品',
   'Model S 全天候脚垫套装',
-  '2160',
+  '{p1:"2160"}',
   NULL,
   NULL,
   NULL,
@@ -396,7 +402,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '内饰',
   'Model S/X 快速连接手机底座',
-  '300-350',
+  '{p1:"300",p2:"325",p3:"350"}',
   '{t1:"iPhone",t2:"USB-C",t3:"Micro USB"}',
   NULL,
   NULL,
@@ -409,7 +415,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '内饰',
   'Model S/X 手机无线充电器',
-  '875',
+  '{p1:"875"}',
   NULL,
   NULL,
   NULL,
@@ -423,7 +429,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '内饰',
   'Model S 硅胶钥匙带',
-  '145',
+  '{p1:"145"}',
   NULL,
   NULL,
   NULL,
@@ -437,7 +443,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '外观',
   'Model S 车衣 (国标)',
-  '3090-3200',
+  '{p1:"2050",p2:"2900"}',
   '{t1:"室内",t2:"室外"}',
   NULL,
   NULL,
@@ -477,7 +483,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '轮毂和轮胎',
   '轮胎修理工具包',
-  '744',
+  '{p1:"875"}',
   NULL,
   NULL,
   NULL,
@@ -505,7 +511,7 @@ INSERT INTO ts_part_product VALUES
   1,
   '脚垫',
   'Model S 全天候脚垫套装',
-  '2160',
+  '{p1:"275"}',
   NULL,
   NULL,
   NULL,
@@ -521,7 +527,110 @@ INSERT INTO ts_part_product VALUES
     'part_bestsell21.jpg',
     'part_bestsell22.jpg',
     '{p1:"1019290-00-B_0.jpg",p2:"1019290-00-B_1.jpg",p3:"1019290-00-B_2.jpg",p4:"1019290-00-B_3.jpg",p5:"1019290-00-B_4.jpg"}' 
-);#后边还有
+  ), 
+  -- #后边还有
+  /* Model 3  类型编号: 2  畅销商品 */
+  (NULL,
+  2,
+  '畅销商品',
+  'Model 3 车主专属福利',
+  '{p1:"0"}',
+  NULL,
+  NULL,
+  NULL,
+  '<p>Model 3 畅销配件，组合购买可享受8折优惠。</p>
+  <p>产品组合：</p>
+  <ul>
+  <li><a href="https://shop.tesla.cn/product/model-3_y-key-fob" title="Model 3 遥控钥匙">Model 3 遥控钥匙</a>&nbsp;&nbsp;(点击链接，加购物车)</li>
+  <li><a href="https://shop.tesla.cn/product/model-3-all-weather-interior-mats" title="Model 3 全天候脚垫套装">Model 3 全天候脚垫套装</a>&nbsp;&nbsp;(点击链接，加购物车)</li>
+  <li><a href="https://shop.tesla.cn/product/model-3-glass-roof-sunshade?sku=1135832-00-A" title="Model 3 玻璃车顶遮阳帘 (前)">Model 3 玻璃车顶遮阳帘 (前)</a>&nbsp;&nbsp;(点击链接，加购物车)</li>
+  </ul>
+  <p>购买规则：</p>
+  <ul>
+  <li>在同一订单中购买上述三款商品，加入购物车自动改价，享受8折优惠</li>
+  <li>享受优惠价格购买的商品组合，退货按实际支付金额退款，需三件商品同时退货，不可只退其中一件或者两件商品，订单中未享受优惠的其他商品退货不受此限制</li>
+  <li>一个订单可优惠购买一套组合商品</li>
+  </ul>
+  <p>特斯拉保留法律允许范围内的解释权。</p>',
+  '1448752-00-B_2.jpg',
+  '1448752-00-B_2.jpg',
+  '{p1:"1448752-00-B_2.jpg",p2:"1449859-00-D_0.jpg",p3:"1135832-00-A_0.jpg"}'),
+  /* Model 3  类型编号: 2  内饰 */
+  (NULL,
+  2,
+  '内饰',
+  'Model 3/Y 遥控钥匙',
+  '{p1:"1200"}',
+  NULL,
+  NULL,
+  NULL,
+  '<p>此商品与下列商品组合购买可享受8折优惠</p>
+  <ul>
+  <li><a href="https://shop.tesla.cn/product/model-3-all-weather-interior-mats" title="Model 3 全天候脚垫套装">Model 3 全天候脚垫套装</a>&nbsp;&nbsp;(点击链接，加购物车)</li>
+  <li><a href="https://shop.tesla.cn/product/model-3-glass-roof-sunshade?sku=1135832-00-A" title="Model 3 玻璃车顶遮阳帘 (前)">Model 3 玻璃车顶遮阳帘 (前)</a>&nbsp;&nbsp;(点击链接，加购物车)</li>
+  </ul>
+  <p>无需动手操作，锁定和解锁 Tesla 从未如此简便。只需将遥控钥匙放在口袋中并拉动门把手，即可自动解锁车辆。打开行李箱的方式与之相同。遥控钥匙的功能会在与车辆配对后自动启用。</p>
+	<p>礼品盒包括遥控钥匙和纽扣电池。</p> 
+  <p>有关 Model 3/Model Y 遥控钥匙的更多信息，请参阅我们的<a href="https://www.tesla.cn/support/model-3-key-fob">支持页面</a>。</p>',
+  '1449859-00-D_0.jpg',
+  '1449859-00-D_1.jpg',
+  '{p1:"1449859-00-D_0.jpg",p2:"1449859-00-D_1.jpg",p3:"1449859-00-D_2.jpg",p4"1449859-00-D_3.jpg"}'),
+  /* Model 3  类型编号: 2  外观 */
+  (NULL,
+  2,
+  '外观',
+  'Model 3 雨刮器',
+  '{p1:"183"}',
+  '{t1:"右(副驾驶)",t2:"左(驾驶位)"}',
+  NULL,
+  NULL,
+  '<p>为 Model 3 雨刮器片选择正规的替换产品以确保能够正确安装，并实现相同的使用效果和性能。</p>
+  <p>包含：</p>
+  <ul>
+  <li>1 x 雨刮器片</li>
+  </ul>
+  <p><a href="https://www.tesla.cn/support/do-it-yourself-model-3#replacing-wiper-blades">Model 3 雨刮器片更换手册</a></p>',
+  '1456933-00-A_1.jpg',
+  '1456933-00-A_1.jpg',
+  '{p1:"1456933-00-A_1.jpg"}'),
+  /* Model 3  类型编号: 2  轮毂和轮胎 */
+  (NULL,
+  2,
+  '轮毂和轮胎',
+  'Model 3 碳纤维轮毂螺帽套件',
+  '{p1:"2400"}',
+  NULL,
+  NULL,
+  NULL,
+  '<p>适用于 Model 3 运动轮毂和高性能轮毂。流线型定制轮毂标，突显个性。由轻型交叉编织的碳纤维制成，哑光表面。</p> 
+  <p>包含：</p> 
+  <p>4 个碳纤维 Tesla 轮毂标</p> 
+  <p>1 个轮毂螺帽拆卸钳</p> 
+  <p><em>注意：仅适用于 19 英寸运动轮毂和 20 英寸高性能轮毂，包括出厂标配和售后改装的轮毂。</em></p>',
+  '1518543-00-A_0.jpg',
+  '1518543-00-A_2.jpg',
+  '{t1:"1518543-00-A_0.jpg",t2:"1518543-00-A_2.jpg",t3:"1518543-00-A_3.jpg"}'),
+  /* Model 3  类型编号: 2  脚垫 */
+  (NULL,
+  2,
+  '脚垫',
+  'Model 3 全天候前备/后备箱地垫',
+  '{p1:"655",p2:"955"}',
+  '{t1:"前备箱",t2:"后备箱"}',
+  NULL,
+  NULL,
+  '<p>地垫为 TPE 材质，不含镉、铅、乳胶、PVC，100% 可回收，内含刚性芯体，强度高且易于清理。</p> 
+  <p><strong>前备箱垫包括：</strong></p>
+	<ul> 
+  <li>1 个前备箱地垫</li> 
+  </ul> 
+  <p><strong>后备箱垫包括：</strong></p> 
+  <ul> 
+  <li>1 个后备箱垫</li> 
+  </ul>',
+  '1133634-00-A_0.jpg',
+  '1133634-00-A_alt.jpg',
+  '{p1:"1133634-00-A_0.jpg",p2:"1133634-00-A_alt.jpg"}');
 /* 还有好多........ */
   
 /* ***************************************************** */
@@ -532,7 +641,7 @@ INSERT INTO ts_dress_product VALUES
   1,
   'T恤',
   'Made on Earth by Humans 短袖T恤',
-  '249',
+  '{p1:"249"}',
   NULL,
   '{c1:"#808080",c2:"#04010a",c3:"#ffffff"}',
   '{s1:"S",s2:"M",s3:"L",s4:"XL"}',
@@ -552,7 +661,7 @@ INSERT INTO ts_dress_product VALUES
   1,
   '帽子',
   'Tesla T标棒球帽',
-  '169',
+  '{p1:"169"}',
   NULL,
   '{c1:"#04010a",c2:"#ffffff",c3:"#d00"}',
   NULL,
@@ -564,15 +673,38 @@ INSERT INTO ts_dress_product VALUES
 /* ***************************************************** */
 /* *******************周边精品详情数据表****************** */
 INSERT INTO ts_surround_product VALUES
-  /* 畅销商品  类型编号: 1  脚垫 */
+--   /* 周边精品  类型编号: 1  畅销商品 */
   (NULL,
   1,
-  '脚垫',
-  'Model S 全天候脚垫套装',
-  '2160',
+  NULL,
+  'Roadster 1:18 汽车模型',
+  '{p1:"1750"}',
   NULL,
   NULL,
   NULL,
+  '<p>Roadster 2.0 等比例压铸汽车模型由 Tesla 官方授权制造，加州设计团队监制，每个细节均精心处理。使用 Roadster 真车 3D CAD 数据打造，等比例还原车辆的每一处细节、曲线和表面。</p>
+  <p>1:18 Roadster 汽车模型的特点：</p>
+  <ul>
+    <li>180 多个金属和塑料零件</li>
+    <li>精致内饰</li>
+    <li>压铸金属材质</li>
+    <li>所有车门和行李箱均可打开</li>
+    <li>敞篷车顶</li>
+    <li>橡胶轮胎</li>
+    <li>车轮可转向</li>
+    <li>行李箱垫和绒面内饰</li>
+    <li>织物座椅安全带</li>
+  </ul>
+  <p>产品详情：</p>
+  <ul>
+    <li>尺寸：长 252 毫米 x 宽 109.5 毫米 x 高 70 毫米</li>
+    <li>重量：0.875 千克</li>
+  </ul>
+  <p>Tesla 独家销售。 </p>
+  <p><em>警告：窒息危险。内含小零件。不适合 14 岁以下儿童。</em></p>',
+  'MTUyNDAwMS0wMC1BXzA=.jpg',
+  'MTE1MjQwMDEtMDAtQV83.jpg',
+  '{p1:"MTUyNDAwMS0wMC1BXzA=.jpg",p2:"MTUyNDAwMS0wMC1BXzE=.jpg",p3:"MTUyNDAwMS0wMC1BXzQ=.jpg",p4:"MTUyNDAwMS0wMC1BXzY=.jpg"}');
 /* ***************************************************** */
 
 
