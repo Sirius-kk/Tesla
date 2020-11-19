@@ -13,6 +13,7 @@ USE tesla;
 /******数据表编写******/
 /*******************/
 
+
 /* *******************主页模块数据表****************** */
 
 /**创建主页轮播图片数据表**/
@@ -27,6 +28,21 @@ CREATE TABLE ts_index_rotationPicture (
 /* ************************************* */
 
 /* *******************商品模块数据表****************** */
+
+/* *********************商品主类表******************* */
+/**创建商品主类表数据表**/
+/*丢弃数据表，如果存在数据表'ts_product'*/
+DROP TABLE IF EXISTS ts_product;
+/*创建商品主类表数据表'ts_product'*/
+CREATE TABLE ts_product (
+  product_id TINYINT PRIMARY KEY AUTO_INCREMENT,        #类目编号
+  product_type VARCHAR(30)    #类目名称
+);
+
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!我要改表 */
+/* *********************商品主类表******************* */
+
 
 /**创建类别数据表**/
 
@@ -162,7 +178,14 @@ CREATE TABLE ts_surround_product(
 -- (...),
 -- (...);
 /*******************/
-
+/* ***********************商品主类目********************* */
+INSERT INTO ts_product VALUES
+  (NULL,'店铺活动'),
+  (NULL,'充电产品'),
+  (NULL,'优选配件'),
+  (NULL,'精选服饰'),
+  (NULL,'周边精品');
+/* ***********************商品主类目********************* */
 /* *******************主页图片详情数据表****************** */
 INSERT INTO ts_index_rotationPicture VALUES
   (NULL,'ts_charge_product',2),
@@ -173,14 +196,7 @@ INSERT INTO ts_index_rotationPicture VALUES
   (NULL,'ts_dress_product',1),
   (NULL,'ts_dress_product',2),
   (NULL,'ts_surround_product',1);
-  -- (NULL,'floor1_2.jpg'),
-  -- (NULL,'floor1_3.jpg'),
-  -- (NULL,'floor2_1.jpg'),
-  -- (NULL,'floor2_2.jpg'),
-  -- (NULL,'floor2_3.jpg'),
-  -- (NULL,'rotation7.jpg');
 /* ***************************************************** */
-
 /* *******************店铺活动类别数据表****************** */
 INSERT INTO ts_activity_family VALUES
 (NULL,'特斯拉宠粉季');

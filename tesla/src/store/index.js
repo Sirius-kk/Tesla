@@ -23,7 +23,7 @@ export default new Vuex.Store({
 
   },
   // 可以发送发送异步请求
-  // Actions提交的是Mutations，而不能直接变更state
+  // Actions提交的是Mutations，而不能直接变更state,要想改变state,必须通过调用Mutations
   actions: {
 
   },

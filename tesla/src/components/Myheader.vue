@@ -198,22 +198,25 @@ export default {
     kard_none() {
       this.kard = "";
     },
-    top_lable(top) {
+    top_lable() {
       // 获取超出页面上方的距离
       let scrollTop =
         document.body.scrollTop || document.documentElement.scrollTop;
+      let headerEle = document.getElementsByClassName("header")[0];
       // 设置滚动阈值
       // 当滚动距离为40px时，则给标签页添加固定定位
       if (scrollTop > 50) {
-        top.style.background = "rgba(255,255,255,1)";
+        headerEle.style.background = "rgba(255,255,255,1)";
       } else {
-        top.style.background = "rgba(255,255,255,0)";
+        headerEle.style.background = "rgba(255,255,255,0)";
       }
     },
   },
   mounted() {
-    let headerEle = document.getElementsByClassName("header")[0];
-    window.addEventListener("scroll", this.top_lable(headerEle));
+    window.addEventListener("scroll", this.top_lable);
+  },
+  destroyed() {
+    this.top_lable = null;
   },
 };
 </script>
