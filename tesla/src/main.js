@@ -17,9 +17,14 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 /* 把axios添加为Vue的原型对象,供全局使用 */
 Vue.prototype.axios=axios;
+/* **********cors跨域解决************************** */
+// /* 设置axios基础的URL地址，并且决定了WEB的服务器端口号 */
+axios.defaults.baseURL = 'http://localhost:3003'
+/* **********cors跨域解决************************** */
+/* **********http-proxy 使用失败****************** */
 /* 配置axios基础路径 */
-axios.defaults.baseURL="/api";
-// axios.defaults.baseURL="http://localhost:5050";
+// axios.defaults.baseURL="/api";
+/* **********http-proxy 使用失败****************** */
 
 /* 把myheader转成全局组件 */
 Vue.component("my-header",myheader);

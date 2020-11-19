@@ -14,12 +14,18 @@ const server = express();
 const bodyParser = require("body-parser");
 /* 引入md5模块 */                           /* 用来加密用户信息 */
 const md5 = require("md5");
+// 引入CORS模块
+const cors = require("cors");               /* 使用cors解决跨域 */
 /* ****************************应用模块导入*********************************** */
 
 /* ****************************引入模块配置*********************************** */
 // 将bodyParser作为中间件
 server.use(bodyParser.urlencoded({
   extended: false
+}));
+// // 将cors作为中间件
+server.use(cors({
+  origin: ["http://127.0.0.1:8080", "http://localhost:8080"]
 }));
 /* ****************************引入模块配置*********************************** */
 
@@ -35,4 +41,4 @@ server.use('/product', productRouter);
 /* **************************引入各个模块的路由器***************************** */
 
 // 指定Web服务器的端口
-server.listen(5050);/* 对应客户端提前设置的端口 */
+server.listen(3003);

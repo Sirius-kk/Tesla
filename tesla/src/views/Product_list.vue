@@ -46,6 +46,7 @@
 }
 .container {
   padding: 0px 24px;
+  min-width: 1100px;
 }
 .t1 {
   padding-top: 40px;
@@ -131,8 +132,8 @@ export default {
 
   },
   mounted(){
-    this.axios.get("/list_activity").then( res => {
-      console.log(res);
+    this.axios.get("/product/list_activity").then( res => {
+      console.log(res.data);
     });
   }
 };
