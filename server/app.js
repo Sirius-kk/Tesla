@@ -32,6 +32,6 @@ server.use('/user', userRouter);//添加前缀并挂载
 //引入商品路由器,并挂载
 const productRouter = require('./router/product.js');
 server.use('/product', productRouter);
-console.log(productRouter); //已测试引入OK
+// console.log(productRouter); //已测试引入OK
 /* **************************引入各个模块的路由器***************************** */
 
