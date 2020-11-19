@@ -17,11 +17,26 @@
         <div class="middle">
           <div class="middle_up">
             <ul class="menu_1" @mouseleave="kard_none">
-              <li @mouseenter="kard_block1">店铺活动</li>
-              <li @mouseenter="kard_block2">充电产品</li>
-              <li @mouseenter="kard_block3">优选配件</li>
-              <li @mouseenter="kard_block4">精选服饰</li>
-              <li @mouseenter="kard_block5">周边精品</li>
+              <li @mouseenter="kard_block1">
+                <!-- <router-link to="">  </router-link> -->
+                店铺活动
+              </li>
+              <li @mouseenter="kard_block2">
+                <!-- <router-link to="">  </router-link> -->
+                充电产品
+              </li>
+              <li @mouseenter="kard_block3">
+                <!-- <router-link to="">  </router-link> -->
+                优选配件
+              </li>
+              <li @mouseenter="kard_block4">
+                <!-- <router-link to="">  </router-link> -->
+                精选服饰
+              </li>
+              <li @mouseenter="kard_block5">
+                <!-- <router-link to="">  </router-link> -->
+                周边精品
+              </li>
             </ul>
           </div>
         </div>
@@ -49,7 +64,11 @@
             <p>特斯拉宠粉季</p>
           </div>
         </div>
-        <div v-else-if="kard == 2" class="menu_2 menu_22" @mouseenter="kard_block2">
+        <div
+          v-else-if="kard == 2"
+          class="menu_2 menu_22"
+          @mouseenter="kard_block2"
+        >
           <div>
             <p>家庭充电</p>
           </div>
@@ -61,7 +80,11 @@
             <h1>Model 3 地毯脚垫套装</h1>
           </span>
         </div>
-        <div v-else-if="kard == 3" class="menu_2 menu_22" @mouseenter="kard_block3">
+        <div
+          v-else-if="kard == 3"
+          class="menu_2 menu_22"
+          @mouseenter="kard_block3"
+        >
           <div>
             <p>Module S</p>
             <ul class="menu_3">
@@ -97,7 +120,11 @@
             <h1>家庭充电服务包 (国标)</h1>
           </span>
         </div>
-        <div v-else-if="kard == 4" class="menu_2 menu_21" @mouseenter="kard_block4">
+        <div
+          v-else-if="kard == 4"
+          class="menu_2 menu_21"
+          @mouseenter="kard_block4"
+        >
           <div>
             <p>男装</p>
             <ul class="menu_3">
@@ -171,12 +198,32 @@ export default {
     kard_none() {
       this.kard = "";
     },
+    top_lable(top) {
+      // 获取超出页面上方的距离
+      let scrollTop =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      // 设置滚动阈值
+      // 当滚动距离为40px时，则给标签页添加固定定位
+      if (scrollTop > 50) {
+        top.style.background = "rgba(255,255,255,1)";
+      } else {
+        top.style.background = "rgba(255,255,255,0)";
+      }
+    },
+  },
+  mounted() {
+    let headerEle = document.getElementsByClassName("header")[0];
+    console.log(headerEle); // 11
+    window.addEventListener("scroll", this.top_lable(headerEle));
   },
 };
 </script>
 
 <style scoped>
 /* 整体样式开始 */
+body {
+  background: forestgreen;
+}
 .header {
   height: 58px;
   position: relative;
@@ -220,7 +267,7 @@ export default {
   width: 100vw;
   height: 460px;
   background: #f8f8f8;
-  position:absolute;
+  position: absolute;
   top: 58px;
   font-size: 18px;
   font-weight: 600;
@@ -238,7 +285,7 @@ export default {
   display: block;
   clear: both;
 }
-.menu_2{
+.menu_2 {
   display: flex;
   padding: 60px 100px;
 }
@@ -259,10 +306,10 @@ export default {
 .menu_23 {
   padding: 60px 100px;
 }
-.menu_23>div {
+.menu_23 > div {
   display: flex;
 }
-.menu_23>div div {
+.menu_23 > div div {
   margin-right: 24px;
   width: 24%;
 }
@@ -281,8 +328,7 @@ export default {
   position: absolute;
   right: 100px;
 }
-.middle_down_img 
-.middle_down_img img {
+.middle_down_img .middle_down_img img {
   height: 340px;
 }
 .middle_down_img h1 {
@@ -290,7 +336,7 @@ export default {
   font-size: 22px;
   text-align: center;
 }
-.double>p+p{
+.double > p + p {
   margin-top: 30px;
 }
 /* 中间部分列表样式结束 */
@@ -306,7 +352,10 @@ export default {
 }
 /* 滚动事件涉及样式 */
 .header {
-  background: chartreuse;
+  background: rgba(255, 255, 255, 0);
+  position: fixed;
+  z-index: 888;
+  width: 100%;
 }
 /* 滚动事件涉及样式 */
 </style>

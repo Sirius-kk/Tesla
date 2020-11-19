@@ -127,5 +127,13 @@ export default {
       ],
     };
   },
+  methods: {
+
+  },
+  mounted(){
+    this.axios.get("/list_activity").then( res => {
+      console.log(res);
+    });
+  }
 };
 </script>

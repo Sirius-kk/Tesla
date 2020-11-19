@@ -19,6 +19,7 @@ Vue.use(ElementUI);
 Vue.prototype.axios=axios;
 /* 配置axios基础路径 */
 axios.defaults.baseURL="/api";
+// axios.defaults.baseURL="http://localhost:5050";
 
 /* 把myheader转成全局组件 */
 Vue.component("my-header",myheader);
