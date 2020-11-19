@@ -304,4 +304,9 @@ export default {
   width: 21px;
   margin-bottom: 4px;
 }
+/* 滚动事件涉及样式 */
+.header {
+  background: chartreuse;
+}
+/* 滚动事件涉及样式 */
 </style>
