@@ -24,9 +24,9 @@ server.use(bodyParser.urlencoded({
   extended: false
 }));
 // // 将cors作为中间件
-server.use(cors({
-  origin: ["http://127.0.0.1:8080", "http://localhost:8080"]
-}));
+// server.use(cors({
+//   origin: ["http://127.0.0.1:8080", "http://localhost:8080"]
+// }));
 /* ****************************引入模块配置*********************************** */
 
 /* **************************引入各个模块的路由器***************************** */

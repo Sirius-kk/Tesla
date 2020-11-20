@@ -27,21 +27,21 @@ CREATE TABLE ts_index_rotationPicture (
 );
 /* ************************************* */
 
-/* *******************商品模块数据表****************** */
+-- /* *******************商品模块数据表****************** */
 
-/* *********************商品主类表******************* */
-/**创建商品主类表数据表**/
-/*丢弃数据表，如果存在数据表'ts_product'*/
-DROP TABLE IF EXISTS ts_product;
-/*创建商品主类表数据表'ts_product'*/
-CREATE TABLE ts_product (
-  product_id TINYINT PRIMARY KEY AUTO_INCREMENT,        #类目编号
-  product_type VARCHAR(30)    #类目名称
-);
+-- /* *********************商品主类表******************* */
+-- /**创建商品主类表数据表**/
+-- /*丢弃数据表，如果存在数据表'ts_product'*/
+-- DROP TABLE IF EXISTS ts_product;
+-- /*创建商品主类表数据表'ts_product'*/
+-- CREATE TABLE ts_product (
+--   product_id TINYINT PRIMARY KEY AUTO_INCREMENT,        #类目编号
+--   product_tp VARCHAR(30)    #类目名称
+-- );
 
 
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!我要改表 */
-/* *********************商品主类表******************* */
+-- /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!我要改表 */
+-- /* *********************商品主类表******************* */
 
 
 /**创建类别数据表**/
@@ -50,36 +50,36 @@ CREATE TABLE ts_product (
 DROP TABLE IF EXISTS ts_activity_family;
 /*创建商铺活动数据表'ts_activity_family'*/
 CREATE TABLE ts_activity_family(
-  activity_id INT PRIMARY KEY AUTO_INCREMENT,              #商铺活动类别编号
-  activityf_type VARCHAR(45)    #商品活动类别名称
+  id INT PRIMARY KEY AUTO_INCREMENT,              #商铺活动类别编号
+  family_name VARCHAR(45)    #商品活动类别名称
 );
 /*丢弃数据表，如果存在数据表'ts_charge_family'*/
 DROP TABLE IF EXISTS ts_charge_family;
 /*创建充电产品数据表'ts_charge_family'*/
 CREATE TABLE ts_charge_family(
-  charge_id INT PRIMARY KEY AUTO_INCREMENT,              #充电产品类别编号
-  chargef_type VARCHAR(45)    #充电产品类别名称
+  id INT PRIMARY KEY AUTO_INCREMENT,              #充电产品类别编号
+  family_name VARCHAR(45)    #充电产品类别名称
 );
 /*丢弃数据表，如果存在数据表'ts_part_family'*/
 DROP TABLE IF EXISTS ts_part_family;
 /**创建优选配件数据表'ts_part_family'**/
 CREATE TABLE ts_part_family (
-  part_id INT PRIMARY KEY AUTO_INCREMENT,                #优选配件类别编号
-  partf_type VARCHAR(45)      #优选配件类别名称
+  id INT PRIMARY KEY AUTO_INCREMENT,                #优选配件类别编号
+  family_name VARCHAR(45)      #优选配件类别名称
 );
 /*丢弃数据表，如果存在数据表'ts_dress_family'*/
 DROP TABLE IF EXISTS ts_dress_family;
 /**创建精品服饰数据表'ts_dress_family'**/
 CREATE TABLE ts_dress_family (
-  dress_id INT PRIMARY KEY AUTO_INCREMENT,               #精品服饰类别编号
-  dressf_type VARCHAR(45)     #精品服饰类别名称
+  id INT PRIMARY KEY AUTO_INCREMENT,               #精品服饰类别编号
+  family_name VARCHAR(45)     #精品服饰类别名称
 );
 /*丢弃数据表，如果存在数据表'ts_surround_family'*/
 DROP TABLE IF EXISTS ts_surround_family;
 /*创建周边精品数据表'ts_surround_family'*/
 CREATE TABLE ts_surround_family (
-  surround_id INT PRIMARY KEY AUTO_INCREMENT,            #周边精品类别编号
-  surroundf_type VARCHAR(45)  #周边精品类别名称
+  id INT PRIMARY KEY AUTO_INCREMENT,            #周边精品类别编号
+  family_name VARCHAR(45)  #周边精品类别名称
 );
 
 /**创建详情数据表**/
@@ -89,86 +89,91 @@ CREATE TABLE ts_surround_family (
 DROP TABLE IF EXISTS ts_activity_product;
 /*店铺活动详情数据表'ts_activity_product'*/
 CREATE TABLE ts_activity_product(
-  apid INT PRIMARY KEY AUTO_INCREMENT,  #店铺活动详情编号
-  afamily_id TINYINT,         #所属型号家族编号
-  aclass VARCHAR(10),         #产品分类
-  atitle VARCHAR(30),         #主标题
-  aprice VARCHAR(30),         #价格
-  atype VARCHAR(50),          #类型
-  acolor VARCHAR(50),         #颜色
-  asize VARCHAR(50),          #尺寸
-  adesc VARCHAR(200),         #商品描述
+  pid INT PRIMARY KEY AUTO_INCREMENT,  #店铺活动详情编号
+  family_id TINYINT,         #所属型号家族编号
+  class VARCHAR(10),         #产品分类
+  title VARCHAR(30),         #主标题
+  price VARCHAR(30),         #价格
+  tp VARCHAR(50),          #类型
+  color VARCHAR(50),         #颜色
+  size VARCHAR(50),          #尺寸
+  ds VARCHAR(200),         #商品描述
   apic VARCHAR(50),           #图片
   apic2 VARCHAR(50),          #切换图片
-  apic_detais VARCHAR(100)    #详情图片
+  pic_detais VARCHAR(100),    #详情图片
+  mian TINYINT               #家族
 );
 /*丢弃数据表，如果存在数据表'ts_charge_product'*/
 DROP TABLE IF EXISTS ts_charge_product;
 /*充电产品详情数据表'ts_charge_product'*/
 CREATE TABLE ts_charge_product(
-  cpid INT PRIMARY KEY AUTO_INCREMENT,  #充电产品详情编号
-  cfamily_id TINYINT,         #所属型号家族编号
-  cclass VARCHAR(10),         #产品分类
-  ctitle VARCHAR(30),         #主标题
-  cprice VARCHAR(30),         #价格
-  ctype VARCHAR(50),          #类型
-  ccolor VARCHAR(50),         #颜色
-  csize VARCHAR(50),          #尺寸
-  cdesc VARCHAR(500),         #商品描述
-  cpic VARCHAR(50),           #图片
-  cpic2 VARCHAR(50),          #切换图片
-  cpic_detais VARCHAR(100)    #详情图片
+  pid INT PRIMARY KEY AUTO_INCREMENT,  #充电产品详情编号
+  family_id TINYINT,         #所属型号家族编号
+  class VARCHAR(10),         #产品分类
+  title VARCHAR(30),         #主标题
+  price VARCHAR(30),         #价格
+  tp VARCHAR(50),            #类型
+  color VARCHAR(50),         #颜色
+  size VARCHAR(50),          #尺寸
+  ds VARCHAR(500),         #商品描述
+  pic VARCHAR(50),           #图片
+  pic2 VARCHAR(50),          #切换图片
+  pic_detais VARCHAR(100),    #详情图片
+  mian TINYINT               #家族
 );
 /*丢弃数据表，如果存在数据表'ts_part_product'*/
 DROP TABLE IF EXISTS ts_part_product;
 /*优选配件详情数据表'ts_part_product'*/
 CREATE TABLE ts_part_product(
-  ppid INT PRIMARY KEY AUTO_INCREMENT,  #优选配件详情编号
-  pfamily_id TINYINT,         #所属型号家族编号
-  pclass VARCHAR(10),         #产品分类1
-  ptitle VARCHAR(30),         #主标题
-  pprice VARCHAR(30),         #价格
-  ptype VARCHAR(50),          #类型
-  pcolor VARCHAR(50),         #颜色
-  psize VARCHAR(50),          #尺寸
-  pdesc VARCHAR(200),         #商品描述
-  ppic VARCHAR(50),           #图片
-  ppic2 VARCHAR(50),          #切换图片
-  ppic_detais VARCHAR(100)    #详情图片
+  pid INT PRIMARY KEY AUTO_INCREMENT,  #优选配件详情编号
+  family_id TINYINT,         #所属型号家族编号
+  class VARCHAR(10),         #产品分类1
+  title VARCHAR(30),         #主标题
+  price VARCHAR(30),         #价格
+  tp VARCHAR(50),          #类型
+  color VARCHAR(50),         #颜色
+  size VARCHAR(50),          #尺寸
+  ds VARCHAR(200),         #商品描述
+  pic VARCHAR(50),           #图片
+  pic2 VARCHAR(50),          #切换图片
+  pic_detais VARCHAR(100),    #详情图片
+  mian TINYINT               #家族
 );
 /*丢弃数据表，如果存在数据表'ts_dress_product'*/
 DROP TABLE IF EXISTS ts_dress_product;
 /*精品服饰详情数据表'ts_dress_product'*/
 CREATE TABLE ts_dress_product(
-  dpid INT PRIMARY KEY AUTO_INCREMENT,  #精品服饰详情编号
-  dfamily_id TINYINT,         #所属型号家族编号
-  dclass VARCHAR(10),         #产品分类
-  dtitle VARCHAR(30),         #主标题
-  dprice VARCHAR(30),         #价格
-  dtype VARCHAR(50),          #类型
-  dcolor VARCHAR(50),         #颜色
-  dsize VARCHAR(50),          #尺寸
-  ddesc VARCHAR(200),         #商品描述
-  dpic VARCHAR(50),           #图片
-  dpic2 VARCHAR(50),          #切换图片
-  dpic_detais VARCHAR(100)    #详情图片
+  pid INT PRIMARY KEY AUTO_INCREMENT,  #精品服饰详情编号
+  family_id TINYINT,         #所属型号家族编号
+  class VARCHAR(10),         #产品分类
+  title VARCHAR(30),         #主标题
+  price VARCHAR(30),         #价格
+  tp VARCHAR(50),          #类型
+  color VARCHAR(50),         #颜色
+  size VARCHAR(50),          #尺寸
+  ds VARCHAR(200),         #商品描述
+  pic VARCHAR(50),           #图片
+  pic2 VARCHAR(50),          #切换图片
+  pic_detais VARCHAR(100),    #详情图片
+  mian TINYINT               #家族
 );
 /*丢弃数据表，如果存在数据表'ts_surround_product'*/
 DROP TABLE IF EXISTS ts_surround_product;
 /*周边精品详情数据表'ts_surround_product'*/
 CREATE TABLE ts_surround_product(
-  spid INT PRIMARY KEY AUTO_INCREMENT,  #周边精品详情编号
-  sfamily_id TINYINT,         #所属型号家族编号
-  sclass VARCHAR(10),         #产品分类
-  stitle VARCHAR(30),         #主标题
-  sprice VARCHAR(30),         #价格
-  dtype VARCHAR(50),          #类型
-  scolor VARCHAR(50),          #颜色
-  dsize VARCHAR(50),           #尺寸
-  sdesc VARCHAR(200),         #商品描述
-  spic VARCHAR(50),           #图片
-  spic2 VARCHAR(50),          #切换图片
-  spic_detais VARCHAR(100)    #详情图片
+  pid INT PRIMARY KEY AUTO_INCREMENT,  #周边精品详情编号
+  family_id TINYINT,         #所属型号家族编号
+  class VARCHAR(10),         #产品分类
+  title VARCHAR(30),         #主标题
+  price VARCHAR(30),         #价格
+  tp VARCHAR(50),          #类型
+  color VARCHAR(50),          #颜色
+  size VARCHAR(50),           #尺寸
+  ds VARCHAR(200),         #商品描述
+  pic VARCHAR(50),           #图片
+  pic2 VARCHAR(50),          #切换图片
+  pic_detais VARCHAR(100),    #详情图片
+  mian TINYINT               #家族
 );
 
 
@@ -178,13 +183,13 @@ CREATE TABLE ts_surround_product(
 -- (...),
 -- (...);
 /*******************/
-/* ***********************商品主类目********************* */
-INSERT INTO ts_product VALUES
-  (NULL,'店铺活动'),
-  (NULL,'充电产品'),
-  (NULL,'优选配件'),
-  (NULL,'精选服饰'),
-  (NULL,'周边精品');
+-- /* ***********************商品主类目********************* */
+-- INSERT INTO ts_product VALUES
+--   (NULL,'店铺活动'),
+--   (NULL,'充电产品'),
+--   (NULL,'优选配件'),
+--   (NULL,'精选服饰'),
+--   (NULL,'周边精品');
 /* ***********************商品主类目********************* */
 /* *******************主页图片详情数据表****************** */
 INSERT INTO ts_index_rotationPicture VALUES
@@ -256,7 +261,7 @@ INSERT INTO ts_activity_product VALUES
     <p>特斯拉保留法律允许范围内的解释权。</p>',
   'activity11.jpg',
   'activity12.jpg',
-  '{p1:"1448752-00-B_2.jpg",p2:"1449859-00-D_0.jpg",p3:"1135832-00-A_0.jpg"}'
+  '{p1:"1448752-00-B_2.jpg",p2:"1449859-00-D_0.jpg",p3:"1135832-00-A_0.jpg"}',1
   );
 /* ***************************************************** */
 /* *******************充电产品详情数据表****************** */
@@ -288,7 +293,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   <p>购买产品即表示您同意<a href="https://www.tesla.cn/go/home-charging-package">《家庭充电服务包条款与条件》</a></p>',
   'charge_home11.png',
   'charge_home12.jpg',
-  '{p1:"1050067-01-E_0.png",p2:"1050067-00-E_alt.jpg"}'
+  '{p1:"1050067-01-E_0.png",p2:"1050067-00-E_alt.jpg"}',2
   ),
   (NULL,
   1,
@@ -305,7 +310,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   <p>1 套安装工具</p>',
   'charge_home21.jpg',
   'charge_home22.jpg',
-  '{p1:"1521226-00-A_0.jpg",p2:"1521226-00-A_1.jpg",p3:"1521226-00-A_3.jpg",p4:"1521226-00-A_4.jpg"}'
+  '{p1:"1521226-00-A_0.jpg",p2:"1521226-00-A_1.jpg",p3:"1521226-00-A_3.jpg",p4:"1521226-00-A_4.jpg"}',2
   ),
   (NULL,
   1,
@@ -333,7 +338,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   <p>购买产品即表示您同意<a href="https://www.tesla.cn/go/home-charging-package">《家庭充电服务包条款与条件》</a></p>',
   'charge_home31.jpg',
   'charge_home32.jpg',
-  '{p1:"1050073-03-G_0.jpg",p2:"1050067-00-E_alt2.jpg"}'
+  '{p1:"1050073-03-G_0.jpg",p2:"1050067-00-E_alt2.jpg"}',2
   ),
   (NULL,
   2,
@@ -344,7 +349,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   NULL,
   NULL,
   '<p>国标移动式连接器支持 100-240V (单相) 50Hz 交流电并且配有正确接地的专用电路插座，最大电流 13A ，适合任何 Tesla 国标车辆。</p><p>移动充电器长度为6米，最大程度支持您的充电便捷性。</p>','charge_travel11.jpg','charge_travel12.jpg',
-  '{p1:"1142848-00-E_0.jpg",p2:"1142848-00-E_1.jpg"}'
+  '{p1:"1142848-00-E_0.jpg",p2:"1142848-00-E_1.jpg"}',2
   ),
   (NULL,
   2,
@@ -357,7 +362,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   '<p>欧标移动式连接器可以让您在任何符合230V（单相）或230V/400V（三相）50Hz交流电，配有正确接地的专用电路的插座即时补给充电，适合任何 Tesla 欧标车辆。</p><p>移动充电器长度为6米，最大程度支持您的充电便捷性。</p>',
   'charge_travel21.jpg',
   'charge_travel22.jpg',
-  '{p1:"1142848-00-E_1.jpg",p2:"1055691-00-F_1.jpg",p3:"1055691-00-F_2.jpg"}'
+  '{p1:"1142848-00-E_1.jpg",p2:"1055691-00-F_1.jpg",p3:"1055691-00-F_2.jpg"}',2
   ),
   (NULL,
   2,
@@ -367,10 +372,10 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   NULL,
   NULL,
   NULL,
-  '<p>搭载非新国标 (IEC TYPE 2) 充电接口的 Tesla Model S 和 Tesla Model X 可通过新国标适配器连接至新国标充电设备充电。</p><p>直流 (DC) 充电适配器使用时，一端连接 Tesla 充电接口，另一端连接新国标充电连接器。</p>',
+  '<p>搭载非新国标 (IEC tp 2) 充电接口的 Tesla Model S 和 Tesla Model X 可通过新国标适配器连接至新国标充电设备充电。</p><p>直流 (DC) 充电适配器使用时，一端连接 Tesla 充电接口，另一端连接新国标充电连接器。</p>',
   'charge_travel31.jpg',
   'charge_travel32.jpg',
-  '{p1:"1084688-00-F_0.jpg"}'
+  '{p1:"1084688-00-F_0.jpg"}',2
   ),
   (NULL,
   2,
@@ -380,8 +385,8 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   NULL,
   NULL,
   NULL,
-  '<p>搭载非新国标 (IEC TYPE 2) 充电接口的 Tesla Model S 和 Tesla Model X 可通过新国标适配器连接至新国标充电设备充电。</p><p>交流 (AC) 充电适配器使用时，一端连接 Tesla 充电接口，另一端连接新国标充电连接器。</p>','charge_travel41.jpg','charge_travel42.jpg',
-  '{p1:"1102683-00-D_0.jpg"}'
+  '<p>搭载非新国标 (IEC tp 2) 充电接口的 Tesla Model S 和 Tesla Model X 可通过新国标适配器连接至新国标充电设备充电。</p><p>交流 (AC) 充电适配器使用时，一端连接 Tesla 充电接口，另一端连接新国标充电连接器。</p>','charge_travel41.jpg','charge_travel42.jpg',
+  '{p1:"1102683-00-D_0.jpg"}',2
   );
 /* ***************************************************** */
 /* *******************优选配件详情数据表****************** */
@@ -398,7 +403,7 @@ INSERT INTO ts_part_product VALUES
   '<p>由轻质网状织物和可折叠的高锰钢框架组成，可阻挡三分之二的太阳能热负荷。拆卸简便，通过专用卡扣安装于玻璃车顶内部。不使用时可折叠存放在约 46 平方厘米的配套收纳袋中。</p> <p>包含：
 					</p> <ul> <li>1 个固定式玻璃车顶遮阳帘</li> <li>1 个拉链式收纳袋</li> </ul> <p>适用于配备固定式玻璃车顶的 Model
 					S 车型。 </p>','part_bestsell11.jpg','part_bestsell12.jpg',
-          '{p1:"1130555-00-A_0.jpg",p2:"1130555-00-A_1.jpg",p3:"1130555-00-A_2.jpg"}'
+          '{p1:"1130555-00-A_0.jpg",p2:"1130555-00-A_1.jpg",p3:"1130555-00-A_2.jpg"}',3
   ),
   (NULL,
   1,
@@ -411,7 +416,7 @@ INSERT INTO ts_part_product VALUES
   '<p>新版 Tesla Model S 全天候脚垫套装采用先进的数字激光测量技术定制而成。确保与车辆紧密贴合，全方位隔离灰尘和液体。脚垫为 TPE 材质，不含镉、铅、乳胶、PVC，100%
 					可回收，内含刚性芯体，强度高且易于清理。</p> <p> 与旧版相比，新版增加了前垫固定贴片以便于安装，并增加了围挡高度以更好地保护车辆前部底板。 </p> <p>包含：</p> <ul>
 					<li>1 个驾驶位脚垫</li> <li>1 个副驾位脚垫</li> <li>1 个第二排脚垫</li> </ul>','part_bestsell21.jpg','part_bestsell22.jpg',
-          '{p1:"1019290-00-B_0.jpg",p2:"1019290-00-B_1.jpg",p3:"1019290-00-B_2.jpg",p4:"1019290-00-B_3.jpg",p5:"1019290-00-B_4.jpg"}'
+          '{p1:"1019290-00-B_0.jpg",p2:"1019290-00-B_1.jpg",p3:"1019290-00-B_2.jpg",p4:"1019290-00-B_3.jpg",p5:"1019290-00-B_4.jpg"}',3
   ),
   /* Model S  类型编号: 2  内饰 */
   (NULL,
@@ -425,7 +430,7 @@ INSERT INTO ts_part_product VALUES
   '<p>安装快速连接手机充电底座后，充电操作更符合人体工程学。杂乱的充电线被隐藏，外观更整洁。支持盲插，可快速、安全地为智能手机充电。</p> <p>包含：</p>
 					<ul> <li>1 个通用底座</li> <li>2 个设备托架，宽、窄各 1 个</li> <li>1 个充电线，可选择充电接口 iPhoneLighting® 、Micro-USB 或 USB-C 。</li> </ul> <p>注意：配备集成中控台的车型可以自行安装，无需前往服务中心。目前兼容 iPhone 6 Plus 及更高版本设备。</p> <p>不适用于配备第一代插入式中控台的车型。</p>
 				</div>','part_inner11.jpg','part_inner12.jpg',
-        '{p1:"1060583-00-B_0.jpg",p2:"1060583-00-B_1.png",p3:"1060583-00-B_2.png",p4:"1060583-00-B_3.png",p5:"1060583-00-B_0.png",p6:"1060583-00-B_1.png",p7:"1060583-00-B_2.png",p8:"1060583-00-B_3.png"}'
+        '{p1:"1060583-00-B_0.jpg",p2:"1060583-00-B_1.png",p3:"1060583-00-B_2.png",p4:"1060583-00-B_3.png",p5:"1060583-00-B_0.png",p6:"1060583-00-B_1.png",p7:"1060583-00-B_2.png",p8:"1060583-00-B_3.png"}',3
   ),
   (NULL,
   1,
@@ -439,7 +444,7 @@ INSERT INTO ts_part_product VALUES
     <p>浏览 <a href="https://www.tesla.cn/support/do-it-yourself-model-s#wireless-phone-charger" title="DIY 操作指南">DIY 操作指南</a>，轻松安装。</p>
     <p><em>注意：充电器可容纳的手机规格为 —— 高 165 毫米，宽 80.5 毫米，厚 11.9 毫米以内。</em></p>',
     'part_inner21.jpg','part_inner22.jpg',
-    '{p1:"1562264-00-A_0.jpg",p2:"1562264-00-A_1.jpg",p3:"1562264-00-A_2.jpg",p4:"1562264-00-A_3.jpg",p5:"1562264-00-A_4.jpg"}'
+    '{p1:"1562264-00-A_0.jpg",p2:"1562264-00-A_1.jpg",p3:"1562264-00-A_2.jpg",p4:"1562264-00-A_3.jpg",p5:"1562264-00-A_4.jpg"}',3
   ),
   (NULL,
   1,
@@ -452,7 +457,7 @@ INSERT INTO ts_part_product VALUES
   '<p>定制款 Tesla 通用钥匙带，适用于所有车型的遥控钥匙。钥匙带为硅胶材质，饰以 Tesla "T" Logo，钥匙圈为金属材质，外观简洁，使用方便。</p> <p><em>注意：产品不包括遥控钥匙。</em></p>',
   'part_inner31.jpg',
   'part_inner32.jpg',
-  '{p1:"1490875-00-A_3.jpg",p2:"1490875-00-A_0.jpg",p3:"1490875-00-A_0.jpg",p4:"1490875-00-A_2.jpg"}'
+  '{p1:"1490875-00-A_3.jpg",p2:"1490875-00-A_0.jpg",p3:"1490875-00-A_0.jpg",p4:"1490875-00-A_2.jpg"}',3
   ),
   /* Model S  类型编号: 1  外观 */
   (NULL,
@@ -492,7 +497,7 @@ INSERT INTO ts_part_product VALUES
           </ul>',
   '1017723-00-A_0.jpg',
   '1017723-00-A_alt.jpg',
-  '{p1:"1017723-00-A_0.jpg",p2:"1017723-00-A_1.jpg",p3:"1017723-00-A_2.jpg",p4:"1017723-00-A_alt.jpg",p5:"1017723-01-A_0.jpg",p6:"1017723-01-A_1.jpg",p7:"1017723-01-A_2.jpg",p8:"1017723-01-A_alt.jpg"}'
+  '{p1:"1017723-00-A_0.jpg",p2:"1017723-00-A_1.jpg",p3:"1017723-00-A_2.jpg",p4:"1017723-00-A_alt.jpg",p5:"1017723-01-A_0.jpg",p6:"1017723-01-A_1.jpg",p7:"1017723-01-A_2.jpg",p8:"1017723-01-A_alt.jpg"}',3
   ),   #后边还有一个雨刷可以加进去
   /* Model S  类型编号: 1  轮毂和轮胎 */
   (NULL,
@@ -520,7 +525,7 @@ INSERT INTO ts_part_product VALUES
   ',
   '1133009-00-A_0.jpg',
   '1133009-00-A_alt.jpg',
-  '{p1:"1133009-00-A_0.jpg",p2:"1133009-00-A_1.jpg",p3:"1133009-00-A_2.jpg",p4:"1133009-00-A_alt.jpg"}'
+  '{p1:"1133009-00-A_0.jpg",p2:"1133009-00-A_1.jpg",p3:"1133009-00-A_2.jpg",p4:"1133009-00-A_alt.jpg"}',3
   ), #后边还有
   /* Model S  类型编号: 1  脚垫 */
   (NULL,
@@ -542,7 +547,7 @@ INSERT INTO ts_part_product VALUES
     </ul>',
     'part_bestsell21.jpg',
     'part_bestsell22.jpg',
-    '{p1:"1019290-00-B_0.jpg",p2:"1019290-00-B_1.jpg",p3:"1019290-00-B_2.jpg",p4:"1019290-00-B_3.jpg",p5:"1019290-00-B_4.jpg"}' 
+    '{p1:"1019290-00-B_0.jpg",p2:"1019290-00-B_1.jpg",p3:"1019290-00-B_2.jpg",p4:"1019290-00-B_3.jpg",p5:"1019290-00-B_4.jpg"}' ,3
   ), 
   -- #后边还有
   /* Model 3  类型编号: 2  畅销商品 */
@@ -570,7 +575,7 @@ INSERT INTO ts_part_product VALUES
   <p>特斯拉保留法律允许范围内的解释权。</p>',
   '1448752-00-B_2.jpg',
   '1448752-00-B_2.jpg',
-  '{p1:"1448752-00-B_2.jpg",p2:"1449859-00-D_0.jpg",p3:"1135832-00-A_0.jpg"}'),
+  '{p1:"1448752-00-B_2.jpg",p2:"1449859-00-D_0.jpg",p3:"1135832-00-A_0.jpg"}',3),
   /* Model 3  类型编号: 2  内饰 */
   (NULL,
   2,
@@ -590,7 +595,7 @@ INSERT INTO ts_part_product VALUES
   <p>有关 Model 3/Model Y 遥控钥匙的更多信息，请参阅我们的<a href="https://www.tesla.cn/support/model-3-key-fob">支持页面</a>。</p>',
   '1449859-00-D_0.jpg',
   '1449859-00-D_1.jpg',
-  '{p1:"1449859-00-D_0.jpg",p2:"1449859-00-D_1.jpg",p3:"1449859-00-D_2.jpg",p4"1449859-00-D_3.jpg"}'),
+  '{p1:"1449859-00-D_0.jpg",p2:"1449859-00-D_1.jpg",p3:"1449859-00-D_2.jpg",p4"1449859-00-D_3.jpg"}',3),
   /* Model 3  类型编号: 2  外观 */
   (NULL,
   2,
@@ -608,7 +613,7 @@ INSERT INTO ts_part_product VALUES
   <p><a href="https://www.tesla.cn/support/do-it-yourself-model-3#replacing-wiper-blades">Model 3 雨刮器片更换手册</a></p>',
   '1456933-00-A_1.jpg',
   '1456933-00-A_1.jpg',
-  '{p1:"1456933-00-A_1.jpg"}'),
+  '{p1:"1456933-00-A_1.jpg"}',3),
   /* Model 3  类型编号: 2  轮毂和轮胎 */
   (NULL,
   2,
@@ -625,7 +630,7 @@ INSERT INTO ts_part_product VALUES
   <p><em>注意：仅适用于 19 英寸运动轮毂和 20 英寸高性能轮毂，包括出厂标配和售后改装的轮毂。</em></p>',
   '1518543-00-A_0.jpg',
   '1518543-00-A_2.jpg',
-  '{t1:"1518543-00-A_0.jpg",t2:"1518543-00-A_2.jpg",t3:"1518543-00-A_3.jpg"}'),
+  '{t1:"1518543-00-A_0.jpg",t2:"1518543-00-A_2.jpg",t3:"1518543-00-A_3.jpg"}',3),
   /* Model 3  类型编号: 2  脚垫 */
   (NULL,
   2,
@@ -646,7 +651,7 @@ INSERT INTO ts_part_product VALUES
   </ul>',
   '1133634-00-A_0.jpg',
   '1133634-00-A_alt.jpg',
-  '{p1:"1133634-00-A_0.jpg",p2:"1133634-00-A_alt.jpg"}');
+  '{p1:"1133634-00-A_0.jpg",p2:"1133634-00-A_alt.jpg"}',3);
 /* 还有好多........ */
   
 /* ***************************************************** */
@@ -670,7 +675,7 @@ INSERT INTO ts_dress_product VALUES
   </ul>',
   '1478245-02-A_0.jpg',
   '1478244-00-A_1.jpg',
-  '{p1:"1478245-02-A_0.jpg",p2:"1478244-00-A_1.jpg",p3:"1478232-02-A_0.jpg",p4:"1478231-00-A_1.jpg",p5:"1478239-02-A_0.jpg",p6:"1478238-00-A_1.jpg"}'
+  '{p1:"1478245-02-A_0.jpg",p2:"1478244-00-A_1.jpg",p3:"1478232-02-A_0.jpg",p4:"1478231-00-A_1.jpg",p5:"1478239-02-A_0.jpg",p6:"1478238-00-A_1.jpg"}',4
   ), #待补充
   /* 男装  类型编号: 1  帽子 */
   (NULL,
@@ -684,7 +689,7 @@ INSERT INTO ts_dress_product VALUES
   '<p>经典棒球帽款式，软顶帽身，弧形帽檐，饰有 Tesla “T” 标。100% 纯棉制造。有黑色、红色和白色三种颜色可选。</p>',
   '1462061-00-A_0.jpg',
   '1462061-00-A_2.jpg',
-  '{p1:"1462062-00-A_0.jpg",p2:"1462062-00-A_2.jpg",p3:"1462063-00-A_0.jpg",p4:"1462063-00-A_2.jpg",p5:"1462061-00-A_0.jpg",p6:"1462061-00-A_2.jpg"}');
+  '{p1:"1462062-00-A_0.jpg",p2:"1462062-00-A_2.jpg",p3:"1462063-00-A_0.jpg",p4:"1462063-00-A_2.jpg",p5:"1462061-00-A_0.jpg",p6:"1462061-00-A_2.jpg"}',4);
 /* 还有呢 */
 /* ***************************************************** */
 /* *******************周边精品详情数据表****************** */
@@ -720,7 +725,7 @@ INSERT INTO ts_surround_product VALUES
   <p><em>警告：窒息危险。内含小零件。不适合 14 岁以下儿童。</em></p>',
   'MTUyNDAwMS0wMC1BXzA=.jpg',
   'MTE1MjQwMDEtMDAtQV83.jpg',
-  '{p1:"MTUyNDAwMS0wMC1BXzA=.jpg",p2:"MTUyNDAwMS0wMC1BXzE=.jpg",p3:"MTUyNDAwMS0wMC1BXzQ=.jpg",p4:"MTUyNDAwMS0wMC1BXzY=.jpg"}');
+  '{p1:"MTUyNDAwMS0wMC1BXzA=.jpg",p2:"MTUyNDAwMS0wMC1BXzE=.jpg",p3:"MTUyNDAwMS0wMC1BXzQ=.jpg",p4:"MTUyNDAwMS0wMC1BXzY=.jpg"}',5);
 /* ***************************************************** */
 
 
