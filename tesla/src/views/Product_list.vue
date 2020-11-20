@@ -9,25 +9,25 @@
       <div v-for="(item1, index1) of title2" :key="index1">
         <div class="t2">{{ item1.family_name }}</div>
         <!-- 商品块开始 -->
-        <ul class="pro_all">
+        <ul class="pro_all" @mouseover="ima_blo" @mouseleave="ima_non">
           <!-- 单个商品开始 -->
           <li v-for="(item2, index2) of pro" :key="index2" class="product">
             <div class="pro_cont">
               <div class="pro_img">
                 <a href="#">
-                  <img v-if="true" :src="item2.pic" alt="" />
-                  <!-- <img v-else src="" alt="" /> -->
+                  <img :src="item2.pic" alt="" />
+                  <!-- <img :src="item2.pic2" alt="" /> -->
                 </a>
               </div>
-              <div class="pro_buy" @mouseenter="on">
+              <div class="pro_buy">
                 <button>查看详情</button>
                 <div></div>
                 <button>立即购买</button>
               </div>
               <!-- <div class="pro_detail"></div> -->
             </div>
-            <div class="pro_title"></div>
-            <div class="pro_price"></div>
+            <div class="pro_title">{{item2.title}}</div>
+            <div class="pro_price">{{item2.price}}</div>
             {{ pro.cont }}
           </li>
           <!-- 单个商品结束 -->
@@ -111,6 +111,16 @@
   width: 1px;
   background: #999;
 }
+.pro_title,.pro_price {
+  font-size: 14px;
+  font-weight: 700;
+  padding-top: 8px;
+  font-family: PingFangSC, "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;;
+  transition: color .2s linear;
+}
+.pro_title:hover {
+  color: #f00;
+}
 </style>
 <script>
 export default {
@@ -119,38 +129,46 @@ export default {
       title1: ["店铺活动","充电产品","优选配件","精选服饰","周边精品"],
       num: 0,
       title2: [],
-      pro: [],
+      pro: []
     };
   },
   methods: {
 
   },
   methods: {
-    on() {
-
-    }
+    ima_blo(e) {
+      if(e.target.nodeName == "IMG"){
+        console.log("你好");
+        e.target.style.display == "none";
+      }
+    },
+    ima_non() {
+      console.log("886")
+    },
   },
   mounted(){
-    this.axios.get("/product/list_charge_detail").then( res => {
+    this.axios.get("/product/list_charge").then( res => {
       this.num = parseInt(res.data.result[0].mian);    
       /* 把值取出来 */
       this.pro = res.data.result;
       this.title2 = res.data.fs;
       console.log(this.pro);
       // console.log(res.data);
-      console.log(this.title2);
+      // console.log(this.title2);
       /* 图片拼接 */
       this.pro.forEach(item => {
         item.pic = require(`../assets/img/pro_list/${item.pic}`);
+        item.pic2 = require(`../assets/img/pro_list/${item.pic2}`);
+        // item.price = JSON.parse(item.price);
+        console.log(typeof item.price);
       })
+      /* 判断当前的一级标题是用family_name还是用title自带 */
+      // fs.family_name
+      // title1: ["店铺活动","充电产品","优选配件","精选服饰","周边精品"],
+      /* 在于判断class是否为null */
+      /* 如果为null，则使用title自带 */
+      // if () {}
     });
-    // this.axios.get("/product/list_charge_family").then( res => {
-    //   /* 把值取出来 */
-    //   // this.pro = res.data.result;
-    //   console.log(res.data.result);
-    //   /* 副标题 */
-    //   // this.num = parseInt(res.data.result[0].mian);    
-    // });
   }
 };
 </script>

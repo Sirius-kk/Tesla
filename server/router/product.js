@@ -10,25 +10,49 @@ const pool = require('../pool.js');//引入上一级目录下的pool.js
 /* *************************接口配置****************************** */
 /* 店铺活动 */
 r.get("/list_activity",(req,res) => {
-  // res.send({code: 1,result: "获取成功"});
-  // 1. 查询商品
-  let sql = "SELECT * FROM ts_activity_product";
-  pool.query(sql,(err,result) => {
+  /* 获取充电产品家族类型 */
+  let sql1 = "SELECT id,family_name FROM ts_activity_family ";
+  let fs = '';
+  pool.query(sql1,(err,result) => {
     if(err) throw err;
-    res.send({code: 1,result: result});
+    fs = result;
+    // console.log(fs);
   });
-  // 2.
+  let sql3 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_charge_product";
+  pool.query(sql3,(err,result) => {
+    if(err) throw err;
+    res.send({result: result,fs: fs});
+  });
 });
+/* 店铺活动 */
 /* 充电产品 */
-r.get("/list_charge_detail",(req,res) => {
+r.get("/list_charge",(req,res) => {
+  /* 获取充电产品家族类型 */
   let sql1 = "SELECT id,family_name FROM ts_charge_family ";
   let fs = '';
   pool.query(sql1,(err,result) => {
     if(err) throw err;
     fs = result;
-    console.log(fs);
+    // console.log(fs);
   });
-  let sql3 = "SELECT pid,family_id,price,title,pic,pic2,mian FROM ts_charge_product";
+  let sql3 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_charge_product";
+  pool.query(sql3,(err,result) => {
+    if(err) throw err;
+    res.send({result: result,fs: fs});
+  });
+});
+/* 充电产品 */
+/* 优选配件 */
+r.get("/list_part",(req,res) => {
+  /* 获取充电产品家族类型 */
+  let sql1 = "SELECT id,family_name FROM ts_part_product ";
+  let fs = '';
+  pool.query(sql1,(err,result) => {
+    if(err) throw err;
+    fs = result;
+    // console.log(fs);
+  });
+  let sql3 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_part_product";
   pool.query(sql3,(err,result) => {
     if(err) throw err;
     res.send({result: result,fs: fs});
@@ -36,6 +60,38 @@ r.get("/list_charge_detail",(req,res) => {
 });
 /* 优选配件 */
 /* 精选服饰 */
+r.get("/list_dress",(req,res) => {
+  /* 获取充电产品家族类型 */
+  let sql1 = "SELECT id,family_name FROM ts_part_product ";
+  let fs = '';
+  pool.query(sql1,(err,result) => {
+    if(err) throw err;
+    fs = result;
+    // console.log(fs);
+  });
+  let sql3 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_dress_product";
+  pool.query(sql3,(err,result) => {
+    if(err) throw err;
+    res.send({result: result,fs: fs});
+  });
+});
+/* 精选服饰 */
+/* 周边精品 */
+r.get("/list_surround",(req,res) => {
+  /* 获取充电产品家族类型 */
+  let sql1 = "SELECT id,family_name FROM ts_part_product ";
+  let fs = '';
+  pool.query(sql1,(err,result) => {
+    if(err) throw err;
+    fs = result;
+    // console.log(fs);
+  });
+  let sql3 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_surround_product";
+  pool.query(sql3,(err,result) => {
+    if(err) throw err;
+    res.send({result: result,fs: fs});
+  });
+});
 /* 周边精品 */
 /* *************************接口配置****************************** */
 
