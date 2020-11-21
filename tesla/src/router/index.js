@@ -1,8 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-/* 导入商品列表模块 */
-import product_list from '../views/Product_list.vue'
+/* 导入 a 商品列表模块 */
+import product_alist from '../views/Product_alist.vue'
+/* 导入 c 商品列表模块 */
+import product_clist from '../views/Product_clist.vue'
+/* 导入 p 商品列表模块 */
+import product_plist from '../views/Product_plist.vue'
+/* 导入 d 商品列表模块 */
+import product_dlist from '../views/Product_dlist.vue'
+/* 导入 s 商品列表模块 */
+import product_slist from '../views/Product_slist.vue'
 
 Vue.use(VueRouter)
 
@@ -13,8 +21,24 @@ const routes = [
     component: Home
   },
   {
-    path: '/pro_list',
-    component: product_list
+    path: '/pro_alist',
+    component: product_alist
+  },
+  {
+    path: '/pro_clist',
+    component: product_clist
+  },
+  {
+    path: '/pro_plist',
+    component: product_plist
+  },
+  {
+    path: '/pro_dlist',
+    component: product_dlist
+  },
+  {
+    path: '/pro_slist',
+    component: product_slist
   },
   {
     path: '/about',

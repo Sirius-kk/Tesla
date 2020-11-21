@@ -93,14 +93,14 @@ CREATE TABLE ts_activity_product(
   family_id TINYINT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类
   title VARCHAR(30),         #主标题
-  price VARCHAR(30),         #价格
+  price INT,         #价格
   tp VARCHAR(50),          #类型
   color VARCHAR(50),         #颜色
   size VARCHAR(50),          #尺寸
   ds VARCHAR(200),         #商品描述
-  apic VARCHAR(50),           #图片
-  apic2 VARCHAR(50),          #切换图片
-  pic_detais VARCHAR(100),    #详情图片
+  pic VARCHAR(50),           #图片
+  pic2 VARCHAR(50),          #切换图片
+  pic_detais VARCHAR(400),    #详情图片
   mian TINYINT               #家族
 );
 /*丢弃数据表，如果存在数据表'ts_charge_product'*/
@@ -111,14 +111,14 @@ CREATE TABLE ts_charge_product(
   family_id TINYINT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类
   title VARCHAR(30),         #主标题
-  price VARCHAR(30),         #价格
+  price INT,         #价格
   tp VARCHAR(50),            #类型
   color VARCHAR(50),         #颜色
   size VARCHAR(50),          #尺寸
   ds VARCHAR(500),         #商品描述
   pic VARCHAR(50),           #图片
   pic2 VARCHAR(50),          #切换图片
-  pic_detais VARCHAR(100),    #详情图片
+  pic_detais VARCHAR(400),    #详情图片
   mian TINYINT               #家族
 );
 /*丢弃数据表，如果存在数据表'ts_part_product'*/
@@ -129,14 +129,14 @@ CREATE TABLE ts_part_product(
   family_id TINYINT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类1
   title VARCHAR(30),         #主标题
-  price VARCHAR(30),         #价格
+  price INT,         #价格
   tp VARCHAR(50),          #类型
   color VARCHAR(50),         #颜色
   size VARCHAR(50),          #尺寸
   ds VARCHAR(200),         #商品描述
   pic VARCHAR(50),           #图片
   pic2 VARCHAR(50),          #切换图片
-  pic_detais VARCHAR(100),    #详情图片
+  pic_detais VARCHAR(400),    #详情图片
   mian TINYINT               #家族
 );
 /*丢弃数据表，如果存在数据表'ts_dress_product'*/
@@ -147,14 +147,14 @@ CREATE TABLE ts_dress_product(
   family_id TINYINT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类
   title VARCHAR(30),         #主标题
-  price VARCHAR(30),         #价格
+  price INT,         #价格
   tp VARCHAR(50),          #类型
   color VARCHAR(50),         #颜色
   size VARCHAR(50),          #尺寸
   ds VARCHAR(200),         #商品描述
   pic VARCHAR(50),           #图片
   pic2 VARCHAR(50),          #切换图片
-  pic_detais VARCHAR(100),    #详情图片
+  pic_detais VARCHAR(400),    #详情图片
   mian TINYINT               #家族
 );
 /*丢弃数据表，如果存在数据表'ts_surround_product'*/
@@ -165,14 +165,14 @@ CREATE TABLE ts_surround_product(
   family_id TINYINT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类
   title VARCHAR(30),         #主标题
-  price VARCHAR(30),         #价格
+  price INT,         #价格
   tp VARCHAR(50),          #类型
   color VARCHAR(50),          #颜色
   size VARCHAR(50),           #尺寸
   ds VARCHAR(200),         #商品描述
   pic VARCHAR(50),           #图片
   pic2 VARCHAR(50),          #切换图片
-  pic_detais VARCHAR(100),    #详情图片
+  pic_detais VARCHAR(400),    #详情图片
   mian TINYINT               #家族
 );
 
@@ -241,7 +241,7 @@ INSERT INTO ts_activity_product VALUES
   1,
   NULL,
   'Model 3 车主专属福利',
-  '{p1:"0"}',
+  0,
   NULL,
   NULL,
   NULL,
@@ -261,7 +261,7 @@ INSERT INTO ts_activity_product VALUES
     <p>特斯拉保留法律允许范围内的解释权。</p>',
   'activity11.jpg',
   'activity12.jpg',
-  '{p1:"1448752-00-B_2.jpg",p2:"1449859-00-D_0.jpg",p3:"1135832-00-A_0.jpg"}',1
+  '1448752-00-B_2.jpg1449859-00-D_0.jpg1135832-00-A_0.jpg',1
   );
 /* ***************************************************** */
 /* *******************充电产品详情数据表****************** */
@@ -271,7 +271,7 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   1,
   NULL,
   '家庭充电服务包 (国标)',
-  '{p1:"8000"}',
+  8000,
   NULL,
   NULL,
   NULL,
@@ -291,15 +291,15 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   <p>实际电缆必要安装长度小于限定优惠米数的，以实际安装必要长度为准，差值米数不以任何形式赠送或返还。</p>
   <p>我们的安装服务质保期是自您签署《充电器安装确认书》之日起的2年内，壁挂式连接器的质保是自您购买之日起的4年内。需要注意的是，充电器仅在您具备安装条件后寄送至服务商带桩上门（不具备安装条件可申请全额退款）。服务商与您取得确认后现场拆封，若无质量问题恕不支持退款。</p>
   <p>购买产品即表示您同意<a href="https://www.tesla.cn/go/home-charging-package">《家庭充电服务包条款与条件》</a></p>',
-  'charge_home11.png',
+  'charge_home11.jpg',
   'charge_home12.jpg',
-  '{p1:"1050067-01-E_0.png",p2:"1050067-00-E_alt.jpg"}',2
+  '1050067-01-E_0.jpg1050067-00-E_alt.jpg',2
   ),
   (NULL,
   1,
   NULL,
   '充电线缆整理器',
-  '{p1:"275"}',
+  275,
   NULL,
   NULL,
   NULL,
@@ -310,13 +310,13 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   <p>1 套安装工具</p>',
   'charge_home21.jpg',
   'charge_home22.jpg',
-  '{p1:"1521226-00-A_0.jpg",p2:"1521226-00-A_1.jpg",p3:"1521226-00-A_3.jpg",p4:"1521226-00-A_4.jpg"}',2
+  '1521226-00-A_0.jpg1521226-00-A_1.jpg1521226-00-A_3.jpg1521226-00-A_4.jpg',2
   ),
   (NULL,
   1,
   NULL,
   '家庭充电服务包 (欧标)',
-  '{p1:"8000"}',
+  8000,
   NULL,
   NULL,
   NULL,
@@ -338,55 +338,55 @@ INSERT INTO ts_charge_product VALUES/* 这里商品描述缺少一个最外层DI
   <p>购买产品即表示您同意<a href="https://www.tesla.cn/go/home-charging-package">《家庭充电服务包条款与条件》</a></p>',
   'charge_home31.jpg',
   'charge_home32.jpg',
-  '{p1:"1050073-03-G_0.jpg",p2:"1050067-00-E_alt2.jpg"}',2
+  '1050073-03-G_0.jpg1050067-00-E_alt2.jpg',2
   ),
   (NULL,
   2,
   NULL,
   '移动充电连接器 (国标)',
-  '{p1:"2550"}',
+  2550,
   NULL,
   NULL,
   NULL,
   '<p>国标移动式连接器支持 100-240V (单相) 50Hz 交流电并且配有正确接地的专用电路插座，最大电流 13A ，适合任何 Tesla 国标车辆。</p><p>移动充电器长度为6米，最大程度支持您的充电便捷性。</p>','charge_travel11.jpg','charge_travel12.jpg',
-  '{p1:"1142848-00-E_0.jpg",p2:"1142848-00-E_1.jpg"}',2
+  '1142848-00-E_0.jpg1142848-00-E_1.jpg',2
   ),
   (NULL,
   2,
   NULL,
   '移动充电连接器 (欧标)',
-  '{p1:"4750"}',
+  4750,
   NULL,
   NULL,
   NULL,
   '<p>欧标移动式连接器可以让您在任何符合230V（单相）或230V/400V（三相）50Hz交流电，配有正确接地的专用电路的插座即时补给充电，适合任何 Tesla 欧标车辆。</p><p>移动充电器长度为6米，最大程度支持您的充电便捷性。</p>',
   'charge_travel21.jpg',
   'charge_travel22.jpg',
-  '{p1:"1142848-00-E_1.jpg",p2:"1055691-00-F_1.jpg",p3:"1055691-00-F_2.jpg"}',2
+  '1142848-00-E_1.jpg1055691-00-F_1.jpg1055691-00-F_2.jpg',2
   ),
   (NULL,
   2,
   NULL,
   '国标直流(DC)适配器',
-  '{p1:"2750"}',
+  2750,
   NULL,
   NULL,
   NULL,
   '<p>搭载非新国标 (IEC tp 2) 充电接口的 Tesla Model S 和 Tesla Model X 可通过新国标适配器连接至新国标充电设备充电。</p><p>直流 (DC) 充电适配器使用时，一端连接 Tesla 充电接口，另一端连接新国标充电连接器。</p>',
   'charge_travel31.jpg',
   'charge_travel32.jpg',
-  '{p1:"1084688-00-F_0.jpg"}',2
+  '1084688-00-F_0.jpg',2
   ),
   (NULL,
   2,
   NULL,
   '国标交流(AC)适配器',
-  '{p1:"2750"}',
+  2750,
   NULL,
   NULL,
   NULL,
   '<p>搭载非新国标 (IEC tp 2) 充电接口的 Tesla Model S 和 Tesla Model X 可通过新国标适配器连接至新国标充电设备充电。</p><p>交流 (AC) 充电适配器使用时，一端连接 Tesla 充电接口，另一端连接新国标充电连接器。</p>','charge_travel41.jpg','charge_travel42.jpg',
-  '{p1:"1102683-00-D_0.jpg"}',2
+  '1102683-00-D_0.jpg',2
   );
 /* ***************************************************** */
 /* *******************优选配件详情数据表****************** */
@@ -396,47 +396,73 @@ INSERT INTO ts_part_product VALUES
   1,
   '畅销商品',
   'Model S 固定式玻璃车顶遮阳帘',
-  '{p1:"580"}',
+  580,
   NULL,
   NULL,
   NULL,
   '<p>由轻质网状织物和可折叠的高锰钢框架组成，可阻挡三分之二的太阳能热负荷。拆卸简便，通过专用卡扣安装于玻璃车顶内部。不使用时可折叠存放在约 46 平方厘米的配套收纳袋中。</p> <p>包含：
 					</p> <ul> <li>1 个固定式玻璃车顶遮阳帘</li> <li>1 个拉链式收纳袋</li> </ul> <p>适用于配备固定式玻璃车顶的 Model
 					S 车型。 </p>','part_bestsell11.jpg','part_bestsell12.jpg',
-          '{p1:"1130555-00-A_0.jpg",p2:"1130555-00-A_1.jpg",p3:"1130555-00-A_2.jpg"}',3
+          '1130555-00-A_0.jpg1130555-00-A_1.jpg1130555-00-A_2.jpg',3
   ),
   (NULL,
   1,
   '畅销商品',
   'Model S 全天候脚垫套装',
-  '{p1:"2160"}',
+  2160,
   NULL,
   NULL,
   NULL,
   '<p>新版 Tesla Model S 全天候脚垫套装采用先进的数字激光测量技术定制而成。确保与车辆紧密贴合，全方位隔离灰尘和液体。脚垫为 TPE 材质，不含镉、铅、乳胶、PVC，100%
 					可回收，内含刚性芯体，强度高且易于清理。</p> <p> 与旧版相比，新版增加了前垫固定贴片以便于安装，并增加了围挡高度以更好地保护车辆前部底板。 </p> <p>包含：</p> <ul>
 					<li>1 个驾驶位脚垫</li> <li>1 个副驾位脚垫</li> <li>1 个第二排脚垫</li> </ul>','part_bestsell21.jpg','part_bestsell22.jpg',
-          '{p1:"1019290-00-B_0.jpg",p2:"1019290-00-B_1.jpg",p3:"1019290-00-B_2.jpg",p4:"1019290-00-B_3.jpg",p5:"1019290-00-B_4.jpg"}',3
+          '1019290-00-B_0.jpg1019290-00-B_1.jpg1019290-00-B_2.jpg1019290-00-B_3.jpg1019290-00-B_4.jpg',3
   ),
   /* Model S  类型编号: 2  内饰 */
   (NULL,
   1,
   '内饰',
   'Model S/X 快速连接手机底座',
-  '{p1:"300",p2:"325",p3:"350"}',
-  '{t1:"iPhone",t2:"USB-C",t3:"Micro USB"}',
+  300,
+  'iPhone',
   NULL,
   NULL,
   '<p>安装快速连接手机充电底座后，充电操作更符合人体工程学。杂乱的充电线被隐藏，外观更整洁。支持盲插，可快速、安全地为智能手机充电。</p> <p>包含：</p>
 					<ul> <li>1 个通用底座</li> <li>2 个设备托架，宽、窄各 1 个</li> <li>1 个充电线，可选择充电接口 iPhoneLighting® 、Micro-USB 或 USB-C 。</li> </ul> <p>注意：配备集成中控台的车型可以自行安装，无需前往服务中心。目前兼容 iPhone 6 Plus 及更高版本设备。</p> <p>不适用于配备第一代插入式中控台的车型。</p>
 				</div>','part_inner11.jpg','part_inner12.jpg',
-        '{p1:"1060583-00-B_0.jpg",p2:"1060583-00-B_1.png",p3:"1060583-00-B_2.png",p4:"1060583-00-B_3.png",p5:"1060583-00-B_0.png",p6:"1060583-00-B_1.png",p7:"1060583-00-B_2.png",p8:"1060583-00-B_3.png"}',3
+        '1060583-00-B_0.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg1060583-00-B_10.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg',3
+  ),
+  (NULL,
+  1,
+  '内饰',
+  'Model S/X 快速连接手机底座',
+  325,
+  'USB-C',
+  NULL,
+  NULL,
+  '<p>安装快速连接手机充电底座后，充电操作更符合人体工程学。杂乱的充电线被隐藏，外观更整洁。支持盲插，可快速、安全地为智能手机充电。</p> <p>包含：</p>
+					<ul> <li>1 个通用底座</li> <li>2 个设备托架，宽、窄各 1 个</li> <li>1 个充电线，可选择充电接口 iPhoneLighting® 、Micro-USB 或 USB-C 。</li> </ul> <p>注意：配备集成中控台的车型可以自行安装，无需前往服务中心。目前兼容 iPhone 6 Plus 及更高版本设备。</p> <p>不适用于配备第一代插入式中控台的车型。</p>
+				</div>','part_inner11.jpg','part_inner12.jpg',
+        '1060583-00-B_0.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg1060583-00-B_10.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg',3
+  ),
+  (NULL,
+  1,
+  '内饰',
+  'Model S/X 快速连接手机底座',
+  350,
+  'Micro USB',
+  NULL,
+  NULL,
+  '<p>安装快速连接手机充电底座后，充电操作更符合人体工程学。杂乱的充电线被隐藏，外观更整洁。支持盲插，可快速、安全地为智能手机充电。</p> <p>包含：</p>
+					<ul> <li>1 个通用底座</li> <li>2 个设备托架，宽、窄各 1 个</li> <li>1 个充电线，可选择充电接口 iPhoneLighting® 、Micro-USB 或 USB-C 。</li> </ul> <p>注意：配备集成中控台的车型可以自行安装，无需前往服务中心。目前兼容 iPhone 6 Plus 及更高版本设备。</p> <p>不适用于配备第一代插入式中控台的车型。</p>
+				</div>','part_inner11.jpg','part_inner12.jpg',
+        '1060583-00-B_0.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg1060583-00-B_10.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg',3
   ),
   (NULL,
   1,
   '内饰',
   'Model S/X 手机无线充电器',
-  '{p1:"875"}',
+  875,
   NULL,
   NULL,
   NULL,
@@ -444,28 +470,28 @@ INSERT INTO ts_part_product VALUES
     <p>浏览 <a href="https://www.tesla.cn/support/do-it-yourself-model-s#wireless-phone-charger" title="DIY 操作指南">DIY 操作指南</a>，轻松安装。</p>
     <p><em>注意：充电器可容纳的手机规格为 —— 高 165 毫米，宽 80.5 毫米，厚 11.9 毫米以内。</em></p>',
     'part_inner21.jpg','part_inner22.jpg',
-    '{p1:"1562264-00-A_0.jpg",p2:"1562264-00-A_1.jpg",p3:"1562264-00-A_2.jpg",p4:"1562264-00-A_3.jpg",p5:"1562264-00-A_4.jpg"}',3
+    '1562264-00-A_0.jpg1562264-00-A_1.jpg1562264-00-A_2.jpg1562264-00-A_3.jpg1562264-00-A_4.jpg',3
   ),
   (NULL,
   1,
   '内饰',
   'Model S 硅胶钥匙带',
-  '{p1:"145"}',
+  145,
   NULL,
   NULL,
   NULL,
   '<p>定制款 Tesla 通用钥匙带，适用于所有车型的遥控钥匙。钥匙带为硅胶材质，饰以 Tesla "T" Logo，钥匙圈为金属材质，外观简洁，使用方便。</p> <p><em>注意：产品不包括遥控钥匙。</em></p>',
   'part_inner31.jpg',
   'part_inner32.jpg',
-  '{p1:"1490875-00-A_3.jpg",p2:"1490875-00-A_0.jpg",p3:"1490875-00-A_0.jpg",p4:"1490875-00-A_2.jpg"}',3
+  '1490875-00-A_3.jpg1490875-00-A_0.jpg1490875-00-A_0.jpg1490875-00-A_2.jpg',3
   ),
   /* Model S  类型编号: 1  外观 */
   (NULL,
   1,
   '外观',
   'Model S 车衣 (国标)',
-  '{p1:"2050",p2:"2900"}',
-  '{t1:"室内",t2:"室外"}',
+  2050,
+  '室内',
   NULL,
   NULL,
   '<h3>室内车衣</h3>
@@ -497,14 +523,53 @@ INSERT INTO ts_part_product VALUES
           </ul>',
   '1017723-00-A_0.jpg',
   '1017723-00-A_alt.jpg',
-  '{p1:"1017723-00-A_0.jpg",p2:"1017723-00-A_1.jpg",p3:"1017723-00-A_2.jpg",p4:"1017723-00-A_alt.jpg",p5:"1017723-01-A_0.jpg",p6:"1017723-01-A_1.jpg",p7:"1017723-01-A_2.jpg",p8:"1017723-01-A_alt.jpg"}',3
+  '1017723-00-A_0.jpg1017723-00-A_1.jpg1017723-00-A_2.jpg1017723-00-A_alt.jpg1017723-01-A_0.jpg1017723-01-A_1.jpg1017723-01-A_2.jpg1017723-01-A_alt.jpg',3
+  ),
+  (NULL,
+  1,
+  '外观',
+  'Model S 车衣 (国标)',
+  2900,
+  '室外',
+  NULL,
+  NULL,
+  '<h3>室内车衣</h3>
+  <p>弹力缎面，像手套一样贴合车身，可有效防止漆面刮擦或尘埃积聚。充电端口处有专门的开口，可正常连接充电器。通风网孔在充电时有利于车辆散热。</p>
+					<p> 特色： </p>
+          <ul> 
+          <li>丝滑黑色缎面</li> 
+          <li>内层材质柔软</li> 
+          </ul> 
+          <p> 包含： </p>
+					<ul> 
+          <li>1 个车衣</li> 
+          <li>1 个收纳袋</li> 
+          </ul> 
+          <br><br> 
+          <h3>户外车衣</h3> 
+          <p>保护您的爱车免受恶劣天气等户外因素的影响。车衣中间层采用热塑性聚氨酯材料，里层和外层采用机织聚酯材料，透气性和耐水性俱佳。充电端口处有专门的开口，可正常连接充电器。通风网孔在充电时有利于车辆散热。</p><p>
+					</p>
+          <p> 特色： </p> 
+          <ul> 
+          <li>外层结实耐用</li> 
+          <li>内层材质柔软</li> 
+          <li>防盗钢丝锁</li> 
+          </ul>
+					<p> 包含： </p> 
+          <ul> 
+          <li>1 个车衣</li> 
+          <li>1 个收纳袋</li> 
+          </ul>',
+  '1017723-00-A_0.jpg',
+  '1017723-00-A_alt.jpg',
+  '1017723-00-A_0.jpg1017723-00-A_1.jpg1017723-00-A_2.jpg1017723-00-A_alt.jpg1017723-01-A_0.jpg1017723-01-A_1.jpg1017723-01-A_2.jpg1017723-01-A_alt.jpg',3
   ),   #后边还有一个雨刷可以加进去
   /* Model S  类型编号: 1  轮毂和轮胎 */
   (NULL,
   1,
   '轮毂和轮胎',
   '轮胎修理工具包',
-  '{p1:"875"}',
+  875,
   NULL,
   NULL,
   NULL,
@@ -525,14 +590,14 @@ INSERT INTO ts_part_product VALUES
   ',
   '1133009-00-A_0.jpg',
   '1133009-00-A_alt.jpg',
-  '{p1:"1133009-00-A_0.jpg",p2:"1133009-00-A_1.jpg",p3:"1133009-00-A_2.jpg",p4:"1133009-00-A_alt.jpg"}',3
+  '1133009-00-A_0.jpg1133009-00-A_1.jpg1133009-00-A_2.jpg1133009-00-A_alt.jpg',3
   ), #后边还有
   /* Model S  类型编号: 1  脚垫 */
   (NULL,
   1,
   '脚垫',
   'Model S 全天候脚垫套装',
-  '{p1:"275"}',
+  275,
   NULL,
   NULL,
   NULL,
@@ -547,7 +612,7 @@ INSERT INTO ts_part_product VALUES
     </ul>',
     'part_bestsell21.jpg',
     'part_bestsell22.jpg',
-    '{p1:"1019290-00-B_0.jpg",p2:"1019290-00-B_1.jpg",p3:"1019290-00-B_2.jpg",p4:"1019290-00-B_3.jpg",p5:"1019290-00-B_4.jpg"}' ,3
+    '1019290-00-B_0.jpg1019290-00-B_1.jpg1019290-00-B_2.jpg1019290-00-B_3.jpg1019290-00-B_4.jpg' ,3
   ), 
   -- #后边还有
   /* Model 3  类型编号: 2  畅销商品 */
@@ -555,7 +620,7 @@ INSERT INTO ts_part_product VALUES
   2,
   '畅销商品',
   'Model 3 车主专属福利',
-  '{p1:"0"}',
+  0,
   NULL,
   NULL,
   NULL,
@@ -575,13 +640,13 @@ INSERT INTO ts_part_product VALUES
   <p>特斯拉保留法律允许范围内的解释权。</p>',
   '1448752-00-B_2.jpg',
   '1448752-00-B_2.jpg',
-  '{p1:"1448752-00-B_2.jpg",p2:"1449859-00-D_0.jpg",p3:"1135832-00-A_0.jpg"}',3),
+  '1448752-00-B_2.jpg1449859-00-D_0.jpg1135832-00-A_0.jpg',3),
   /* Model 3  类型编号: 2  内饰 */
   (NULL,
   2,
   '内饰',
   'Model 3/Y 遥控钥匙',
-  '{p1:"1200"}',
+  1200,
   NULL,
   NULL,
   NULL,
@@ -595,14 +660,14 @@ INSERT INTO ts_part_product VALUES
   <p>有关 Model 3/Model Y 遥控钥匙的更多信息，请参阅我们的<a href="https://www.tesla.cn/support/model-3-key-fob">支持页面</a>。</p>',
   '1449859-00-D_0.jpg',
   '1449859-00-D_1.jpg',
-  '{p1:"1449859-00-D_0.jpg",p2:"1449859-00-D_1.jpg",p3:"1449859-00-D_2.jpg",p4"1449859-00-D_3.jpg"}',3),
+  '1449859-00-D_0.jpg1449859-00-D_1.jpg1449859-00-D_2.jpg1449859-00-D_3.jpg',3),
   /* Model 3  类型编号: 2  外观 */
   (NULL,
   2,
   '外观',
   'Model 3 雨刮器',
-  '{p1:"183"}',
-  '{t1:"右(副驾驶)",t2:"左(驾驶位)"}',
+  183,
+  '右(副驾驶)',
   NULL,
   NULL,
   '<p>为 Model 3 雨刮器片选择正规的替换产品以确保能够正确安装，并实现相同的使用效果和性能。</p>
@@ -613,13 +678,30 @@ INSERT INTO ts_part_product VALUES
   <p><a href="https://www.tesla.cn/support/do-it-yourself-model-3#replacing-wiper-blades">Model 3 雨刮器片更换手册</a></p>',
   '1456933-00-A_1.jpg',
   '1456933-00-A_1.jpg',
-  '{p1:"1456933-00-A_1.jpg"}',3),
+  '1456933-00-A_1.jpg',3),
+  (NULL,
+  2,
+  '外观',
+  'Model 3 雨刮器',
+  183,
+  '左(驾驶位)',
+  NULL,
+  NULL,
+  '<p>为 Model 3 雨刮器片选择正规的替换产品以确保能够正确安装，并实现相同的使用效果和性能。</p>
+  <p>包含：</p>
+  <ul>
+  <li>1 x 雨刮器片</li>
+  </ul>
+  <p><a href="https://www.tesla.cn/support/do-it-yourself-model-3#replacing-wiper-blades">Model 3 雨刮器片更换手册</a></p>',
+  '1456933-00-A_1.jpg',
+  '1456933-00-A_1.jpg',
+  '1456933-00-A_1.jpg',3),
   /* Model 3  类型编号: 2  轮毂和轮胎 */
   (NULL,
   2,
   '轮毂和轮胎',
   'Model 3 碳纤维轮毂螺帽套件',
-  '{p1:"2400"}',
+  2400,
   NULL,
   NULL,
   NULL,
@@ -630,14 +712,14 @@ INSERT INTO ts_part_product VALUES
   <p><em>注意：仅适用于 19 英寸运动轮毂和 20 英寸高性能轮毂，包括出厂标配和售后改装的轮毂。</em></p>',
   '1518543-00-A_0.jpg',
   '1518543-00-A_2.jpg',
-  '{t1:"1518543-00-A_0.jpg",t2:"1518543-00-A_2.jpg",t3:"1518543-00-A_3.jpg"}',3),
+  '1518543-00-A_0.jpg1518543-00-A_2.jpg1518543-00-A_3.jpg',3),
   /* Model 3  类型编号: 2  脚垫 */
   (NULL,
   2,
   '脚垫',
   'Model 3 全天候前备/后备箱地垫',
-  '{p1:"655",p2:"955"}',
-  '{t1:"前备箱",t2:"后备箱"}',
+  655,
+  '前备箱',
   NULL,
   NULL,
   '<p>地垫为 TPE 材质，不含镉、铅、乳胶、PVC，100% 可回收，内含刚性芯体，强度高且易于清理。</p> 
@@ -651,7 +733,27 @@ INSERT INTO ts_part_product VALUES
   </ul>',
   '1133634-00-A_0.jpg',
   '1133634-00-A_alt.jpg',
-  '{p1:"1133634-00-A_0.jpg",p2:"1133634-00-A_alt.jpg"}',3);
+  '1133634-00-A_0.jpg1133634-00-A_alt.jpg',3),
+  (NULL,
+  2,
+  '脚垫',
+  'Model 3 全天候前备/后备箱地垫',
+  955,
+  '后备箱',
+  NULL,
+  NULL,
+  '<p>地垫为 TPE 材质，不含镉、铅、乳胶、PVC，100% 可回收，内含刚性芯体，强度高且易于清理。</p> 
+  <p><strong>前备箱垫包括：</strong></p>
+	<ul> 
+  <li>1 个前备箱地垫</li> 
+  </ul> 
+  <p><strong>后备箱垫包括：</strong></p> 
+  <ul> 
+  <li>1 个后备箱垫</li> 
+  </ul>',
+  '1133634-00-A_0.jpg',
+  '1133634-00-A_alt.jpg',
+  '1133634-00-A_0.jpg1133634-00-A_alt.jpg',3);
 /* 还有好多........ */
   
 /* ***************************************************** */
@@ -662,10 +764,10 @@ INSERT INTO ts_dress_product VALUES
   1,
   'T恤',
   'Made on Earth by Humans 短袖T恤',
-  '{p1:"249"}',
+  '249',
   NULL,
-  '{c1:"#808080",c2:"#04010a",c3:"#ffffff"}',
-  '{s1:"S",s2:"M",s3:"L",s4:"XL"}',
+  '#808080;#04010a;#ffffff;',
+  'S;M;L;XL;',
   '<p>在一次具有历史意义的发射任务中，一辆 Tesla Roadster 跑车和它的“驾驶员” Starman 搭乘火箭来到太空，开启了一段漫长的太空之旅。这辆 Roadster 的电路板上刻有一句话，“Made on Earth by Humans”，意思是“地球出品，人类制造”。穿上这款T恤，表达你对太空探索和前沿科技创新的支持。由 100% 纯棉制成。</p>
   <ul>
   <li>S (165/84A) : 胸围 48.5cm，肩宽 41.5cm</li>
@@ -675,21 +777,21 @@ INSERT INTO ts_dress_product VALUES
   </ul>',
   '1478245-02-A_0.jpg',
   '1478244-00-A_1.jpg',
-  '{p1:"1478245-02-A_0.jpg",p2:"1478244-00-A_1.jpg",p3:"1478232-02-A_0.jpg",p4:"1478231-00-A_1.jpg",p5:"1478239-02-A_0.jpg",p6:"1478238-00-A_1.jpg"}',4
+  '1478245-02-A_0.jpg1478244-00-A_1.jpg1478232-02-A_0.jpg1478231-00-A_1.jpg1478239-02-A_0.jpg1478238-00-A_1.jpg',4
   ), #待补充
   /* 男装  类型编号: 1  帽子 */
   (NULL,
   1,
   '帽子',
   'Tesla T标棒球帽',
-  '{p1:"169"}',
+  '169',
   NULL,
-  '{c1:"#04010a",c2:"#ffffff",c3:"#d00"}',
+  '#04010a;#ffffff;#dd0000;',
   NULL,
   '<p>经典棒球帽款式，软顶帽身，弧形帽檐，饰有 Tesla “T” 标。100% 纯棉制造。有黑色、红色和白色三种颜色可选。</p>',
   '1462061-00-A_0.jpg',
   '1462061-00-A_2.jpg',
-  '{p1:"1462062-00-A_0.jpg",p2:"1462062-00-A_2.jpg",p3:"1462063-00-A_0.jpg",p4:"1462063-00-A_2.jpg",p5:"1462061-00-A_0.jpg",p6:"1462061-00-A_2.jpg"}',4);
+  '1462062-00-A_0.jpg1462062-00-A_2.jpg1462063-00-A_0.jpg1462063-00-A_2.jpg1462061-00-A_0.jpg1462061-00-A_2.jpg',4);
 /* 还有呢 */
 /* ***************************************************** */
 /* *******************周边精品详情数据表****************** */
@@ -699,7 +801,7 @@ INSERT INTO ts_surround_product VALUES
   1,
   NULL,
   'Roadster 1:18 汽车模型',
-  '{p1:"1750"}',
+  '1750',
   NULL,
   NULL,
   NULL,
@@ -725,7 +827,7 @@ INSERT INTO ts_surround_product VALUES
   <p><em>警告：窒息危险。内含小零件。不适合 14 岁以下儿童。</em></p>',
   'MTUyNDAwMS0wMC1BXzA=.jpg',
   'MTE1MjQwMDEtMDAtQV83.jpg',
-  '{p1:"MTUyNDAwMS0wMC1BXzA=.jpg",p2:"MTUyNDAwMS0wMC1BXzE=.jpg",p3:"MTUyNDAwMS0wMC1BXzQ=.jpg",p4:"MTUyNDAwMS0wMC1BXzY=.jpg"}',5);
+  'MTUyNDAwMS0wMC1BXzA=.jpgMTUyNDAwMS0wMC1BXzE=.jpgMTUyNDAwMS0wMC1BXzQ=.jpgMTUyNDAwMS0wMC1BXzY=.jpg',5);
 /* ***************************************************** */
 
 

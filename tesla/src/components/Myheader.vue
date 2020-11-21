@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="head">
     <el-row>
       <el-col :span="9">
         <!-- 左侧部分开始 -->
@@ -16,24 +16,24 @@
         <!-- 中间部分开始 -->
         <div class="middle">
           <div class="middle_up">
-            <ul class="menu_1" @mouseleave="kard_none">
-              <li @mouseenter="kard_block1">
+            <ul class="menu_1" @mouseleave="kard_none" @click="jump1">
+              <li @mouseenter="kard_block1" class="activity">
                 <!-- <router-link to="">  </router-link> -->
                 店铺活动
               </li>
-              <li @mouseenter="kard_block2">
+              <li @mouseenter="kard_block2" class="charge">
                 <!-- <router-link to="">  </router-link> -->
                 充电产品
               </li>
-              <li @mouseenter="kard_block3">
+              <li @mouseenter="kard_block3" class="part">
                 <!-- <router-link to="">  </router-link> -->
                 优选配件
               </li>
-              <li @mouseenter="kard_block4">
+              <li @mouseenter="kard_block4" class="dress">
                 <!-- <router-link to="">  </router-link> -->
                 精选服饰
               </li>
-              <li @mouseenter="kard_block5">
+              <li @mouseenter="kard_block5" class="surround">
                 <!-- <router-link to="">  </router-link> -->
                 周边精品
               </li>
@@ -168,6 +168,7 @@
       </div>
     </div>
     <!-- 悬浮导航结束 -->
+    <div></div>
   </div>
 </template>
 
@@ -198,13 +199,29 @@ export default {
     kard_none() {
       this.kard = "";
     },
+    jump1(e) {
+      if( e.target.className == "activity" ){
+        this.$router.push("/pro_alist");
+      } else if( e.target.className == "charge" ) {
+        this.$router.push("/pro_clist");
+      } else if( e.target.className == "part" ) {
+        this.$router.push("/pro_plist");
+      } else if( e.target.className == "dress" ) {
+        this.$router.push("/pro_dlist");
+      } else if( e.target.className == "surround" ) {
+        this.$router.push("/pro_slist");
+      } 
+    },
     top_lable() {
       // 获取超出页面上方的距离
+      // console.log(111111111);
       let scrollTop =
         document.body.scrollTop || document.documentElement.scrollTop;
-      let headerEle = document.getElementsByClassName("header")[0];
+      let headerEle = document.getElementsByClassName("head")[0];
+      // console.log(headerEle);
       // 设置滚动阈值
       // 当滚动距离为40px时，则给标签页添加固定定位
+      // console.log(scrollTop);
       if (scrollTop > 50) {
         headerEle.style.background = "rgba(255,255,255,1)";
       } else {
@@ -223,12 +240,12 @@ export default {
 
 <style scoped>
 /* 整体样式开始 */
-.header {
+.head {
   height: 58px;
   position: relative;
 }
 /* 清除高度坍塌 */
-.header::after {
+.head::after {
   content: "";
   display: block;
   clear: both;
@@ -244,6 +261,9 @@ export default {
 }
 .el-row {
   min-width: 1100px;
+}
+li,p,h1 {
+  cursor: pointer;
 }
 /* 整体样式结束 */
 /* 左侧结构样式开始 */
@@ -354,7 +374,7 @@ export default {
   margin-bottom: 4px;
 }
 /* 滚动事件涉及样式 */
-.header {
+.head {
   background: rgba(255, 255, 255, 0);
   position: fixed;
   z-index: 888;
