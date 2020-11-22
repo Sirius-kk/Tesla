@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="9">
         <!-- 左侧部分开始 -->
-        <div class="left">
+        <div class="left" @click="jumpIndex">
           <div class="img_logo">
             <img src="../assets/img/header/logo.jpg" />
           </div>
@@ -16,7 +16,7 @@
         <!-- 中间部分开始 -->
         <div class="middle">
           <div class="middle_up">
-            <ul class="menu_1" @mouseleave="kard_none" @click="jump1">
+            <ul class="menu_1" @mouseleave="kard_none" @click="jumpList">
               <li @mouseenter="kard_block1" class="activity">
                 <!-- <router-link to="">  </router-link> -->
                 店铺活动
@@ -42,16 +42,18 @@
         </div>
         <!-- 中间部分结束 -->
       </el-col>
-      <el-col :span="9">
+      <el-col :span="6" :offset="3">
         <!-- 右侧部分开始 -->
         <div class="right">
           <div class="shopping">
+            <div></div>
             <img src="../assets/img/header/shopping.png" />
           </div>
           <div class="search">
+            <input type="text">
             <img src="../assets/img/header/search.png" />
           </div>
-          <div>登录</div>
+          <div @click="login">登录</div>
         </div>
         <!-- 右侧部分结束 -->
       </el-col>
@@ -142,8 +144,8 @@
           <div>
             <P>童装</P>
             <ul class="menu_3">
-              <li>童装</li>
               <li>上衣</li>
+              <li>玩具</li>
             </ul>
           </div>
         </div>
@@ -199,7 +201,13 @@ export default {
     kard_none() {
       this.kard = "";
     },
-    jump1(e) {
+    /* 跳轉主頁 */
+    jumpIndex() {
+      this.$router.push("/");
+    },
+    /* 跳轉主頁 */
+    /* 一級導航跳轉 */
+    jumpList(e) {
       if( e.target.className == "activity" ){
         this.$router.push("/pro_alist");
       } else if( e.target.className == "charge" ) {
@@ -212,28 +220,16 @@ export default {
         this.$router.push("/pro_slist");
       } 
     },
-    top_lable() {
-      // 获取超出页面上方的距离
-      // console.log(111111111);
-      let scrollTop =
-        document.body.scrollTop || document.documentElement.scrollTop;
-      let headerEle = document.getElementsByClassName("head")[0];
-      // console.log(headerEle);
-      // 设置滚动阈值
-      // 当滚动距离为40px时，则给标签页添加固定定位
-      // console.log(scrollTop);
-      if (scrollTop > 50) {
-        headerEle.style.background = "rgba(255,255,255,1)";
-      } else {
-        headerEle.style.background = "rgba(255,255,255,0)";
-      }
-    },
-  },
-  mounted() {
-    window.addEventListener("scroll", this.top_lable);
-  },
-  destroyed() {
-    this.top_lable = null;
+    /* 一級導航跳轉 */
+    /* 二級導航跳轉 */
+
+    /* 二級導航跳轉 */
+    /* 登錄跳轉 */
+    login() {
+      // this.$router.push();
+      console.log("登錄跳轉");
+    }
+    /* 登錄跳轉 */
   },
 };
 </script>
@@ -262,7 +258,7 @@ export default {
 .el-row {
   min-width: 1100px;
 }
-li,p,h1 {
+li,p,h1,.left {
   cursor: pointer;
 }
 /* 整体样式结束 */
@@ -363,7 +359,7 @@ li,p,h1 {
   margin-top: 30px;
 }
 /* 中间部分列表样式结束 */
-/* 右侧图标样式 */
+/* 右侧样式開始 */
 .right > div {
   float: right;
   cursor: pointer;
@@ -373,9 +369,36 @@ li,p,h1 {
   width: 21px;
   margin-bottom: 4px;
 }
+.shopping,.search {
+  position: relative;
+}
+.shopping div,.search img {
+  position: absolute;
+} 
+.search input {
+  padding: 7px 14px;
+  border-radius: 30px;
+  outline: 0;
+  border: 1px solid #bdb7b7;
+}
+.search img {
+  top: 19px;
+  left: 168px;
+} 
+.shopping div {
+  width: 15px;
+  height: 15px;
+  background:#000;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 50%;
+  top: 13px;
+  left: 11px;
+}
+/* 右侧样式結束 */
 /* 滚动事件涉及样式 */
 .head {
-  background: rgba(255, 255, 255, 0);
+  background: #fff;
   position: fixed;
   z-index: 888;
   width: 100%;

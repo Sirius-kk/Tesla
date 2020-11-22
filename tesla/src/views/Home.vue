@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-    <my-header></my-header>
+      <my-header-index></my-header-index>
     </div>
     <!-- 第一部分 -->
     <div class="div_1">
@@ -19,19 +19,24 @@
     <!-- 第三部分 -->
     <div class="div_3">
       <!-- 左右侧箭头 -->
-      <div class="prev a1">
+      <div @click="prev" class="prev a1">
         <img src="../assets/imgs/prev.png" alt="" />
       </div>
-      <div class="next a1">
+      <div @click="next" class="next a1">
         <img src="../assets/imgs/next.png" alt="" />
       </div>
       <!-- 轮播区域 -->
       <div class="bigbox">
         <div class="box">
-          <ul >
-            <li  v-for="(item,i) of carsou" :key=i class="a1"  >
-              <img :src="item.src" alt="">
-              <p>{{item.title}}</p>
+          <ul :style="{ width: ulwidth + 'px', left: '-' + left1 + 'px' }">
+            <li
+              v-for="(item, i) of carsou"
+              :key="i"
+              class="a1"
+              :style="{ width: liwidth + 'px' }"
+            >
+              <img :src="item.pic" alt="" />
+              <p style="margin-top: 20px; font-size: 18px">{{ item.title }}</p>
             </li>
           </ul>
         </div>
@@ -71,6 +76,7 @@
           <img class="img_1 a1" src="../assets/imgs/mens.jpg" alt="" />
           <p style="color: #fff">男装</p>
         </div>
+
         <div class="div_6-2-2">
           <img class="img_1 a1" src="../assets/imgs/womens.jpg" alt="" />
           <p>女装</p>
@@ -80,7 +86,9 @@
   </div>
 </template>
 <style  scoped>
-.header{z-index: 5;}
+.header {
+  z-index: 5;
+}
 .div_1 {
   position: relative;
 }
@@ -120,7 +128,7 @@
 .div_3 {
   width: 100%;
   height: 637px;
- 
+
   position: relative;
 }
 .prev,
@@ -128,7 +136,7 @@
   width: 5%;
   height: 100%;
   position: absolute;
-  background-color:#f8f8f8;
+  background-color: #f8f8f8;
 }
 .prev img,
 .next img {
@@ -147,28 +155,28 @@
   right: 5%;
   height: 100%;
 }
-.box{
+.box {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 .box ul {
-  width: 1000px;
   height: 100%;
   position: absolute;
-  left: 0;
-  transition: left 1s linear 
+  transition: left 1s linear;
 }
 .box ul li {
   height: 100%;
   background-color: #f8f8f8;
   margin-left: 20px;
   float: left;
-  width: 100px;
   text-align: center;
+  overflow: hidden;
 }
-.box ul li>img{width: 100%;height: 541px;}
+.box ul li > img {
+  height: 541px;
+}
 .div_4 {
   width: 100%;
   display: flex;
@@ -244,7 +252,7 @@
 }
 .a1:hover {
   box-shadow: 0px 0px 10px #888888;
-  transition: all 0.5 linear 
+  transition: all 0.5 linear;
 }
 img:hover {
   cursor: pointer;
@@ -254,42 +262,46 @@ img:hover {
 export default {
   data() {
     return {
-      carsou:[
-        {src:require("../assets/imgs/7528845-00-A--mens-t-embroidery-tee-grey.jpg"),title:"男装 T标 短袖T恤"},
-        {src:require("../assets/imgs/1133634-00-A.jpg"),title:"Model 3 全天候前备/后备箱地垫"},
-        {src:require("../assets/imgs/1103026-00-A.jpg"),title:"Model X 全天候地垫"},
-        {src:require("../assets/imgs/7528823-00-A--womens-small-chest-wordmark-tee-white.jpg"),title:"女装 小Tesla Logo 短袖T恤"},
-        {src:require("../assets/imgs/1103026-00-A.jpg"),title:"Model S 全天候脚垫套装"},
-        {src:require("../assets/imgs/1133009-00-A.jpg"),title:"轮胎修理工具包"},
-        {src:require("../assets/imgs/1474952-00-A_0.jpg"),title:"Model S 1:18 汽车模型"}
-        ],
-    }
+      liwidth: 0,
+      ulwidth: 0,
+      aa: "",
+      carsou: [],
+      left1: 0,
+    };
   },
   methods: {
-    // 轮播图代码
-    add() {
-     let boxEle=document.getElementsByClassName("box")[0]
-     let ulEle=boxEle.children[0]
-     let li=ulEle.children
-      ulEle.innerHTML+=ulEle.innerHTML
-     let widthEle=(boxEle.offsetWidth-80)/3
-     ulEle.style.width=widthEle*(li.length+1)+"px"
-     for(var item of li){
-       item.style.width=widthEle+"px"
-     }
-      let jump=widthEle+20
-      let counent=li.length
-       let aa=0;
-     setInterval(()=>{
-       aa+=jump
-       if(aa>=jump*(li.length-3)){aa=0;}
-       ulEle.style.left='-'+aa+'px'
-      },2000)
-    }
-    // 轮播图结束
+    prev() {
+      if (this.left1 > 0) {
+        this.left1 -= this.liwidth + 20;
+      }
+    },
+    next() {
+      this.left1 += this.liwidth + 20;
+    },
   },
   mounted() {
-    this.add();
+    this.axios.get("/product/carsou").then((res) => {
+      console.log(res.data);
+      let data = res.data.result;
+      data.forEach((item) => {
+        if (item.pic != null) {
+          item.pic = require(`../assets/img/pro_list/` + item.pic);
+        }
+        this.carsou.push(item);
+      });
+      //  定义轮播图函数
+      let boxEle = document.getElementsByClassName("box")[0];
+      let liEle = document.getElementsByClassName("li")[0];
+      this.liwidth = (boxEle.offsetWidth - 80) / 3;
+      this.ulwidth = this.liwidth * this.carsou.length;
+      setInterval(() => {
+        let a = this.liwidth + 20;
+        this.left1 += a;
+        if (this.left1 > a * (this.carsou.length - 4)) {
+          this.left1 = 0;
+        }
+      }, 5000);
+    });
   },
 };
 </script>

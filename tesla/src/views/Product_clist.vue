@@ -1,22 +1,26 @@
 <template>
   <div>
-    <my-header></my-header>
+    <my-header-list></my-header-list>
     <!-- 页面开始 -->
     <!-- 一级标题+容器开始 -->
     <div class="container">
       <div class="t1">{{ title1[num] }}</div>
       <!-- 二级标题+容器开始 -->
-      <div v-for="(item1, index1) of title2" :key="index1">
-        <div class="t2">{{ item1.family_name }}</div>
+      <div v-for="(item2, index2) of title2" :key="index2">
+        <div class="t2">{{ item2.family_name }}</div>
         <!-- 商品块开始 -->
         <ul class="pro_all" @mouseover="ima_blo" @mouseleave="ima_non">
           <!-- 单个商品开始 -->
-          <li v-for="(item2, index2) of pro" :key="index2" class="product">
+          <li
+            v-for="(item3, index3) of pro_list[index2]"
+            :key="index3"
+            class="product"
+          >
             <div class="pro_cont">
               <div class="pro_img">
                 <a href="#">
-                  <img :src="item2.pic" alt="" />
-                  <!-- <img :src="item2.pic2" alt="" /> -->
+                  <img :src="item3.pic" alt="" />
+                  <!-- <img :src="item3.pic2" alt="" /> -->
                 </a>
               </div>
               <div class="pro_buy">
@@ -26,8 +30,8 @@
               </div>
               <!-- <div class="pro_detail"></div> -->
             </div>
-            <div class="pro_title">{{ item2.title }}</div>
-            <div class="pro_price">¥ {{ item2.price }}</div>
+            <div class="pro_title">{{ item3.title }}</div>
+            <div class="pro_price">¥ {{ item3.price }}</div>
           </li>
           <!-- 单个商品结束 -->
         </ul>
@@ -132,6 +136,7 @@ export default {
       num: 0,
       title2: [],
       pro: [],
+      pro_list: [],
     };
   },
   methods: {},
@@ -149,79 +154,43 @@ export default {
   mounted() {
     /* activity  \  charge  \  part   \  dress  \  surround */
     this.axios.get("/product/list_charge").then((res) => {
-      /* 把值取出来 */
-      this.pro = res.data.result;
-      /** 给当前的页面添加一级标题 */
-      /** 判断当前的一级标题是用family_name还是用title自带 */
-      /** fnames.family_name */
-      /** title1: ["店铺活动","充电产品","优选配件","精选服饰","周边精品"], */
-      /** 在于判断class是否为null */
-      /** 如果为null，则使用title自带 */
-      // if (this.pro[0].class) {
-        /* 
-          存在class字段,
-          把样式表的名存进title1 
-        */
-        // let fnames = res.data.fnames;
-        // fnames.forEach((item) => {
-        //   this.title1.push(item.family_name);
-        // });
-        // for (let item in res.data.fnames) {
-        //   this.title1.push(item.family_name);
-        // }
-        /*  
-          同时添加二级标题
-          并且把class字段存进title
-        */
-        // let t2 = res.data.title2;
-        // t2.forEach(item => {
-        //   this.title2.push(item.class);
-        // });
-        /*  
-          再同时把二级标题下同级商品存进下标与title2对应的二级数组中
-          !!!!!!  利用 title2[i] 去判断相同的放进同一个数组,最后把形成的数组在放进一个数组形成而技术组
-        */
-        // for(var i of res.data.result){
-        //   for(var k of this.title2){
-        //     if(i.class == k){
-
-        //     }
-        //   }
-        // }
-      //   console.log(this.title1,this.title2);
-      // } else {
-        /* 
-          不存在class字段,
-          把事先准备好的一级标题名放进title1 
-        */
-        this.title1 = [
-          "店铺活动",
-          "充电产品",
-          "优选配件",
-          "精选服饰",
-          "周边精品",
-        ];
-        this.num = parseInt(res.data.result[0].mian - 1);
-        /* 且把商品类目名赋值给title2 */
-        this.title2 = res.data.fnames;
+      console.log(res.data);
+      this.pro = res.data.product;
+      this.title1 = [
+        "店铺活动",
+        "充电产品",
+        "优选配件",
+        "精选服饰",
+        "周边精品",
+      ];
+      this.num = parseInt(res.data.product[0].mian - 1);
+      /* 且把商品类目名赋值给title2 */
+      this.title2 = res.data.fnames;
+      // console.log(this.title2);
       // }
       /* 二级标题 */
-      // console.log(res.data);
-      console.log(this.title2);
       /* 图片拼接 */
       this.pro.forEach((item) => {
         item.pic = require(`../assets/img/pro_list/${item.pic}`);
         item.pic2 = require(`../assets/img/pro_list/${item.pic2}`);
       });
-      /* 获取有几种二级标题 */
-      let fname = [];
-      for(let i=0;i< this.title2.length;i++){
-        fname.push(this.title2[i].id);
+      /* *************利用逻辑去写商品的分类********** */
+      let p = [];
+      for (let i = 0; i < this.title2.length; i++) {
+        p.push([]);
       }
-      console.log(fname);
-      this.axios.get("/product/list_charge_pro_type?fname=" + fname).then(res =>{
-        console.log(res.data);
-      });
+      // console.log(p); // 获取和二级标题个数对应的空数组
+      for (let i = 0; i < this.pro.length; i++) {
+        // console.log(this.pro[i]);//7个obj
+        for (let k = 0; k < p.length; k++) {
+          if (this.pro[i].family_id == this.title2[k].id) {
+            p[k].push(this.pro[i]);
+          }
+        }
+      }
+      console.log(p);
+      this.pro_list = p;
+      /* *************利用逻辑去写商品的分类************ */
     });
   },
 };
