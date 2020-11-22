@@ -12,6 +12,11 @@ import axios from "axios";
 /* 导入Myheader模块 */
 import myheader from "./components/Myheader.vue";
 
+/* *********************** */
+$.ajaxSetup({
+  async: false
+});
+/* *********************** */
 Vue.config.productionTip = false
 /* 添加ElementUI为Vue公共组件 */
 Vue.use(ElementUI);

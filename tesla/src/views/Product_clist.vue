@@ -216,7 +216,7 @@ export default {
       /* 获取有几种二级标题 */
       let fname = [];
       for(let i=0;i< this.title2.length;i++){
-        fname.push(this.title2[i].family_name);
+        fname.push(this.title2[i].id);
       }
       console.log(fname);
       this.axios.get("/product/list_charge_pro_type?fname=" + fname).then(res =>{

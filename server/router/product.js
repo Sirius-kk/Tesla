@@ -54,16 +54,22 @@ r.get("/list_charge",(req,res) => {
 /* 充电产品 */
 r.get("/list_charge_pro_type",(req,res) => {
   let fname = req.query.fname;
-  let pro_show = [];
-  for(let i of fname){
+  fname = fname.split(",");
+  // console.log(typeof fname,fname);
+  var pro_show = [];
+  for(let i in fname){
+    console.log(fname[i]);
+    debugger
     let sql = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_activity_product WHERE family_id=?";
-    pool.query(sql,[i],(err,result) => {
+    pool.query(sql,[fname[i]],(err,result) => {
       if(err) throw err;
       let pro = result;
+      console.log(pro);
       pro_show.push(pro);
-      console.log(pro_show);
+      // console.log(pro_show);
     })
   };
+  console.log(pro_show);
   res.send({pro_show: pro_show});
 })
 /* 充电产品 */
