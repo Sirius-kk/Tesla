@@ -12,7 +12,7 @@ const pool = require('../pool.js');//引入上一级目录下的pool.js
 r.get("/carsou",(req,res)=>{
   let sql = "SELECT title,pic FROM ts_part_product";
   pool.query(sql,(err,result)=>{
-    if(err)throw err;
+    if(err) throw err;
     res.send({code:1});
   })
 });

@@ -42,16 +42,18 @@
         </div>
         <!-- 中间部分结束 -->
       </el-col>
-      <el-col :span="6" :offset="3">
+      <el-col :span="7" :offset="2">
         <!-- 右侧部分开始 -->
         <div class="right">
           <div class="shopping">
-            <div></div>
+            <div class="shopping_tip">2</div>
             <img src="../assets/img/header/shopping.png" />
           </div>
           <div class="search">
-            <input type="text">
-            <img src="../assets/img/header/search.png" />
+            <img src="../assets/img/header/search.png"  @click="input_Show" />
+          </div>
+          <div class="search search1">
+            <input type="text" v-show="input_show">
           </div>
           <div @click="login">登录</div>
         </div>
@@ -179,7 +181,7 @@ export default {
   data() {
     return {
       kard: "",
-      // kard: 1,
+      input_show: false,
     };
   },
   methods: {
@@ -204,6 +206,12 @@ export default {
     /* 跳轉主頁 */
     jumpIndex() {
       this.$router.push("/");
+    },
+    input_Show() {
+      if(this.input_show == false) {
+        this.input_show = true;
+        document.getElementsByClassName("search1")[0].style.width = "220px";
+      }
     },
     /* 跳轉主頁 */
     /* 一級導航跳轉 */
@@ -248,7 +256,8 @@ export default {
 }
 /* 设置公共头部整体高度 */
 .el-col-9,
-.el-col-6 {
+.el-col-6,
+.el-col-7 {
   height: 50px;
   line-height: 58px;
 }
@@ -341,7 +350,7 @@ li,p,h1,.left {
   font-weight: 400;
 }
 .menu_3 li {
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 }
 .middle_down_img {
   position: absolute;
@@ -375,7 +384,14 @@ li,p,h1,.left {
 .shopping div,.search img {
   position: absolute;
 } 
+.search1 {
+  width: 44px;
+  height: 50px;
+  transition: width .3s;
+  overflow: hidden;
+}
 .search input {
+  width: 190px;
   padding: 7px 14px;
   border-radius: 30px;
   outline: 0;
@@ -383,17 +399,20 @@ li,p,h1,.left {
 }
 .search img {
   top: 19px;
-  left: 168px;
+  right: 10px;
+  z-index: 5;
 } 
 .shopping div {
   width: 15px;
   height: 15px;
   background:#000;
-  color: #fff;
-  font-weight: 700;
   border-radius: 50%;
   top: 13px;
   left: 11px;
+}
+.shopping_tip {
+  color: #fff;
+  font-size: bold;
 }
 /* 右侧样式結束 */
 /* 滚动事件涉及样式 */

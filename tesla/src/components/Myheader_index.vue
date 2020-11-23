@@ -368,7 +368,7 @@ li,p,h1,.left {
   font-weight: 400;
 }
 .menu_3 li {
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 }
 .middle_down_img {
   position: absolute;
