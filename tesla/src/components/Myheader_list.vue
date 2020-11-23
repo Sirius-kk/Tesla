@@ -17,26 +17,11 @@
         <div class="middle">
           <div class="middle_up">
             <ul class="menu_1" @mouseleave="kard_none" @click="jumpList">
-              <li @mouseenter="kard_block1" class="activity">
-                <!-- <router-link to="">  </router-link> -->
-                店铺活动
-              </li>
-              <li @mouseenter="kard_block2" class="charge">
-                <!-- <router-link to="">  </router-link> -->
-                充电产品
-              </li>
-              <li @mouseenter="kard_block3" class="part">
-                <!-- <router-link to="">  </router-link> -->
-                优选配件
-              </li>
-              <li @mouseenter="kard_block4" class="dress">
-                <!-- <router-link to="">  </router-link> -->
-                精选服饰
-              </li>
-              <li @mouseenter="kard_block5" class="surround">
-                <!-- <router-link to="">  </router-link> -->
-                周边精品
-              </li>
+              <li @mouseenter="kard_block1" class="activity">店铺活动</li>
+              <li @mouseenter="kard_block2" class="charge">充电产品</li>
+              <li @mouseenter="kard_block3" class="part">优选配件</li>
+              <li @mouseenter="kard_block4" class="dress">精选服饰</li>
+              <li @mouseenter="kard_block5" class="surround">周边精品</li>
             </ul>
           </div>
         </div>
@@ -47,14 +32,15 @@
         <div class="right">
           <div class="shopping">
             <div class="shopping_tip">2</div>
-            <img src="../assets/img/header/shopping.png" />
+            <img src="../assets/img/header/shopping2.svg" />
           </div>
-          <div class="search">
-            <img src="../assets/img/header/search.png"  @click="input_Show" />
+          <!-- <div class="search">
+            <img src="../assets/img/header/sousuo1.svg" v-if="search_s" @click="input_Show" />
+            <img src="../assets/img/header/sousuo2.svg" v-else @click="input_Show" />
           </div>
           <div class="search search1">
             <input type="text" v-show="input_show">
-          </div>
+          </div> -->
           <div @click="login">登录</div>
         </div>
         <!-- 右侧部分结束 -->
@@ -65,7 +51,9 @@
       <div class="middle_down_ul">
         <div v-if="kard == 1" class="menu_2 menu_21" @mouseenter="kard_block1">
           <div>
-            <p>特斯拉宠粉季</p>
+            <p>
+              <router-link to="/pro_alist"> 特斯拉宠粉季 </router-link>
+            </p>
           </div>
         </div>
         <div
@@ -74,7 +62,9 @@
           @mouseenter="kard_block2"
         >
           <div>
-            <p>家庭充电</p>
+            <p>
+              <router-link to="/pro_clist"> 家庭充电 </router-link>
+            </p>
           </div>
           <div>
             <p>旅行充电</p>
@@ -90,7 +80,9 @@
           @mouseenter="kard_block3"
         >
           <div>
-            <p>Module S</p>
+            <p>
+              <router-link to="/pro_plist"> Module S </router-link>
+            </p>
             <ul class="menu_3">
               <li>畅销商品</li>
               <li>内饰</li>
@@ -130,7 +122,9 @@
           @mouseenter="kard_block4"
         >
           <div>
-            <p>男装</p>
+            <p>
+              <router-link to="/pro_dlist"> 男装 </router-link>
+            </p>
             <ul class="menu_3">
               <li>T恤</li>
               <li>帽子</li>
@@ -154,7 +148,9 @@
         <div v-else-if="kard == 5" class="menu_23" @mouseenter="kard_block5">
           <div class="menu_231">
             <div class="double">
-              <P>畅销商品</P>
+              <P>
+                <router-link to="/pro_slist"> 畅销商品 </router-link>
+              </P>
               <P>玩具</P>
             </div>
             <div class="double">
@@ -207,26 +203,28 @@ export default {
     jumpIndex() {
       this.$router.push("/");
     },
+    /* 搜索框的弹出 */
     input_Show() {
-      if(this.input_show == false) {
+      if (this.input_show == false) {
         this.input_show = true;
         document.getElementsByClassName("search1")[0].style.width = "220px";
       }
     },
+    /* 搜索框的弹出 */
     /* 跳轉主頁 */
     /* 一級導航跳轉 */
     jumpList(e) {
-      if( e.target.className == "activity" ){
+      if (e.target.className == "activity") {
         this.$router.push("/pro_alist");
-      } else if( e.target.className == "charge" ) {
+      } else if (e.target.className == "charge") {
         this.$router.push("/pro_clist");
-      } else if( e.target.className == "part" ) {
+      } else if (e.target.className == "part") {
         this.$router.push("/pro_plist");
-      } else if( e.target.className == "dress" ) {
+      } else if (e.target.className == "dress") {
         this.$router.push("/pro_dlist");
-      } else if( e.target.className == "surround" ) {
+      } else if (e.target.className == "surround") {
         this.$router.push("/pro_slist");
-      } 
+      }
     },
     /* 一級導航跳轉 */
     /* 二級導航跳轉 */
@@ -236,7 +234,7 @@ export default {
     login() {
       // this.$router.push();
       console.log("登錄跳轉");
-    }
+    },
     /* 登錄跳轉 */
   },
 };
@@ -247,6 +245,10 @@ export default {
 .head {
   height: 58px;
   position: relative;
+  color: #000;
+}
+.head a {
+  color: #000;
 }
 /* 清除高度坍塌 */
 .head::after {
@@ -267,7 +269,10 @@ export default {
 .el-row {
   min-width: 1100px;
 }
-li,p,h1,.left {
+li,
+p,
+h1,
+.left {
   cursor: pointer;
 }
 /* 整体样式结束 */
@@ -378,16 +383,18 @@ li,p,h1,.left {
   width: 21px;
   margin-bottom: 4px;
 }
-.shopping,.search {
+.shopping,
+.search {
   position: relative;
 }
-.shopping div,.search img {
+.shopping div,
+.search img {
   position: absolute;
-} 
-.search1 {
+}
+/* .search1 {
   width: 44px;
   height: 50px;
-  transition: width .3s;
+  transition: width .2s;
   overflow: hidden;
 }
 .search input {
@@ -396,19 +403,23 @@ li,p,h1,.left {
   border-radius: 30px;
   outline: 0;
   border: 1px solid #bdb7b7;
-}
-.search img {
+} */
+/* .search img {
   top: 19px;
   right: 10px;
   z-index: 5;
-} 
+}  */
 .shopping div {
-  width: 15px;
-  height: 15px;
-  background:#000;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  padding-left: 4px;
+  background: #000;
   border-radius: 50%;
-  top: 13px;
-  left: 11px;
+  top: 12px;
+  left: 10px;
+  line-height: 16px;
+  font-weight: 700;
 }
 .shopping_tip {
   color: #fff;

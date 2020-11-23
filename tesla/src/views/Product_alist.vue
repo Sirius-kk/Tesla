@@ -14,10 +14,10 @@
           <li v-for="(item2, index2) of pro" :key="index2" class="product">
             <div class="pro_cont">
               <div class="pro_img">
-                <a href="#">
+                <router-link :to="`/detail/${item2.pid}`">
                   <img :src="item2.pic" alt="" />
                   <!-- <img :src="item2.pic2" alt="" /> -->
-                </a>
+                </router-link>
               </div>
               <div class="pro_buy">
                 <button>查看详情</button>
@@ -174,6 +174,7 @@ export default {
         item.pic = require(`../assets/img/pro_list/${item.pic}`);
         item.pic2 = require(`../assets/img/pro_list/${item.pic2}`);
       });
+      console.log(this.pro);
     });
   },
 };

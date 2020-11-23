@@ -11,6 +11,8 @@ import product_plist from '../views/Product_plist.vue'
 import product_dlist from '../views/Product_dlist.vue'
 /* 导入 s 商品列表模块 */
 import product_slist from '../views/Product_slist.vue'
+/* 導入詳情模塊 */
+import detail from '../views/Detail'
 
 Vue.use(VueRouter)
 
@@ -39,6 +41,10 @@ const routes = [
   {
     path: '/pro_slist',
     component: product_slist
+  },
+  {
+    path: '/detail/:pid',
+    component: detail
   },
   {
     path: '/about',

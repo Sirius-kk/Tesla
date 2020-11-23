@@ -4,7 +4,7 @@
       <my-header-index></my-header-index>
     </div>
     <!-- 第一部分 -->
-    <div class="div_1">
+    <div class="div_1" >
       <img class="img_1" src="../assets/imgs/wall-connector.jpg" alt="" />
       <div>
         <P>点击购买 家庭充电包服务</P>
@@ -101,6 +101,7 @@
   top: 27%;
   left: 40%;
   text-align: center;
+  cursor: pointer;
 }
 .div_1 div p:first-child {
   font-size: 17px;
@@ -251,7 +252,7 @@
   padding-top: 20px;
 }
 .a1:hover {
-  box-shadow: 0px 0px 10px #888888;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.19);
   transition: all 0.5 linear;
 }
 img:hover {

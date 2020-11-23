@@ -1,5 +1,5 @@
 <template>
-  <div class="head">
+  <div class="head" @mouseenter="h_show" @mouseleave="h_hide">
     <el-row>
       <el-col :span="9">
         <!-- 左侧部分开始 -->
@@ -42,16 +42,34 @@
         </div>
         <!-- 中间部分结束 -->
       </el-col>
-      <el-col :span="6" :offset="3">
+      <el-col :span="7" :offset="2">
         <!-- 右侧部分开始 -->
         <div class="right">
           <div class="shopping">
-            <div></div>
-            <img src="../assets/img/header/shopping.png" />
+            <div class="shopping_tip">2</div>
+            <img src="../assets/img/header/shopping1.svg" v-if="shop_car" />
+            <img src="../assets/img/header/shopping2.svg" v-else />
           </div>
           <div class="search">
-            <input type="text">
-            <img src="../assets/img/header/search.png" />
+            <img
+              src="../assets/img/header/sousuo1.svg"
+              v-if="search_s"
+              @click="input_Show"
+            />
+            <img
+              src="../assets/img/header/sousuo2.svg"
+              v-else
+              @click="input_Show"
+            />
+          </div>
+          <div class="search search1">
+            <input
+              class="sousuo_inp"
+              type="text"
+              v-if="input_show"
+              placeholder="搜索"
+              @blur="inp_blur"
+            />
           </div>
           <div @click="login">登录</div>
         </div>
@@ -179,7 +197,9 @@ export default {
   data() {
     return {
       kard: "",
-      // kard: 1,
+      input_show: false,
+      shop_car: true,
+      search_s: true,
     };
   },
   methods: {
@@ -205,20 +225,31 @@ export default {
     jumpIndex() {
       this.$router.push("/");
     },
+    /* 搜索框的弹出 */
+    input_Show() {
+      if (this.input_show == false) {
+        this.input_show = true;
+        document.getElementsByClassName("search1")[0].style.width = "220px";
+        // document.getElementById("inp").focus();
+        // console.log(document.getElementsByClassName("sousuo_inp"));
+      }
+    },
+    /* 搜索框的弹出 */
+    /*  */
     /* 跳轉主頁 */
     /* 一級導航的跳轉 */
     jumpList(e) {
-      if( e.target.className == "activity" ){
+      if (e.target.className == "activity") {
         this.$router.push("/pro_alist");
-      } else if( e.target.className == "charge" ) {
+      } else if (e.target.className == "charge") {
         this.$router.push("/pro_clist");
-      } else if( e.target.className == "part" ) {
+      } else if (e.target.className == "part") {
         this.$router.push("/pro_plist");
-      } else if( e.target.className == "dress" ) {
+      } else if (e.target.className == "dress") {
         this.$router.push("/pro_dlist");
-      } else if( e.target.className == "surround" ) {
+      } else if (e.target.className == "surround") {
         this.$router.push("/pro_slist");
-      } 
+      }
     },
     /* 一級導航的跳轉 */
     /* 二級導航跳轉 */
@@ -237,20 +268,56 @@ export default {
       let scrollTop =
         document.body.scrollTop || document.documentElement.scrollTop;
       let headerEle = document.getElementsByClassName("head")[0];
-      let nav_font = document.getElementsByClassName("menu_1")[0];
+      let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
       // console.log(headerEle);
       // 设置滚动阈值
       // 当滚动距离为40px时，则给标签页添加固定定位
       // console.log(scrollTop);
       if (scrollTop > 50) {
         headerEle.style.background = "rgba(255,255,255,1)";
-        nav_font.style.color = "#000";
+        headerEle.style.color = "#000";
+        shopping_tipEle.style.background = "#000";
+        shopping_tipEle.style.color = "#fff";
+        this.search_s = false;
+        this.shop_car = false;
       } else {
         headerEle.style.background = "rgba(255,255,255,0)";
-        nav_font.style.color = "#fff";
+        headerEle.style.color = "#fff";
+        shopping_tipEle.style.background = "#fff";
+        shopping_tipEle.style.color = "#000";
+        this.search_s = true;
+        this.shop_car = true;
       }
     },
     /* 主頁頭部的變色設置 */
+    /* 頭部鼠標懸停顯示 */
+    h_show() {
+      let headerEle = document.getElementsByClassName("head")[0];
+      let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
+      headerEle.style.background = "rgba(255,255,255,1)";
+      headerEle.style.color = "#000";
+      shopping_tipEle.style.background = "#000";
+      shopping_tipEle.style.color = "#fff";
+      this.search_s = false;
+      this.shop_car = false;
+    },
+    h_hide() {
+      let headerEle = document.getElementsByClassName("head")[0];
+      let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
+      headerEle.style.background = "rgba(255,255,255,0)";
+      shopping_tipEle.style.background = "#fff";
+      shopping_tipEle.style.color = "#000";
+      headerEle.style.color = "#fff";
+      this.search_s = true;
+      this.shop_car = true;
+    },
+    /* 頭部鼠標懸停顯示 */
+    /* 当搜索框失焦则隐藏 */
+    inp_blur() {
+      document.getElementsByClassName("search1")[0].style.width = "44px";
+      this.input_show = false;
+    },
+    /* 当搜索框失焦则隐藏 */
   },
   mounted() {
     window.addEventListener("scroll", this.top_lable);
@@ -266,6 +333,7 @@ export default {
 .head {
   height: 58px;
   position: relative;
+  color: #fff;
 }
 /* 清除高度坍塌 */
 .head::after {
@@ -275,7 +343,8 @@ export default {
 }
 /* 设置公共头部整体高度 */
 .el-col-9,
-.el-col-6 {
+.el-col-6,
+.el-col-7 {
   height: 50px;
   line-height: 58px;
 }
@@ -285,7 +354,10 @@ export default {
 .el-row {
   min-width: 1100px;
 }
-li,p,h1,.left {
+li,
+p,
+h1,
+.left {
   cursor: pointer;
 }
 /* 整体样式结束 */
@@ -396,31 +468,48 @@ li,p,h1,.left {
   width: 21px;
   margin-bottom: 4px;
 }
-.shopping,.search {
+.shopping,
+.search {
   position: relative;
 }
-.shopping div,.search img {
+.shopping div,
+.search img {
   position: absolute;
-} 
+}
+.search1 {
+  width: 44px;
+  height: 50px;
+  transition: width 0.2s;
+  overflow: hidden;
+}
 .search input {
+  width: 190px;
   padding: 7px 14px;
   border-radius: 30px;
   outline: 0;
   border: 1px solid #bdb7b7;
+  background: rgba(255, 255, 255, 0);
 }
 .search img {
   top: 19px;
-  left: 168px;
-} 
+  right: 10px;
+  z-index: 5;
+}
 .shopping div {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  padding-left: 4px;
   background: #000;
-  color: #fff;
-  font-weight: 700;
   border-radius: 50%;
-  top: 13px;
-  left: 11px;
+  top: 12px;
+  left: 10px;
+  line-height: 16px;
+  font-weight: 700;
+}
+.shopping_tip {
+  color: #fff;
+  font-size: bold;
 }
 /* 右侧样式結束 */
 /* 滚动事件涉及样式開始 */

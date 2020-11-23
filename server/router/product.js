@@ -10,11 +10,16 @@ const pool = require('../pool.js');//引入上一级目录下的pool.js
 /* ***************************************************接口配置****************************************** */
 /* 主頁輪播圖 */
 r.get("/carsou",(req,res)=>{
-  let sql = "SELECT title,pic FROM ts_part_product";
-  pool.query(sql,(err,result)=>{
-    if(err) throw err;
-    res.send({code:1});
-  })
+  // let sql = "SELECT title,pic FROM ts_part_product";
+  // pool.query(sql,(err,result)=>{
+    // if(err) throw err;
+  //   res.send({code:1});
+  // })
+  let sql = "SELECT title,pic FROM ts_part_product";
+  pool.query(sql,(err,result) => {
+    if(err) throw err; 
+    res.send({code: 1,result: result});
+  });
 });
 /* 主頁輪播圖 */
 
@@ -141,7 +146,7 @@ r.get("/list_dress", (req, res) => {
   }
   function productTitle2(fnames) {
     // /* 获取二级标题 */
-    let sql2 = "SELECT DISTINCT class FROM ts_dress_product ";
+    let sql2 = "SELECT DISTINCT class FROM ts_dress_product";
     pool.query(sql2, (err, result) => {
       if (err) throw err;
       title2 = result;
