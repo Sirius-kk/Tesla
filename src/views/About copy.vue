@@ -11,7 +11,7 @@
     </el-row>
     <!-- 购物车第二部分主体 -->
     <el-row class="cart_middle">
-      <div v-for="product in products" :key="product.id" >
+      <div v-for="product in products" :key="product.id" @change="handleOneChange">
         <div id="cont">
           <el-col :span="6">
             <div id="middle_img1">
@@ -33,11 +33,8 @@
           <el-col :span="5" class="money" >
             <p>￥{{ product.OnePrice }}</p>
           </el-col>
-          <el-col :span="1" class="middle_img money" >
-            <a href="" @click="clear1()">
-              <img  src="../../public/img/差号.png" />
-              </a>
-            
+          <el-col :span="1" class="middle_img money">
+            <img @click="clear1" src="../../public/img/差号.png" />
           </el-col>
         </div>
       </div>
@@ -67,7 +64,7 @@
 .cart_top div > img {
   width: 16px;
 }
-.middle_img a>img {
+.middle_img > img {
   width: 20px;
 }
 .cart_top,
@@ -140,13 +137,27 @@ export default {
           num:0
         },
       ],
+      
       number: 4,
       allPrice: 0,
     };
   },
 
-
   methods: {
+    handleChange(value){
+      console.log(value)
+    },
+    handleOneChange(value) {
+            let a = 0;
+            value.filter((it, id) => {
+                if (it == this.products[id].name) {
+                    if (this.products[id].OnePrice) {
+                        a += this.products[id].OnePrice;
+                    }
+                }
+            });
+            this.allPrice = a;
+        },
         handleChangeNum(val) {
             this.products.filter((it, id) => {
                 if (it.id == val) {
@@ -172,20 +183,17 @@ export default {
                 callback: action => {
                     this.$message({
                         type: "info",
-                        message: "正在跳转支付页面"
+                        message: "哈哈哈"
                     });
                 }
             });
         },
     
     clear1(){
-      this.addPopStatu=false;
-      this.clearform();
-      console.log(1);
+      
     },
     
   },
-  
 };
 </script>
 
