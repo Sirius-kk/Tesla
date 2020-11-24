@@ -210,8 +210,12 @@ export default {
   methods: {
     handleChange(value) {},
     add() {
-      let pid = 6;
-      this.axios.get(`/product/detail_product?pid=` + pid).then((res) => {
+      //获取URL的参数
+      let pid = this.$route.params.pid;
+      let tableName = this.$route.params.tableName;
+      console.log(pid,tableName);
+      //获取URL的参数
+      this.axios.get(`/product/detail_product?pid=${pid}&tableName=${tableName}`).then((res) => {
         let data = res.data.result; // 一条数据
         this.data = data;
         for (var key in data) {

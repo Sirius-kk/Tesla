@@ -81,7 +81,7 @@
       <div class="middle_down_ul">
         <div v-if="kard == 1" class="menu_2 menu_21" @mouseenter="kard_block1">
           <div>
-            <p>特斯拉宠粉季</p>
+            <router-link to="/pro_alist"> 特斯拉宠粉季 </router-link>
           </div>
         </div>
         <div
@@ -90,14 +90,18 @@
           @mouseenter="kard_block2"
         >
           <div>
-            <p>家庭充电</p>
+            <p>
+              <router-link to="/pro_clist"> 家庭充电 </router-link>
+            </p>
           </div>
           <div>
             <p>旅行充电</p>
           </div>
           <span class="middle_down_img">
             <img src="../assets/img/header/kard_1.jpg" />
-            <h1>Model 3 地毯脚垫套装</h1>
+            <h1>
+              <router-link to="/detail"> Model 3 地毯脚垫套装 </router-link>
+            </h1>
           </span>
         </div>
         <div
@@ -106,38 +110,74 @@
           @mouseenter="kard_block3"
         >
           <div>
-            <p>Module S</p>
+            <p>
+              <router-link to="/pro_plist"> Module S </router-link>
+            </p>
             <ul class="menu_3">
-              <li>畅销商品</li>
-              <li>内饰</li>
-              <li>外观</li>
-              <li>轮毂和轮胎</li>
-              <li>脚垫</li>
+              <li>
+                <router-link to=""> 畅销商品 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 内饰 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 外观 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 轮毂和轮胎 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 脚垫 </router-link>
+              </li>
             </ul>
           </div>
           <div>
             <p>Module 3</p>
             <ul class="menu_3">
-              <li>畅销商品</li>
-              <li>内饰</li>
-              <li>外观</li>
-              <li>轮毂和轮胎</li>
-              <li>脚垫</li>
+              <li>
+                <router-link to=""> 畅销商品 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 内饰 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 外观 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 轮毂和轮胎 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 脚垫 </router-link>
+              </li>
             </ul>
           </div>
           <div>
-            <p>Module X</p>
+            <p>
+              <router-link to=""> Module X </router-link>
+            </p>
             <ul class="menu_3">
-              <li>畅销商品</li>
-              <li>内饰</li>
-              <li>外观</li>
-              <li>轮毂和轮胎</li>
-              <li>脚垫</li>
+              <li>
+                <router-link to=""> 畅销商品 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 内饰 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 外观 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 轮毂和轮胎 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 脚垫 </router-link>
+              </li>
             </ul>
           </div>
           <span class="middle_down_img">
             <img src="../assets/img/header/kard_2.jpg" />
-            <h1>家庭充电服务包 (国标)</h1>
+            <h1>
+              <router-link to=""> 家庭充电服务包 (国标) </router-link>
+            </h1>
           </span>
         </div>
         <div
@@ -146,42 +186,72 @@
           @mouseenter="kard_block4"
         >
           <div>
-            <p>男装</p>
+            <p>
+              <router-link to="/pro_dlist"> 男装 </router-link>
+            </p>
             <ul class="menu_3">
-              <li>T恤</li>
-              <li>帽子</li>
+              <li>
+                <router-link to=""> T恤 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 帽子 </router-link>
+              </li>
             </ul>
           </div>
           <div>
-            <p>女装</p>
+            <p>
+              <router-link to=""> 女装 </router-link>
+            </p>
             <ul class="menu_3">
-              <li>T恤</li>
-              <li>帽子</li>
+              <li>
+                <router-link to=""> T恤 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 帽子 </router-link>
+              </li>
             </ul>
           </div>
           <div>
-            <P>童装</P>
+            <P>
+              <router-link to=""> 童装 </router-link>
+            </P>
             <ul class="menu_3">
-              <li>上衣</li>
-              <li>玩具</li>
+              <li>
+                <router-link to=""> 上衣 </router-link>
+              </li>
+              <li>
+                <router-link to=""> 玩具 </router-link>
+              </li>
             </ul>
           </div>
         </div>
         <div v-else-if="kard == 5" class="menu_23" @mouseenter="kard_block5">
           <div class="menu_231">
             <div class="double">
-              <P>畅销商品</P>
-              <P>玩具</P>
+              <P>
+                <router-link to="/pro_slist"> 畅销商品 </router-link>
+              </P>
+              <P>
+                <router-link to=""> 玩具 </router-link>
+              </P>
             </div>
             <div class="double">
-              <P>户外商品</P>
-              <P>科技</P>
+              <P>
+                <router-link to=""> 户外商品 </router-link>
+              </P>
+              <P>
+                <router-link to=""> 科技 </router-link>
+              </P>
             </div>
             <div>
-              <P>水杯</P>
+              <P>
+                <router-link to=""> 水杯 </router-link>
+              </P>
             </div>
             <div>
-              <P>收藏品</P>
+              <P>
+                <router-link to=""> 收藏品 </router-link>
+              </P>
             </div>
           </div>
         </div>

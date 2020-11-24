@@ -14,6 +14,7 @@ import product_slist from '../views/Product_slist.vue'
 /* 導入詳情模塊 */
 import detail from '../views/Detail'
 
+// Vue.use(VueRouter)
 Vue.use(VueRouter)
 
 const routes = [
@@ -43,7 +44,9 @@ const routes = [
     component: product_slist
   },
   {
-    path: '/detail/:pid',
+    /*  */
+    path: '/detail/:pid&:tableName',
+    /*  */
     component: detail
   },
   {

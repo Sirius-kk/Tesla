@@ -205,8 +205,12 @@ r.get("/list_surround", (req, res) => {
 r.get("/detail_product",(req,res) => {
   // 获取地址栏中客户端传递过来的pid，该参数表示的分类的ID
   let pid = req.query.pid;
-  let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_details FROM ts_part_product WHERE pid=?";
-  pool.query(sql,[pid],(err,result) => {
+  /*  */
+  let tableName = req.query.tableName;
+  /*  */
+  console.log(req.query,typeof req.query.pid);
+  let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ? WHERE pid=?";
+  pool.query(sql,[tableName,pid],(err,result) => {
     if(err) throw err;
     res.send({code: 1,result: result[0]});
   });

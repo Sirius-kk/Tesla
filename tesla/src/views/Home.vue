@@ -4,17 +4,27 @@
       <my-header-index></my-header-index>
     </div>
     <!-- 第一部分 -->
-    <div class="div_1" >
+    <div class="div_1">
       <img class="img_1" src="../assets/imgs/wall-connector.jpg" alt="" />
       <div>
-        <P>点击购买 家庭充电包服务</P>
-        <P>随时在家为特斯拉充电</P>
+        <P>
+          <!--  -->
+          <router-link :to="`/detail/${1}&${'ts_charge_product'}`"
+            ><span> 点击购买 家庭充电包服务 </span></router-link
+          >
+          <!--  -->
+        </P>
+        <router-link :to="`/detail/${1}&${'ts_charge_product'}`"
+          ><p>随时在家为特斯拉充电</p></router-link
+        >
       </div>
     </div>
     <!-- 第二部分 -->
     <div class="div_2">
       <h3>畅销商品</h3>
-      <a href="javascropt:;">查看全部</a>
+      <!-- <a href="javascropt:;"> -->
+      <span> <router-link to="/pro_slist"> 查看全部 </router-link></span>
+      <!-- </a> -->
     </div>
     <!-- 第三部分 -->
     <div class="div_3">
@@ -35,8 +45,12 @@
               class="a1"
               :style="{ width: liwidth + 'px' }"
             >
-              <img :src="item.pic" alt="" />
-              <p style="margin-top: 20px; font-size: 18px">{{ item.title }}</p>
+              <router-link :to="`/detail/${1}&${'ts_charge_product'}`">
+                <img :src="item.pic" alt="" />
+                <p style="margin-top: 20px; font-size: 18px">
+                  {{ item.title }}
+                </p>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -45,41 +59,55 @@
     <!-- 第四部分 -->
     <div class="div_4">
       <div>
-        <img class="img_1 a1" src="../assets/imgs/model3@2x.jpg" alt="" />
-        <p>Model 3 配件</p>
+        <router-link to="/pro_plist">
+          <img class="img_1 a1" src="../assets/imgs/model3@2x.jpg" alt="" />
+          <p>Model 3 配件</p>
+        </router-link>
       </div>
       <div style="padding-right: 24px">
-        <img class="img_1 a1" src="../assets/imgs/modelx.jpg" alt="" />
-        <p>Model X 配件</p>
+        <router-link to="/pro_plist">
+          <img class="img_1 a1" src="../assets/imgs/modelx.jpg" alt="" />
+          <p>Model X 配件</p>
+        </router-link>
       </div>
     </div>
     <!-- 第五部分 -->
     <div class="div_5">
-      <div><img class="img_1 a1" src="../assets/imgs/models.jpg" alt="" /></div>
-      <p>Model S 配件</p>
+      <router-link to="/pro_plist">
+        <div>
+          <img class="img_1 a1" src="../assets/imgs/models.jpg" alt="" />
+        </div>
+        <p>Model S 配件</p>
+      </router-link>
     </div>
     <!-- 第六部分 -->
     <div class="div_6">
       <!-- 左侧部分 -->
       <div class="div_6-1">
-        <img
-          style="width: 100%; height: 100%"
-          class="a1"
-          src="../assets/imgs/charging-gen3.jpg"
-          alt=""
-        />
-        <p>充电产品</p>
+        <router-link to="/pro_clist">
+          <img
+            style="width: 100%; height: 100%"
+            class="a1"
+            src="../assets/imgs/charging-gen3.jpg"
+            alt=""
+          />
+          <p>充电产品</p>
+        </router-link>
       </div>
       <!-- 右侧部分 -->
       <div class="div_6-2">
         <div class="div_6-2-1">
-          <img class="img_1 a1" src="../assets/imgs/mens.jpg" alt="" />
-          <p style="color: #fff">男装</p>
+          <router-link to="/pro_dlist">
+            <img class="img_1 a1" src="../assets/imgs/mens.jpg" alt="" />
+            <p style="color: #fff">男装</p>
+          </router-link>
         </div>
 
         <div class="div_6-2-2">
-          <img class="img_1 a1" src="../assets/imgs/womens.jpg" alt="" />
-          <p>女装</p>
+          <router-link to="/pro_dlist">
+            <img class="img_1 a1" src="../assets/imgs/womens.jpg" alt="" />
+            <p>女装</p>
+          </router-link>
         </div>
       </div>
     </div>
@@ -103,11 +131,12 @@
   text-align: center;
   cursor: pointer;
 }
-.div_1 div p:first-child {
+.div_1 div p:first-child span {
   font-size: 17px;
   font-weight: 700;
   color: white;
   margin-bottom: 25px;
+  display: inline-block;
 }
 .div_1 div p:last-child {
   font-size: 26px;
@@ -119,12 +148,13 @@
   font-weight: 600;
   position: relative;
 }
-.div_2 a {
+.div_2 span {
   position: absolute;
   right: 30px;
   top: 21px;
   font-size: 12px;
   color: #666666;
+  cursor: pointer;
 }
 .div_3 {
   width: 100%;
