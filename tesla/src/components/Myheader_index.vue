@@ -302,6 +302,10 @@ export default {
         document.getElementsByClassName("search1")[0].style.width = "220px";
         // document.getElementById("inp").focus();
         // console.log(document.getElementsByClassName("sousuo_inp"));
+      } else if(this.input_show == true) {
+        this.axios.get("/product/select_one",res => {
+          
+        });
       }
     },
     /* 搜索框的弹出 */

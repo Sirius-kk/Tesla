@@ -201,21 +201,33 @@ r.get("/list_surround", (req, res) => {
 });
 /* 周边精品 */
 
-/* 商品詳情 */
+/* 商品詳情 */  /*  */
 r.get("/detail_product",(req,res) => {
-  // 获取地址栏中客户端传递过来的pid，该参数表示的分类的ID
-  let pid = req.query.pid;
-  /*  */
-  let tableName = req.query.tableName;
-  /*  */
-  console.log(req.query,typeof req.query.pid);
-  let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ? WHERE pid=?";
-  pool.query(sql,[tableName,pid],(err,result) => {
-    if(err) throw err;
-    res.send({code: 1,result: result[0]});
+  console.log(req.query);
+  /* 获取地址栏中的pid和tableName */
+  // let pid = 1;/* √ */
+  let pid = req.query.pid;
+  // let tableName = req.query.tableName;
+  // console.log(pid,tableName);
+  /* 查询语句 */
+  // let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ? WHERE pid=?";
+  let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_surround_product WHERE pid=?";
+  pool.query(sql,[pid],(err,result) => {
+    // pool.query(sql,[tableName,pid],(err,res) => {
+    if(err) throw err;
+    console.log(result);
+    res.send({code: 1,result: result});/* res.send  */
   });
+  /*  */
+  // res.send({code: 1}); √
 });
 /* 商品詳情 */
+
+/* 主页模糊查询 */  /* √√√ */
+r.get("/select_one",(req,res) => {
+  res.send({code :1});
+});
+/* 主页模糊查询 */
 
 /* ***************************************************接口配置****************************************** */
 

@@ -1,78 +1,84 @@
 <template>
-  <div class="tontenter">
-    <my-header-list></my-header-list>
-    <div class="left">
-      <img
-        class="img1"
-        v-for="(item, index) of image"
-        :src="item"
-        :key="index"
-        alt=""
-      />
-    </div>
-    <div class="right">
-      <div class="title">
-        <span>{{ data.title }}</span>
-        <p>¥ {{ options[value].price }}</p>
+  <div>
+    <div class="tontenter">
+      <my-header-list></my-header-list>
+      <div class="left">
+        <img
+          class="img1"
+          v-for="(item, index) of image"
+          :src="item"
+          :key="index"
+          alt=""
+        />
       </div>
-      <div v-if="data.tp != null">
-        <el-select v-model="value" placeholder="请选择">
-          <!-- ****************** -->
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-          <!-- ****************** -->
-        </el-select>
-      </div>
-      <div class="content" v-if="data.color != null">
-        <p class="p1">{{ data.color }}</p>
-        <el-radio v-model="radio" label="1"
-          ><span class="span span1"></span
-        ></el-radio>
-        <el-radio v-model="radio" label="2"
-          ><span class="span span2"></span
-        ></el-radio>
-        <el-radio v-model="radio" label="3"
-          ><span class="span span3"></span
-        ></el-radio>
-      </div>
-      <div v-if="data.size != null">
-        <p class="p1">大小</p>
-        <div class="chicun">
-          <a href="javascript:;">2T</a>
-          <a href="javascript:;">4T</a>
-          <a href="javascript:;">6</a>
-          <a href="javascript:;">8</a>
-          <a href="javascript:;">10</a>
-          <a href="javascript:;">12</a>
+      <div class="right">
+        <div class="title">
+          <span>{{ data.title }}</span>
+          <p>¥ {{ options[value].price }}</p>
         </div>
+        <div v-if="data.tp != null">
+          <el-select v-model="value" placeholder="请选择">
+            <!-- ****************** -->
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+            <!-- ****************** -->
+          </el-select>
+        </div>
+        <div class="content" v-if="data.color != null">
+          <p class="p1">{{ data.color }}</p>
+          <el-radio v-model="radio" label="1"
+            ><span class="span span1"></span
+          ></el-radio>
+          <el-radio v-model="radio" label="2"
+            ><span class="span span2"></span
+          ></el-radio>
+          <el-radio v-model="radio" label="3"
+            ><span class="span span3"></span
+          ></el-radio>
+        </div>
+        <div v-if="data.size != null">
+          <p class="p1">大小</p>
+          <div class="chicun">
+            <a href="javascript:;">2T</a>
+            <a href="javascript:;">4T</a>
+            <a href="javascript:;">6</a>
+            <a href="javascript:;">8</a>
+            <a href="javascript:;">10</a>
+            <a href="javascript:;">12</a>
+          </div>
+        </div>
+        <div class="car">
+          <p class="p1">数量</p>
+          <el-input-number
+            size="small"
+            v-model="num"
+            @change="handleChange"
+            :min="1"
+            :max="10"
+            label="描述文字"
+          ></el-input-number>
+          <p style="margin-top: 30px">
+            <button class="my_btn">添加进购物车</button>
+          </p>
+          <p class="help">需要帮助？</p>
+        </div>
+        <div class="div_2" v-html="data.ds"></div>
       </div>
-      <div class="car">
-        <p class="p1">数量</p>
-        <el-input-number
-          size="small"
-          v-model="num"
-          @change="handleChange"
-          :min="1"
-          :max="10"
-          label="描述文字"
-        ></el-input-number>
-        <p style="margin-top: 30px">
-          <button class="my_btn">添加进购物车</button>
-        </p>
-        <p class="help">需要帮助？</p>
-      </div>
-      <div class="div_2" v-html="data.ds"></div>
     </div>
   </div>
 </template>
 <style  scoped>
 .tontenter {
   padding: 0 24px 0 24px;
-  margin-top: 36px;
+}
+.tontenter::after {
+  content: "";
+  display: block;
+  clear: both;
 }
 .left {
   width: 65%;
@@ -213,25 +219,30 @@ export default {
       //获取URL的参数
       let pid = this.$route.params.pid;
       let tableName = this.$route.params.tableName;
-      console.log(pid,tableName);
+      console.log(pid, tableName);
       //获取URL的参数
-      this.axios.get(`/product/detail_product?pid=${pid}&tableName=${tableName}`).then((res) => {
-        let data = res.data.result; // 一条数据
-        this.data = data;
-        for (var key in data) {
-          if (key == "pic_detais") {
-            this.img = data.pic_detais.split(".jpg"); // 数组
-            for (var key in this.img) {
-              this.img[key] += `.jpg`;
+      this.axios
+        .get(
+          "/product/detail_product?pid=" + pid + "&" + "tableName=" + tableName
+        )
+        .then((res) => {
+          console.log(res.data);
+          let data = res.data.result; // 一条数据
+          this.data = data;
+          for (var key in data) {
+            if (key == "pic_detais") {
+              this.img = data.pic_detais.split(".jpg"); // 数组
+              for (var key in this.img) {
+                this.img[key] += `.jpg`;
+              }
+              this.img.pop();
+              this.img.forEach((item) => {
+                item = require(`../assets/img/pro_details/${item}`);
+                this.image.push(item);
+              });
             }
-            this.img.pop();
-            this.img.forEach((item) => {
-              item = require(`../assets/img/pro_details/${item}`);
-              this.image.push(item);
-            });
           }
-        }
-      });
+        });
     },
   },
   mounted() {
