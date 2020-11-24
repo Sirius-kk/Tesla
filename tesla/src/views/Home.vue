@@ -43,7 +43,7 @@
               class="a1"
               :style="{ width: liwidth + 'px' }"
             >
-              <router-link :to="`/detail/${1}&${'ts_charge_product'}`">
+              <router-link :to="`/detail/${item.pid}&${item.mian}`">
                 <img :src="item.pic" alt="" />
                 <p style="margin-top: 20px; font-size: 18px">
                   {{ item.title }}

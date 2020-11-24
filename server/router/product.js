@@ -10,12 +10,7 @@ const pool = require('../pool.js');//引入上一级目录下的pool.js
 /* ***************************************************接口配置****************************************** */
 /* 主頁輪播圖 */
 r.get("/carsou",(req,res)=>{
-  // let sql = "SELECT title,pic FROM ts_part_product";
-  // pool.query(sql,(err,result)=>{
-    // if(err) throw err;
-  //   res.send({code:1});
-  // })
-  let sql = "SELECT title,pic FROM ts_part_product";
+  let sql = "SELECT title,pic,pid,mian FROM ts_part_product";
   pool.query(sql,(err,result) => {
     if(err) throw err; 
     res.send({code: 1,result: result});
@@ -208,14 +203,26 @@ r.get("/detail_product",(req,res) => {
   // let pid = 1;/* √ */
   let tableName = req.query.tableName;
   let pid = req.query.pid;
+  switch(tableName) {
+    case '1':
+      tableName = 'ts_activity_product';
+      break;
+    case '2':
+      tableName = 'ts_charge_product';
+      break;
+    case '3':
+      tableName = 'ts_part_product';
+      break;
+    case '4':
+      tableName = 'ts_dress_product';
+      break;
+    case '5':
+      tableName = 'ts_surround_product';
+      break;
+    
+  };
   console.log(pid,tableName);
   /* 查询语句 */
-  // let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ? WHERE pid=?";/* 為什麼自帶引號,而且還被報錯!!!!! */
-  // let sql1 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_activity_product WHERE pid=?";
-  // let sql2 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_charge_product WHERE pid=?";
-  // let sql3 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_part_family WHERE pid=?";
-  // let sql4 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_dress_product WHERE pid=?";
-  // let sql5 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_surround_product WHERE pid=?";
   let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM "+ tableName +" WHERE pid=?";
   pool.query(sql,[pid],(err,result) => {
     // pool.query(sql,[tableName,pid],(err,res) => {

@@ -14,17 +14,20 @@
           <li v-for="(item2, index2) of pro" :key="index2" class="product">
             <div class="pro_cont">
               <div class="pro_img">
-                <router-link :to="`/detail/${item2.pid}`">
+                <router-link :to="`/detail/${item2.pid}&${item2.mian}`">
                   <img :src="item2.pic" alt="" />
                   <!-- <img :src="item2.pic2" alt="" /> -->
                 </router-link>
               </div>
               <div class="pro_buy">
-                <button>查看详情</button>
+                <button>
+                  <router-link :to="`/detail/${item2.pid}&${item2.mian}`">
+                    查看详情
+                  </router-link>
+                </button>
                 <div></div>
                 <button>立即购买</button>
               </div>
-              <!-- <div class="pro_detail"></div> -->
             </div>
             <div class="pro_title">{{ item2.title }}</div>
             <div class="pro_price">¥ {{ item2.price }}</div>

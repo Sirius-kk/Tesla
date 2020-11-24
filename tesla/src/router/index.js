@@ -14,9 +14,11 @@ import product_slist from '../views/Product_slist.vue'
 /* 導入詳情模塊 */
 import detail from '../views/Detail'
 /* 登录页面 */
-import log from '../views/Login1.vue'
+import log from '../views/Login.vue'
 /* 搜索页面模块 */
 import select from '../views/Select_product.vue'
+/* 购物车模块 */
+import shoppingCar from "../views/ceshi.vue"
 
 // Vue.use(VueRouter)
 Vue.use(VueRouter)
@@ -25,11 +27,18 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    // meta: {
+    //   keepAlive:true
+    // }
   },
   {
     path: '/select/:key',
     component: select
+  },
+  {
+    path: '/shopping_car',
+    component: shoppingCar
   },
   {
     path: '/log',
@@ -37,23 +46,41 @@ const routes = [
   },
   {
     path: '/pro_alist',
-    component: product_alist
+    component: product_alist,
+    // meta: {
+    //   keepAlive:true
+    // }
   },
   {
     path: '/pro_clist',
-    component: product_clist
+    component: product_clist,
+    // meta: {
+    //   keepAlive:true
+    // }
   },
   {
+    /*  */
     path: '/pro_plist',
-    component: product_plist
+    component: product_plist,
+    // meta: {
+    //   keepAlive:true
+    // }
   },
   {
+    /* 精品服饰 */
     path: '/pro_dlist',
-    component: product_dlist
+    component: product_dlist,
+    // meta: {
+    //   keepAlive:true
+    // }
   },
   {
+    /* 周边精品 */
     path: '/pro_slist',
-    component: product_slist
+    component: product_slist,
+    // meta: {
+    //   keepAlive:true
+    // }
   },
   {
     /*  */
@@ -74,7 +101,19 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  /* *********keep-alve咋使用********* */
+  // scrollBehavior (to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     return savedPosition
+  //   } else {
+  //     return {
+  //       x: 0,
+  //       y: 0
+  //     }
+  //   }
+  // }
+  /* ****************** */
 })
 
 export default router

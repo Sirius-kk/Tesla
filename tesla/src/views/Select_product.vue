@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-header-list></my-header-list>
+    <my-header-index></my-header-index>
     <!-- 页面开始 -->
     <!-- 一级标题+容器开始 -->
     <div class="container">
@@ -8,7 +8,10 @@
       <!-- 二级标题+容器开始 -->
       <!-- <div v-for="(item1, index1) of title2" :key="index1"> -->
       <div v-if="img_sorry" class="img_s">
-        <img src="../assets/imgs/u=1080315010,2709859418&fm=26&gp=0.jpg" alt="">
+        <img
+          src="../assets/imgs/u=1080315010,2709859418&fm=26&gp=0.jpg"
+          alt=""
+        />
       </div>
       <div>
         <!-- <div class="t2">{{ item1.family_name }}</div> -->
@@ -48,6 +51,11 @@
 * {
   box-sizing: border-box;
 }
+/*  */
+/* .head_index {
+  color: #000;
+} */
+/*  */
 .container {
   padding: 58px 24px;
   min-width: 1100px;
@@ -144,10 +152,9 @@ export default {
     return {
       title: "",
       pro: [],
-      img_sorry: false
+      img_sorry: false,
     };
   },
-  methods: {},
   methods: {
     ima_blo(e) {
       if (e.target.nodeName == "IMG") {
@@ -163,21 +170,21 @@ export default {
     /* activity  \  charge  \  part   \  dress  \  surround */
     /* activity charge surround 一组*/
     /* part dress 一组 */
-    console.log(this.$route.params.key);// 3
+    console.log(this.$route.params.key); // 3
     let key = `%${this.$route.params.key}%`;
-    key = encodeURI(key);  
+    key = encodeURI(key);
     console.log(key);
     this.axios.get(`/product/select?key=${key}`).then((res) => {
       console.log(res.data);
       // let data = res.date;
-      if(res.data.code == 0){
+      if (res.data.code == 0) {
         this.title = "您再試著搜搜別的商品?";
         this.img_sorry = true;
       } else {
         this.img_sorry = false;
         let data = res.data.product;
-        for(var item1 of data) {
-          for(var item2 of item1) {
+        for (var item1 of data) {
+          for (var item2 of item1) {
             item2.pic = require(`../assets/img/pro_list/${item2.pic}`);
             item2.pic2 = require(`../assets/img/pro_list/${item2.pic2}`);
             this.pro.push(item2);

@@ -363,6 +363,7 @@ export default {
     h_show() {
       let headerEle = document.getElementsByClassName("head_index")[0];
       let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
+      document.getElementsByClassName("sousuo_inp")[0].style.color = "#000";
       headerEle.style.background = "rgba(255,255,255,1)";
       headerEle.style.color = "#000";
       shopping_tipEle.style.background = "#000";
@@ -373,6 +374,7 @@ export default {
     h_hide() {
       let headerEle = document.getElementsByClassName("head_index")[0];
       let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
+      document.getElementsByClassName("sousuo_inp")[0].style.color = "#fff";
       headerEle.style.background = "rgba(255,255,255,0)";
       shopping_tipEle.style.background = "#fff";
       shopping_tipEle.style.color = "#000";
@@ -393,7 +395,7 @@ export default {
     });
   },
   destroyed() {
-    this.top_lable = null;
+    window.removeEventListener("scroll", this.top_lable);
   },
 };
 </script>

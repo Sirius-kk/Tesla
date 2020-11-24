@@ -14,7 +14,7 @@
       <div class="right">
         <div class="title">
           <span>{{ data.title }}</span>
-          <p>¥ {{ pro_detail[value].price }}</p>
+          <p>¥ {{ data.price }}</p>
         </div>
         <div v-if="data.tp != null">
           <el-select v-model="value" placeholder="请选择">
@@ -190,28 +190,7 @@ export default {
       data: [],
       image: [],
       img: [],
-      pro_detail: [
-        {
-          value: "0",
-          label: "请选择",
-          price: "300-350",
-        },
-        {
-          value: "1",
-          label: "iPhone",
-          price: "300",
-        },
-        {
-          value: "2",
-          label: "USB-C",
-          price: "325",
-        },
-        {
-          value: "3",
-          label: "Micro USB",
-          price: "350",
-        },
-      ],
+      pro_detail: '',
       value: "1",
     };
   },
