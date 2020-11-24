@@ -1,5 +1,5 @@
 <template>
-  <div class="head" @mouseenter="h_show" @mouseleave="h_hide">
+  <div class="head_index" @mouseenter="h_show" @mouseleave="h_hide">
     <el-row>
       <el-col :span="9">
         <!-- 左侧部分开始 -->
@@ -64,11 +64,11 @@
           </div>
           <div class="search search1">
             <input
+              v-model="inp_value"
               class="sousuo_inp"
               type="text"
               v-if="input_show"
               placeholder="搜索"
-              @blur="inp_blur"
             />
           </div>
           <div @click="login">登录</div>
@@ -267,9 +267,10 @@ export default {
   data() {
     return {
       kard: "",
-      input_show: false,
+      input_show: true,
       shop_car: true,
       search_s: true,
+      inp_value: ""
     };
   },
   methods: {
@@ -295,20 +296,14 @@ export default {
     jumpIndex() {
       this.$router.push("/");
     },
-    /* 搜索框的弹出 */
+    /* 搜索商品 */
     input_Show() {
-      if (this.input_show == false) {
-        this.input_show = true;
-        document.getElementsByClassName("search1")[0].style.width = "220px";
-        // document.getElementById("inp").focus();
-        // console.log(document.getElementsByClassName("sousuo_inp"));
-      } else if(this.input_show == true) {
-        this.axios.get("/product/select_one",res => {
-          
-        });
+      // 獲取當前輸入框的值然後跳轉并傳值到search頁面
+      if(this.inp_value.length !=0 ) {
+        this.$router.push(`/select/${this.inp_value}`);
       }
     },
-    /* 搜索框的弹出 */
+    /* 搜索商品 */
     /*  */
     /* 跳轉主頁 */
     /* 一級導航的跳轉 */
@@ -341,7 +336,7 @@ export default {
       // console.log(111111111);
       let scrollTop =
         document.body.scrollTop || document.documentElement.scrollTop;
-      let headerEle = document.getElementsByClassName("head")[0];
+      let headerEle = document.getElementsByClassName("head_index")[0];
       let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
       // console.log(headerEle);
       // 设置滚动阈值
@@ -366,7 +361,7 @@ export default {
     /* 主頁頭部的變色設置 */
     /* 頭部鼠標懸停顯示 */
     h_show() {
-      let headerEle = document.getElementsByClassName("head")[0];
+      let headerEle = document.getElementsByClassName("head_index")[0];
       let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
       headerEle.style.background = "rgba(255,255,255,1)";
       headerEle.style.color = "#000";
@@ -376,7 +371,7 @@ export default {
       this.shop_car = false;
     },
     h_hide() {
-      let headerEle = document.getElementsByClassName("head")[0];
+      let headerEle = document.getElementsByClassName("head_index")[0];
       let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
       headerEle.style.background = "rgba(255,255,255,0)";
       shopping_tipEle.style.background = "#fff";
@@ -386,15 +381,16 @@ export default {
       this.shop_car = true;
     },
     /* 頭部鼠標懸停顯示 */
-    /* 当搜索框失焦则隐藏 */
-    inp_blur() {
-      document.getElementsByClassName("search1")[0].style.width = "44px";
-      this.input_show = false;
-    },
-    /* 当搜索框失焦则隐藏 */
   },
   mounted() {
     window.addEventListener("scroll", this.top_lable);
+    console.log(document.getElementsByClassName("sousuo_inp")[0]);
+    document.getElementsByClassName("sousuo_inp")[0].addEventListener("keyup",e => {
+      console.log(12132546);
+      if(e.keyCode == 13) {
+        this.input_Show();
+      }
+    });
   },
   destroyed() {
     this.top_lable = null;
@@ -404,13 +400,13 @@ export default {
 
 <style scoped>
 /* 整体样式开始 */
-.head {
+.head_index {
   height: 58px;
   position: relative;
   color: #fff;
 }
 /* 清除高度坍塌 */
-.head::after {
+.head_index::after {
   content: "";
   display: block;
   clear: both;
@@ -551,7 +547,7 @@ h1,
   position: absolute;
 }
 .search1 {
-  width: 44px;
+  width: 220px;
   height: 50px;
   transition: width 0.2s;
   overflow: hidden;
@@ -587,7 +583,7 @@ h1,
 }
 /* 右侧样式結束 */
 /* 滚动事件涉及样式開始 */
-.head {
+.head_index {
   background: rgba(255, 255, 255, 0);
   position: fixed;
   z-index: 888;

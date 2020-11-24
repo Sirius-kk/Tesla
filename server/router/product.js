@@ -29,9 +29,9 @@ r.get("/list_activity", (req, res) => {
   let product = '';
   function familyType() {
     // /* 获取店铺活动家族类型 */
-    let sql1 = "SELECT id,family_name FROM ts_activity_family";
+    let sql = "SELECT id,family_name FROM ts_activity_family";
     let fnames = '';
-    pool.query(sql1, (err, result) => {
+    pool.query(sql, (err, result) => {
       if (err) throw err;
       fnames = result;
       // console.log(fnames);
@@ -41,8 +41,8 @@ r.get("/list_activity", (req, res) => {
   }
   function Product(fnames) {
     // /* 获取商品 */
-    let sql3 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_activity_product";
-    pool.query(sql3, (err, result) => {
+    let sql = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_activity_product";
+    pool.query(sql, (err, result) => {
       if (err) throw err;
       product = result;
       // console.log(product);
@@ -201,17 +201,22 @@ r.get("/list_surround", (req, res) => {
 });
 /* 周边精品 */
 
-/* 商品詳情 */  /*  */
+/* 商品詳情 */  /* 店鋪活動 */
 r.get("/detail_product",(req,res) => {
   console.log(req.query);
   /* 获取地址栏中的pid和tableName */
   // let pid = 1;/* √ */
+  let tableName = req.query.tableName;
   let pid = req.query.pid;
-  // let tableName = req.query.tableName;
-  // console.log(pid,tableName);
+  console.log(pid,tableName);
   /* 查询语句 */
-  // let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ? WHERE pid=?";
-  let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_surround_product WHERE pid=?";
+  // let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ? WHERE pid=?";/* 為什麼自帶引號,而且還被報錯!!!!! */
+  // let sql1 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_activity_product WHERE pid=?";
+  // let sql2 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_charge_product WHERE pid=?";
+  // let sql3 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_part_family WHERE pid=?";
+  // let sql4 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_dress_product WHERE pid=?";
+  // let sql5 = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM ts_surround_product WHERE pid=?";
+  let sql = "SELECT pid,class,title,price,tp,color,size,ds,pic_detais FROM "+ tableName +" WHERE pid=?";
   pool.query(sql,[pid],(err,result) => {
     // pool.query(sql,[tableName,pid],(err,res) => {
     if(err) throw err;
@@ -224,8 +229,88 @@ r.get("/detail_product",(req,res) => {
 /* 商品詳情 */
 
 /* 主页模糊查询 */  /* √√√ */
-r.get("/select_one",(req,res) => {
-  res.send({code :1});
+r.get("/select",(req,res) => {
+  // 获取地址栏中的模糊条件的关键字
+  let key = req.query.key;
+  /* 拿到的值要先在前台用 encodeURL(值) 进行编码 */
+  console.log(key);
+  /* 5个查询语句(同时查询5个数据表) */
+  let sql1 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_activity_product WHERE title LIKE ?";
+  let sql2 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_charge_product WHERE title LIKE ?";
+  let sql3 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_part_product WHERE title LIKE ?";
+  let sql4 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_dress_product WHERE title LIKE ?";
+  let sql5 = "SELECT class,pid,family_id,price,title,pic,pic2,mian FROM ts_surround_product WHERE title LIKE ?";
+  let product = [];
+  function Product1() {// 店铺活动
+    // /* 获取商品 */
+    pool.query(sql1,[key],(err, result) => {
+      if (err) throw err;
+      console.log(result);
+      if(result.length != 0){
+        product.push(result);
+      }
+      // console.log(product);
+    });
+    // /* 获取商品 */
+    Product2(product);
+  }
+  function Product2(product) {// 充电产品
+    // /* 获取商品 */
+    pool.query(sql2,[key],(err, result) => {
+      if (err) throw err;
+      console.log(result);
+      if(result.length != 0){
+        product.push(result);
+      }
+      // console.log(product);
+      Product3(product);
+    });
+    // /* 获取商品 */
+  }
+  function Product3(product) {// 优选配件
+    // /* 获取商品 */
+    pool.query(sql3,[key],(err, result) => {
+      if (err) throw err;
+      console.log(result);
+      if(result.length != 0){
+        product.push(result);
+      }
+      // console.log(product);
+      Product4(product);
+    });
+    // /* 获取商品 */
+  }
+  function Product4(product) {// 精选服饰
+    // /* 获取商品 */
+    pool.query(sql4,[key],(err, result) => {
+      if (err) throw err;
+      console.log(result);
+      if(result.length != 0){
+        product.push(result);
+      }
+      // console.log(product);
+      Product5(product);
+      // console.log(product);
+    });
+    // /* 获取商品 */
+  }
+  function Product5(product) {// 精选服饰
+    // /* 获取商品 */
+    pool.query(sql5,[key],(err, result) => {
+      if (err) throw err;
+      console.log(result);
+      if(result.length != 0){
+        product.push(result);
+        res.send({product: product,code: 1});
+      } else {
+        res.send({product: product,code: 0});
+      }
+      // console.log(product);
+    });
+    // /* 获取商品 */
+  }
+  Product1();
+  // res.send({code :1});
 });
 /* 主页模糊查询 */
 

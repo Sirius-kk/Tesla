@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="cont">
+    <my-header-list></my-header-list>
     <div class="tontenter">
-      <my-header-list></my-header-list>
       <div class="left">
         <img
           class="img1"
@@ -14,13 +14,13 @@
       <div class="right">
         <div class="title">
           <span>{{ data.title }}</span>
-          <p>¥ {{ options[value].price }}</p>
+          <p>¥ {{ pro_detail[value].price }}</p>
         </div>
         <div v-if="data.tp != null">
           <el-select v-model="value" placeholder="请选择">
             <!-- ****************** -->
             <el-option
-              v-for="item in options"
+              v-for="item in pro_detail"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -73,7 +73,7 @@
 </template>
 <style  scoped>
 .tontenter {
-  padding: 0 24px 0 24px;
+  padding: 58px 24px 0 24px;
 }
 .tontenter::after {
   content: "";
@@ -81,8 +81,8 @@
   clear: both;
 }
 .left {
-  width: 65%;
-  padding: 24px 32px 0 0;
+  width: 60%;
+  padding: 0 20px 0 0;
   float: left;
 }
 .img1 {
@@ -93,9 +93,11 @@
 .right {
   width: 25%;
   float: right;
-  padding: 24px 0 0 0;
   position: fixed;
-  right: 120px;
+  right: 135px;
+}
+.title {
+  margin-top: 70px;
 }
 .title span {
   font-size: 32px;
@@ -105,7 +107,7 @@
 .title p {
   font-size: 20px;
   font-weight: 400;
-  margin: 7px 0 40px 0;
+  margin: 25px 0 40px 0;
 }
 .p1 {
   margin: 0 0 15px 0;
@@ -171,12 +173,12 @@
 }
 .help {
   margin-top: 10px;
-  border-bottom: 2px solid #000;
-  width: 85px;
+  border-bottom: 2px solid rgb(172, 163, 163);
+  width: 80px;
   cursor: pointer;
 }
 .div_2 {
-  margin-top: 100px;
+  margin-top: 10px;
 }
 </style>
 <script>
@@ -188,7 +190,7 @@ export default {
       data: [],
       image: [],
       img: [],
-      options: [
+      pro_detail: [
         {
           value: "0",
           label: "请选择",
@@ -226,9 +228,11 @@ export default {
           "/product/detail_product?pid=" + pid + "&" + "tableName=" + tableName
         )
         .then((res) => {
-          console.log(res.data);
-          let data = res.data.result; // 一条数据
+          // console.log(res.data.result[0]);
+          let data = res.data.result[0]; // 一条数据
           this.data = data;
+          console.log(this.data);
+          /* 配置详情图片的路径 */
           for (var key in data) {
             if (key == "pic_detais") {
               this.img = data.pic_detais.split(".jpg"); // 数组

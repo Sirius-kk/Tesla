@@ -1,5 +1,5 @@
 <template>
-  <div class="head">
+  <div class="head_list">
     <el-row>
       <el-col :span="9">
         <!-- 左侧部分开始 -->
@@ -238,12 +238,15 @@ export default {
 
 <style scoped>
 /* 整体样式开始 */
-.head {
+.head_list{
   height: 58px;
-  position: relative;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  color: #000;
 }
 /* 清除高度坍塌 */
-.head::after {
+.head_list::after {
   content: "";
   display: block;
   clear: both;
@@ -414,7 +417,7 @@ li,p,h1,.left {
 }
 /* 右侧样式結束 */
 /* 滚动事件涉及样式 */
-.head {
+.head_list {
   background: #fff;
   position: fixed;
   z-index: 888;

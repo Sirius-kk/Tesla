@@ -6,12 +6,10 @@
     <!-- 第一部分 -->
     <div class="div_1">
       <img class="img_1" src="../assets/imgs/wall-connector.jpg" alt="" />
-      <div>
+      <div @click="charge">
         <P>
           <!--  -->
-          <router-link :to="`/detail/${1}&${'ts_charge_product'}`"
-            ><span> 点击购买 家庭充电包服务 </span></router-link
-          >
+          <span> 点击购买 家庭充电包服务 </span>
           <!--  -->
         </P>
         <router-link :to="`/detail/${1}&${'ts_charge_product'}`"
@@ -205,7 +203,7 @@
   text-align: center;
   overflow: hidden;
 }
-.box ul li > img {
+.box ul li img {
   height: 541px;
 }
 .div_4 {
@@ -309,6 +307,9 @@ export default {
     next() {
       this.left1 += this.liwidth + 20;
     },
+    charge() {
+      this.$router.push(`/detail/${1}&${"ts_charge_product"}`);
+    }
   },
   mounted() {
     this.axios.get("/product/carsou").then((res) => {

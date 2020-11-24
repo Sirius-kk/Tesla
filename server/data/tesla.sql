@@ -27,6 +27,64 @@ CREATE TABLE ts_index_rotationPicture (
 );
 /* ************************************* */
 
+/* *************************用户模块数据表******************* */
+/*丢弃数据表，如果存在数据表'ts_user'*/
+DROP TABLE IF EXISTS ts_user;
+/*创建用户信息数据表'ts_user'*/
+CREATE TABLE ts_user (
+  uid TINYINT PRIMARY KEY AUTO_INCREMENT,          #用户编号
+  uname VARCHAR(32),            #用户昵称
+  upwd VARCHAR(32),             #用户密码
+  email VARCHAR(64),            #用户邮箱
+  phone VARCHAR(11),            #用户手机号
+  avatar VARCHAR(128),          #用户头像
+  gender TINYINT                #用户性别
+);
+/*丢弃数据表，如果存在数据表'ts_receiver_address'*/
+DROP TABLE IF EXISTS ts_receiver_address;
+/*创建用户收货地址数据表'ts_receiver_address'*/
+CREATE TABLE ts_receiver_address (
+  uid TINYINT PRIMARY KEY AUTO_INCREMENT,          #用户编号
+  receiver VARCHAR(16),         #收货人姓名
+  province VARCHAR(16),         #省
+  city VARCHAR(16),             #市
+  county VARCHAR(16),           #县
+  address VARCHAR(128),         #详细地址
+  postcode CHAR(6),             #邮编
+  is_default BOOLEAN            #是否为默认收货地址
+);
+/* *************************用户模块数据表******************* */
+
+/* **************************购物车模块数据表**************** */
+/*丢弃数据表，如果存在数据表'ts_shopping_cart'*/
+DROP TABLE IF EXISTS ts_shopping_cart;
+/*创建用购物车数据表'ts_shopping_cart'*/
+CREATE TABLE ts_shopping_cart (
+  id TINYINT PRIMARY KEY AUTO_INCREMENT,          #购物车编号
+  uid INT,                      #用户编号
+  pid INT,                      #商品编号
+  pcount INT,                   #购买数量
+  is_checked BOOLEAN            #是否勾选 
+);
+/* **************************购物车模块数据表**************** */
+
+/* *****************************订单模块数据表*************** */
+/*丢弃数据表，如果存在数据表'ts_order'*/
+DROP TABLE IF EXISTS ts_order;
+/*创建用购物车数据表'ts_order'*/
+CREATE TABLE ts_order (
+  id TINYINT PRIMARY KEY AUTO_INCREMENT,          #订单编号
+  uid INT,                      #用户编号
+  pid INT,                      #商品编号
+  pcount INT,                   #购买数量
+  status INT,                   #订单状态
+  order_time BIGINT,            #下单时间
+  pay_time BIGINT,              #付款时间
+  deliver_time BIGINT,          #发货时间
+  recived_time BIGINT           #签收时间
+);
+/* *****************************订单模块数据表*************** */
+
 -- /* *******************商品模块数据表****************** */
 
 -- /* *********************商品主类表******************* */
@@ -40,7 +98,6 @@ CREATE TABLE ts_index_rotationPicture (
 -- );
 
 
--- /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!我要改表 */
 -- /* *********************商品主类表******************* */
 
 
@@ -434,32 +491,6 @@ INSERT INTO ts_part_product VALUES
   (NULL,
   1,
   '内饰',
-  'Model S/X 快速连接手机底座',
-  325,
-  'USB-C',
-  NULL,
-  NULL,
-  '<p>安装快速连接手机充电底座后，充电操作更符合人体工程学。杂乱的充电线被隐藏，外观更整洁。支持盲插，可快速、安全地为智能手机充电。</p> <p>包含：</p>
-					<ul> <li>1 个通用底座</li> <li>2 个设备托架，宽、窄各 1 个</li> <li>1 个充电线，可选择充电接口 iPhoneLighting® 、Micro-USB 或 USB-C 。</li> </ul> <p>注意：配备集成中控台的车型可以自行安装，无需前往服务中心。目前兼容 iPhone 6 Plus 及更高版本设备。</p> <p>不适用于配备第一代插入式中控台的车型。</p>
-				</div>','part_inner11.jpg','part_inner12.jpg',
-        '1060583-00-B_0.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg1060583-00-B_10.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg',3
-  ),
-  (NULL,
-  1,
-  '内饰',
-  'Model S/X 快速连接手机底座',
-  350,
-  'Micro USB',
-  NULL,
-  NULL,
-  '<p>安装快速连接手机充电底座后，充电操作更符合人体工程学。杂乱的充电线被隐藏，外观更整洁。支持盲插，可快速、安全地为智能手机充电。</p> <p>包含：</p>
-					<ul> <li>1 个通用底座</li> <li>2 个设备托架，宽、窄各 1 个</li> <li>1 个充电线，可选择充电接口 iPhoneLighting® 、Micro-USB 或 USB-C 。</li> </ul> <p>注意：配备集成中控台的车型可以自行安装，无需前往服务中心。目前兼容 iPhone 6 Plus 及更高版本设备。</p> <p>不适用于配备第一代插入式中控台的车型。</p>
-				</div>','part_inner11.jpg','part_inner12.jpg',
-        '1060583-00-B_0.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg1060583-00-B_10.jpg1060583-00-B_11.jpg1060583-00-B_12.jpg1060583-00-B_13.jpg',3
-  ),
-  (NULL,
-  1,
-  '内饰',
   'Model S/X 手机无线充电器',
   875,
   NULL,
@@ -491,45 +522,6 @@ INSERT INTO ts_part_product VALUES
   'Model S 车衣 (国标)',
   2050,
   '室内',
-  NULL,
-  NULL,
-  '<h3>室内车衣</h3>
-  <p>弹力缎面，像手套一样贴合车身，可有效防止漆面刮擦或尘埃积聚。充电端口处有专门的开口，可正常连接充电器。通风网孔在充电时有利于车辆散热。</p>
-					<p> 特色： </p>
-          <ul> 
-          <li>丝滑黑色缎面</li> 
-          <li>内层材质柔软</li> 
-          </ul> 
-          <p> 包含： </p>
-					<ul> 
-          <li>1 个车衣</li> 
-          <li>1 个收纳袋</li> 
-          </ul> 
-          <br><br> 
-          <h3>户外车衣</h3> 
-          <p>保护您的爱车免受恶劣天气等户外因素的影响。车衣中间层采用热塑性聚氨酯材料，里层和外层采用机织聚酯材料，透气性和耐水性俱佳。充电端口处有专门的开口，可正常连接充电器。通风网孔在充电时有利于车辆散热。</p><p>
-					</p>
-          <p> 特色： </p> 
-          <ul> 
-          <li>外层结实耐用</li> 
-          <li>内层材质柔软</li> 
-          <li>防盗钢丝锁</li> 
-          </ul>
-					<p> 包含： </p> 
-          <ul> 
-          <li>1 个车衣</li> 
-          <li>1 个收纳袋</li> 
-          </ul>',
-  '1017723-00-A_0.jpg',
-  '1017723-00-A_alt.jpg',
-  '1017723-00-A_0.jpg1017723-00-A_1.jpg1017723-00-A_2.jpg1017723-00-A_alt.jpg1017723-01-A_0.jpg1017723-01-A_1.jpg1017723-01-A_2.jpg1017723-01-A_alt.jpg',3
-  ),
-  (NULL,
-  1,
-  '外观',
-  'Model S 车衣 (国标)',
-  2900,
-  '室外',
   NULL,
   NULL,
   '<h3>室内车衣</h3>
@@ -666,23 +658,6 @@ INSERT INTO ts_part_product VALUES
   '外观',
   'Model 3 雨刮器',
   183,
-  '右(副驾驶)',
-  NULL,
-  NULL,
-  '<p>为 Model 3 雨刮器片选择正规的替换产品以确保能够正确安装，并实现相同的使用效果和性能。</p>
-  <p>包含：</p>
-  <ul>
-  <li>1 x 雨刮器片</li>
-  </ul>
-  <p><a href="https://www.tesla.cn/support/do-it-yourself-model-3#replacing-wiper-blades">Model 3 雨刮器片更换手册</a></p>',
-  '1456933-00-A_1.jpg',
-  '1456933-00-A_1.jpg',
-  '1456933-00-A_1.jpg',3),
-  (NULL,
-  2,
-  '外观',
-  'Model 3 雨刮器',
-  183,
   '左(驾驶位)',
   NULL,
   NULL,
@@ -713,26 +688,6 @@ INSERT INTO ts_part_product VALUES
   '1518543-00-A_2.jpg',
   '1518543-00-A_0.jpg1518543-00-A_2.jpg1518543-00-A_3.jpg',3),
   /* Model 3  类型编号: 2  脚垫 */
-  (NULL,
-  2,
-  '脚垫',
-  'Model 3 全天候前备/后备箱地垫',
-  655,
-  '前备箱',
-  NULL,
-  NULL,
-  '<p>地垫为 TPE 材质，不含镉、铅、乳胶、PVC，100% 可回收，内含刚性芯体，强度高且易于清理。</p> 
-  <p><strong>前备箱垫包括：</strong></p>
-	<ul> 
-  <li>1 个前备箱地垫</li> 
-  </ul> 
-  <p><strong>后备箱垫包括：</strong></p> 
-  <ul> 
-  <li>1 个后备箱垫</li> 
-  </ul>',
-  '1133634-00-A_0.jpg',
-  '1133634-00-A_alt.jpg',
-  '1133634-00-A_0.jpg1133634-00-A_alt.jpg',3),
   (NULL,
   2,
   '脚垫',

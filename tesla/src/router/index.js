@@ -13,6 +13,10 @@ import product_dlist from '../views/Product_dlist.vue'
 import product_slist from '../views/Product_slist.vue'
 /* 導入詳情模塊 */
 import detail from '../views/Detail'
+/* 登录页面 */
+import log from '../views/Login1.vue'
+/* 搜索页面模块 */
+import select from '../views/Select_product.vue'
 
 // Vue.use(VueRouter)
 Vue.use(VueRouter)
@@ -22,6 +26,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/select/:key',
+    component: select
+  },
+  {
+    path: '/log',
+    component: log
   },
   {
     path: '/pro_alist',
