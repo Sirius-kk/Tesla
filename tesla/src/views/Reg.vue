@@ -1,50 +1,55 @@
 <template>
-  <div id="app">
-    <div id="mid">
-      <div id="head">Tesla账号登录</div>
-      <div id="body">
-        <div class="body-user">
-          <el-input
-            class="username"
-            placeholder="用户名"
-            v-model="username"
-            clearable
-            @blur.native.capture="checkUsername"
-          >
-          </el-input>
-          <span
-            style="float: right; clear: both; color: red"
-            :style="{ display: a }"
-            >用户名格式错误</span
-          >
-        </div>
-        <div class="body-pwd">
-          <el-input
-            class="password"
-            placeholder="密码"
-            v-model="password"
-            show-password
-            @blur.native.capture="checkPassword"
-          ></el-input>
-          <span
-            style="float: right; clear: both; color: red"
-            :style="{ display: b }"
-            >密码格式错误</span
-          >
-        </div>
-        <!-- <div class="login-else">
-            <span id="login-else-click">短信验证码登录</span>
-          </div> -->
-        <div class="login-btn">
-          <el-button class="btn" type="primary" @click="login">登录</el-button>
-        </div>
-        <div class="link-btn">
-          <div id="sp">
-            <router-link id="sp1" to="/reg">注册</router-link>
-            <span id="sp2">|</span>
-            <span id="sp3">忘记密码</span>
-          </div>
-        </div>
+  <div id="mid">
+    <div id="head">Tesla账号注册</div>
+    <div id="body">
+      <div class="body-user">
+        <el-input
+          class="username"
+          placeholder="请输入6到12位用户名"
+          v-model="username"
+          clearable
+          @blur.native.capture="checkUsername"
+        >
+        </el-input>
+        <span
+          style="float: right; clear: both; color: red"
+          :style="{ display: a }"
+          >用户名格式错误</span
+        >
+      </div>
+      <div class="body-pwd">
+        <el-input
+          class="password"
+          placeholder="请输入8到16位密码"
+          v-model="password"
+          show-password
+          @blur.native.capture="checkPassword"
+        ></el-input>
+        <span
+          style="float: right; clear: both; color: red"
+          :style="{ display: b }"
+          >密码格式错误</span
+        >
+      </div>
+      <div class="body-pwd">
+        <el-input
+          class="password"
+          placeholder="请再次输入密码"
+          v-model="cfpassword"
+          show-password
+          @blur.native.capture="checkcfPassword"
+        ></el-input>
+        <span
+          style="float: right; clear: both; color: red"
+          :style="{ display: c }"
+          >两次密码不一致</span
+        >
+      </div>
+
+      <div class="login-btn">
+        <el-button class="btn" type="primary" @click="reglogin"
+          >免费注册</el-button
+        >
       </div>
     </div>
     <my-footer></my-footer>
@@ -118,26 +123,16 @@
   margin: 0 auto;
   border: 1px solid rebeccapurple;
 }
-#login-else-click {
-  color: aqua;
-  float: left;
-}
+
 .login-btn {
   width: 340px;
   margin: 0 auto;
 }
 .btn {
   width: 100%;
-  background-color: #ca141d;
-  border: #ca141d;
   border-radius: 8px;
 }
-.btn:focus {
-  background-color: #ca141d;
-}
-.btn:hover {
-  background-color: #ca141d;
-}
+
 .link-btn {
   width: 300px;
   margin: 40px auto 0px;
@@ -162,7 +157,6 @@
   color: #007dff;
   cursor: pointer;
 }
-
 </style>
 <script>
 export default {
@@ -170,8 +164,10 @@ export default {
     return {
       username: "",
       password: "",
+      cfpassword: "",
       a: "none",
       b: "none",
+      c: "none",
     };
   },
   methods: {
@@ -180,6 +176,7 @@ export default {
       let uname = this.username;
       let usernameReg = /^[0-9a-zA-Z]{6,12}$/;
       if (usernameReg.test(uname)) {
+        
         this.a = "none";
         return true;
       } else {
@@ -194,20 +191,41 @@ export default {
       let passwordReg = /^[0-9A-Za-z\.\-_]{8,16}$/;
       if (passwordReg.test(upwd)) {
         this.b = "none";
+        if (this.cfpassword != "") {
+          this.checkcfPassword();
+        }
         return true;
       } else {
         this.b = "";
         return false;
       }
     },
-    login() {
-      if (this.checkUsername() && this.checkPassword()) {
+    // 重复验证密码
+    checkcfPassword() {
+      let cfupwd = this.cfpassword;
+      let upwd = this.password;
+      if (cfupwd != upwd && cfupwd != "") {
+        this.c = "none";
+        return true;
+      } else {
+        this.c = "";
+        return false;
+      }
+    },
+    // 注册
+    reglogin() {
+      if (
+        this.checkUsername() &&
+        this.checkPassword() &&
+        this.checkcfPassword()
+      ) {
         this.$message({
-          message: "恭喜您，登陆成功",
+          message: "恭喜您，注册成功",
           type: "success",
         });
+        this.$router.push("/");
       } else {
-        this.$message.error("登录失败，密码或用户名错误");
+        this.$message.error("注册失败，密码或用户名错误");
       }
     },
   },

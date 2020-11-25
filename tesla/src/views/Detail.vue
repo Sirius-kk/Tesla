@@ -207,10 +207,10 @@ export default {
           "/product/detail_product?pid=" + pid + "&" + "tableName=" + tableName
         )
         .then((res) => {
-          // console.log(res.data.result[0]);
+          console.log(res.data);
           let data = res.data.result[0]; // 一条数据
           this.data = data;
-          console.log(this.data);
+          // console.log(this.data);
           /* 配置详情图片的路径 */
           for (var key in data) {
             if (key == "pic_detais") {

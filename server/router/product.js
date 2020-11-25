@@ -219,7 +219,6 @@ r.get("/detail_product",(req,res) => {
     case '5':
       tableName = 'ts_surround_product';
       break;
-    
   };
   console.log(pid,tableName);
   /* 查询语句 */
@@ -308,11 +307,13 @@ r.get("/select",(req,res) => {
       console.log(result);
       if(result.length != 0){
         product.push(result);
+      }
+      if(product.length != 0) {
         res.send({product: product,code: 1});
+        console.log(product);
       } else {
         res.send({product: product,code: 0});
       }
-      // console.log(product);
     });
     // /* 获取商品 */
   }
@@ -320,6 +321,40 @@ r.get("/select",(req,res) => {
   // res.send({code :1});
 });
 /* 主页模糊查询 */
+
+/* ****************************购物车********************** */
+r.get("/shopping_car",(req,res) => {  /* √√√ */
+  /* 获取查询字符串 */
+  let pid = req.query.pid;
+  let tableName = req.query.mian;
+  console.log(req.query);
+  switch(tableName) {
+    case '1':
+      tableName = 'ts_activity_product';
+      break;
+    case '2':
+      tableName = 'ts_charge_product';
+      break;
+    case '3':
+      tableName = 'ts_part_product';
+      break;
+    case '4':
+      tableName = 'ts_dress_product';
+      break;
+    case '5':
+      tableName = 'ts_surround_product';
+      break;
+  };
+  console.log(tableName);
+  /* 查询语句 */
+  let sql = "SELECT pid,title,price,pic FROM " + tableName + " WHERE pid=?";
+  /* 执行sql命令查询 */
+  pool.query(sql, [pid], (err, result) => {
+    if(err) throw err; 
+    res.send({result: result});
+  });
+});
+/* ****************************购物车********************** */
 
 /* ***************************************************接口配置****************************************** */
 

@@ -8,9 +8,7 @@
       <img class="img_1" src="../assets/imgs/wall-connector.jpg" alt="" />
       <div @click="charge">
         <P>
-          <!--  -->
           <span> 点击购买 家庭充电包服务 </span>
-          <!--  -->
         </P>
         <router-link :to="`/detail/${1}&${'ts_charge_product'}`"
           ><p>随时在家为特斯拉充电</p></router-link
@@ -309,7 +307,7 @@ export default {
     },
     charge() {
       this.$router.push(`/detail/${1}&${"ts_charge_product"}`);
-    }
+    },
   },
   mounted() {
     this.axios.get("/product/carsou").then((res) => {

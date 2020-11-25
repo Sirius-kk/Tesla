@@ -13,6 +13,8 @@ import axios from "axios";
 import myHeaderIndex from "./components/Myheader_index.vue";
 /* 导入Myheader_list模块 */
 import myHeaderList from "./components/Myheader_list.vue";
+/* 导入公共底部 */
+import myFooter from "./components/Myfooter.vue"
 
 /* *********************** */
 // $.ajaxSetup({
@@ -36,6 +38,7 @@ axios.defaults.baseURL="/api";
 /* 把myheader转成全局组件 */
 Vue.component("my-header-index",myHeaderIndex);
 Vue.component("my-header-list",myHeaderList);
+Vue.component("my-footer",myFooter);
 
 new Vue({
   router,

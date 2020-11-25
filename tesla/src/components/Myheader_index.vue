@@ -326,8 +326,7 @@ export default {
     /* 二級導航跳轉 */
     /* 登錄跳轉 */
     login() {
-      // this.$router.push();
-      console.log("登錄跳轉");
+      this.$router.push("/log");
     },
     /* 登錄跳轉 */
     /* 主頁頭部的變色設置 */

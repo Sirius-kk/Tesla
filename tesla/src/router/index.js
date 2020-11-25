@@ -15,6 +15,8 @@ import product_slist from '../views/Product_slist.vue'
 import detail from '../views/Detail'
 /* 登录页面 */
 import log from '../views/Login.vue'
+/* 注册页面 */
+import reg from '../views/Reg.vue'
 /* 搜索页面模块 */
 import select from '../views/Select_product.vue'
 /* 购物车模块 */
@@ -39,6 +41,10 @@ const routes = [
   {
     path: '/shopping_car',
     component: shoppingCar
+  },
+  {
+    path: '/reg',
+    component: reg
   },
   {
     path: '/log',
