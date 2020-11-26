@@ -21,6 +21,8 @@ import reg from '../views/Reg.vue'
 import select from '../views/Select_product.vue'
 /* 购物车模块 */
 import shoppingCar from "../views/ceshi.vue"
+/* 订单模块 */
+import order from "../views/Order.vue"
 
 // Vue.use(VueRouter)
 Vue.use(VueRouter)
@@ -41,6 +43,10 @@ const routes = [
   {
     path: '/shopping_car',
     component: shoppingCar
+  },
+  {
+    path: '/order',
+    component: order
   },
   {
     path: '/reg',
