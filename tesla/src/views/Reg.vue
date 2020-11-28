@@ -1,61 +1,109 @@
 <template>
-  <div id="mid">
-    <div id="head">Tesla账号注册</div>
-    <div id="body">
-      <div class="body-user">
-        <el-input
-          class="username"
-          placeholder="请输入6到12位用户名"
-          v-model="username"
-          clearable
-          @blur.native.capture="checkUsername"
-        >
-        </el-input>
-        <span
-          style="float: right; clear: both; color: red"
-          :style="{ display: a }"
-          >用户名格式错误</span
-        >
-      </div>
-      <div class="body-pwd">
-        <el-input
-          class="password"
-          placeholder="请输入8到16位密码"
-          v-model="password"
-          show-password
-          @blur.native.capture="checkPassword"
-        ></el-input>
-        <span
-          style="float: right; clear: both; color: red"
-          :style="{ display: b }"
-          >密码格式错误</span
-        >
-      </div>
-      <div class="body-pwd">
-        <el-input
-          class="password"
-          placeholder="请再次输入密码"
-          v-model="cfpassword"
-          show-password
-          @blur.native.capture="checkcfPassword"
-        ></el-input>
-        <span
-          style="float: right; clear: both; color: red"
-          :style="{ display: c }"
-          >两次密码不一致</span
-        >
-      </div>
-
-      <div class="login-btn">
-        <el-button class="btn" type="primary" @click="reglogin"
-          >免费注册</el-button
-        >
+  <div>
+    <div id="mid">
+      <div id="head">Tesla账号注册</div>
+      <div id="body">
+        <div class="body-user">
+          <el-input
+            class="username"
+            placeholder="请输入6到12位用户名"
+            v-model="username"
+            clearable
+            @blur.native.capture="checkUsername"
+          >
+          </el-input>
+          <span
+            v-if="cod == 0"
+            style="float: right; clear: both; color: red"
+            :style="{ display: a }"
+            >用户名格式错误</span
+          >
+          <span
+            v-else
+            style="float: right; clear: both; color: red"
+            :style="{ display: a }"
+            >用户名已存在</span
+          >
+        </div>
+        <div class="body-pwd">
+          <el-input
+            class="password"
+            placeholder="请输入8到16位密码"
+            v-model="password"
+            show-password
+            @blur.native.capture="checkPassword"
+          ></el-input>
+          <span
+            style="float: right; clear: both; color: red"
+            :style="{ display: b }"
+            >密码格式错误</span
+          >
+        </div>
+        <div class="body-pwd">
+          <el-input
+            class="password"
+            placeholder="请再次输入密码"
+            v-model="cfpassword"
+            show-password
+            @blur.native.capture="checkcfPassword"
+          ></el-input>
+          <span
+            style="float: right; clear: both; color: red"
+            :style="{ display: c }"
+            >两次密码不一致</span
+          >
+        </div>
+        <div class="login-btn">
+          <el-button class="btn" type="primary" @click="reglogin"
+            >免费注册</el-button
+          >
+        </div>
       </div>
     </div>
-    <my-footer></my-footer>
+
+    <div class="zhezhao" :style="{ display: m }"></div>
+    <div class="div-1" :style="{ display: m }">
+      <p class="myp">{{ time }}秒后跳转首页</p>
+      <p class="myp-2">
+        <el-button type="success" round @click="index">立即返回首页</el-button>
+      </p>
+    </div>
+    <div class="div--1"><my-footer></my-footer></div>
   </div>
 </template>
 <style scoped>
+.div--1 {
+  position: relative;
+  top: 50px;
+}
+.myp {
+  margin-top: 50px;
+}
+.myp-2 {
+  margin-top: 70px;
+}
+.zhezhao {
+  z-index: 66;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.7;
+}
+.div-1 {
+  z-index: 90;
+  position: fixed;
+  width: 300px;
+  height: 200px;
+  top: 17%;
+  left: 35%;
+  background-color: white;
+  padding: 100px;
+  text-align: center;
+  font-size: 24px;
+}
 #mid {
   width: 800px;
   height: 760px;
@@ -168,6 +216,9 @@ export default {
       a: "none",
       b: "none",
       c: "none",
+      m: "none",
+      cod: "",
+      time: 5,
     };
   },
   methods: {
@@ -175,13 +226,19 @@ export default {
     checkUsername() {
       let uname = this.username;
       let usernameReg = /^[0-9a-zA-Z]{6,12}$/;
-      if (usernameReg.test(uname)) {
-        
+      // 失去焦点发送请求查询用户名是否存在
+      this.axios.get("/user/reguname?uname=" + uname).then((res) => {
+        this.cod = res.data.code;
+      });
+      //  0代表不存在 1代表存在
+      // 如果正则通过并且后台响应为0 就不显示错误信息
+      if (usernameReg.test(uname) && this.cod == 0) {
         this.a = "none";
         return true;
       } else {
         this.a = "";
         //终止函数的执行
+
         return false;
       }
     },
@@ -191,12 +248,15 @@ export default {
       let passwordReg = /^[0-9A-Za-z\.\-_]{8,16}$/;
       if (passwordReg.test(upwd)) {
         this.b = "none";
+
         if (this.cfpassword != "") {
           this.checkcfPassword();
         }
+
         return true;
       } else {
         this.b = "";
+
         return false;
       }
     },
@@ -204,29 +264,49 @@ export default {
     checkcfPassword() {
       let cfupwd = this.cfpassword;
       let upwd = this.password;
-      if (cfupwd != upwd && cfupwd != "") {
+      if (cfupwd == upwd && cfupwd != "") {
         this.c = "none";
         return true;
       } else {
         this.c = "";
+
         return false;
       }
     },
     // 注册
     reglogin() {
+      // 点击注册之后先判断 用户名 和密码 确认密码 是否都正确
       if (
         this.checkUsername() &&
         this.checkPassword() &&
         this.checkcfPassword()
       ) {
-        this.$message({
-          message: "恭喜您，注册成功",
-          type: "success",
+        // 如果都正确就向后台发送post请求
+        let str = "username=" + this.username + "&password=" + this.password;
+        this.axios.post("/user/reglogin", str).then((res) => {
+          // 如果后台响应为1 代表注册成功别切修改遮罩层不现实
+          if (res.data.code == 1) {
+            this.m = "";
+            // 定义一个定时器5秒后跳转首页
+            let abc = setInterval(() => {
+              this.time--;
+              // 判断5秒后跳转首页，并且同时清除定时器
+              if (this.time == 0) {
+                clearInterval(abc);
+                this.index();
+              }
+            }, 1000);
+          } else {
+            this.$message.error("注册失败");
+          }
         });
-        this.$router.push("/");
       } else {
         this.$message.error("注册失败，密码或用户名错误");
       }
+    },
+
+    index() {
+      this.$router.push("/");
     },
   },
 };

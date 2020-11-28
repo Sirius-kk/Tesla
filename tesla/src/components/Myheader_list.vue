@@ -202,7 +202,7 @@ export default {
       this.$router.push("/");
     },
     input_Show() {
-      if(this.input_show == false) {
+      if (this.input_show == false) {
         this.input_show = true;
         document.getElementsByClassName("search1")[0].style.width = "220px";
       }
@@ -210,17 +210,17 @@ export default {
     /* 跳轉主頁 */
     /* 一級導航跳轉 */
     jumpList(e) {
-      if( e.target.className == "activity" ){
+      if (e.target.className == "activity") {
         this.$router.push("/pro_alist");
-      } else if( e.target.className == "charge" ) {
+      } else if (e.target.className == "charge") {
         this.$router.push("/pro_clist");
-      } else if( e.target.className == "part" ) {
+      } else if (e.target.className == "part") {
         this.$router.push("/pro_plist");
-      } else if( e.target.className == "dress" ) {
+      } else if (e.target.className == "dress") {
         this.$router.push("/pro_dlist");
-      } else if( e.target.className == "surround" ) {
+      } else if (e.target.className == "surround") {
         this.$router.push("/pro_slist");
-      } 
+      }
     },
     /* 一級導航跳轉 */
     /* 二級導航跳轉 */
@@ -228,9 +228,8 @@ export default {
     /* 二級導航跳轉 */
     /* 登錄跳轉 */
     login() {
-      // this.$router.push();
-      console.log("登錄跳轉");
-    }
+      this.$router.push("/log");
+    },
     /* 登錄跳轉 */
   },
 };
@@ -238,7 +237,7 @@ export default {
 
 <style scoped>
 /* 整体样式开始 */
-.head_list{
+.head_list {
   height: 58px;
   width: 100%;
   position: fixed;
@@ -264,7 +263,10 @@ export default {
 .el-row {
   min-width: 1100px;
 }
-li,p,h1,.left {
+li,
+p,
+h1,
+.left {
   cursor: pointer;
 }
 /* 整体样式结束 */
@@ -375,16 +377,18 @@ li,p,h1,.left {
   width: 21px;
   margin-bottom: 4px;
 }
-.shopping,.search {
+.shopping,
+.search {
   position: relative;
 }
-.shopping div,.search img {
+.shopping div,
+.search img {
   position: absolute;
-} 
+}
 .search1 {
   width: 44px;
   height: 50px;
-  transition: width .3s;
+  transition: width 0.3s;
   overflow: hidden;
 }
 .search input {
@@ -398,11 +402,11 @@ li,p,h1,.left {
   top: 19px;
   right: 10px;
   z-index: 5;
-} 
+}
 .shopping div {
   width: 15px;
   height: 15px;
-  background:#000;
+  background: #000;
   box-sizing: border-box;
   padding-left: 4px;
   border-radius: 50%;

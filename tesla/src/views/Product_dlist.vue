@@ -44,6 +44,7 @@
     </div>
     <!-- 一级标题+容器结束 -->
     <!-- 页面结束 -->
+    <my-footer></my-footer>
   </div>
 </template>
 <style scoped>

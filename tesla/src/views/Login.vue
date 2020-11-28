@@ -1,56 +1,54 @@
 <template>
-  <div id="app">
-    <div id="mid">
-      <div id="head">Tesla账号登录</div>
-      <div id="body">
-        <div class="body-user">
-          <el-input
-            class="username"
-            placeholder="用户名"
-            v-model="username"
-            clearable
-            @blur.native.capture="checkUsername"
-          >
-          </el-input>
-          <span
-            style="float: right; clear: both; color: red"
-            :style="{ display: a }"
-            >用户名格式错误</span
-          >
-        </div>
-        <div class="body-pwd">
-          <el-input
-            class="password"
-            placeholder="密码"
-            v-model="password"
-            show-password
-            @blur.native.capture="checkPassword"
-          ></el-input>
-          <span
-            style="float: right; clear: both; color: red"
-            :style="{ display: b }"
-            >密码格式错误</span
-          >
-        </div>
-        <!-- <div class="login-else">
+  <div>
+    <div>
+      <div id="mid">
+        <div id="head">Tesla账号登录</div>
+        <div id="body">
+          <div class="body-user">
+            <el-input
+              class="username"
+              placeholder="用户名"
+              v-model="username"
+              clearable
+              @blur.native.capture="checkUsername"
+            >
+            </el-input>
+          </div>
+          <div class="body-pwd">
+            <el-input
+              class="password"
+              placeholder="密码"
+              v-model="password"
+              show-password
+              @blur.native.capture="checkPassword"
+            ></el-input>
+          </div>
+          <!-- <div class="login-else">
             <span id="login-else-click">短信验证码登录</span>
           </div> -->
-        <div class="login-btn">
-          <el-button class="btn" type="primary" @click="login">登录</el-button>
-        </div>
-        <div class="link-btn">
-          <div id="sp">
-            <router-link id="sp1" to="/reg">注册</router-link>
-            <span id="sp2">|</span>
-            <span id="sp3">忘记密码</span>
+          <div class="login-btn">
+            <el-button class="btn" type="primary" @click="login"
+              >登录</el-button
+            >
+          </div>
+          <div class="link-btn">
+            <div id="sp">
+              <router-link id="sp1" to="/reg">注册</router-link>
+              <span id="sp2">|</span>
+              <span id="sp3">忘记密码</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <my-footer></my-footer>
+    <div class="div--1"><my-footer></my-footer></div>
   </div>
 </template>
 <style scoped>
+.div--1 {
+  position: relative;
+  top: 50px;
+}
 #mid {
   width: 800px;
   height: 760px;
@@ -162,7 +160,6 @@
   color: #007dff;
   cursor: pointer;
 }
-
 </style>
 <script>
 export default {
@@ -170,8 +167,6 @@ export default {
     return {
       username: "",
       password: "",
-      a: "none",
-      b: "none",
     };
   },
   methods: {
@@ -180,10 +175,8 @@ export default {
       let uname = this.username;
       let usernameReg = /^[0-9a-zA-Z]{6,12}$/;
       if (usernameReg.test(uname)) {
-        this.a = "none";
         return true;
       } else {
-        this.a = "";
         //终止函数的执行
         return false;
       }
@@ -193,22 +186,25 @@ export default {
       let upwd = this.password;
       let passwordReg = /^[0-9A-Za-z\.\-_]{8,16}$/;
       if (passwordReg.test(upwd)) {
-        this.b = "none";
         return true;
       } else {
-        this.b = "";
         return false;
       }
     },
+    //登录
     login() {
-      if (this.checkUsername() && this.checkPassword()) {
-        this.$message({
-          message: "恭喜您，登陆成功",
-          type: "success",
-        });
-      } else {
-        this.$message.error("登录失败，密码或用户名错误");
-      }
+      // 保存参数变量str中
+      let str = "username=" + this.username + "&password=" + this.password;
+      // 用post发送请求
+      this.axios.post("/user/login", str).then((res) => {
+        if (res.data.code == 1) {
+          // 如果后台响应一弹出登陆成功 并跳转首页
+          this.$message.success("登录失败，用户名或密码错误");
+          this.$router.push("/");
+        } else {
+          this.$message.error("登录失败，用户名或密码错误");
+        }
+      });
     },
   },
 };

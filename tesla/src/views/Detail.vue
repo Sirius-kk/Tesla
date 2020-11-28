@@ -14,7 +14,7 @@
       <div class="right">
         <div class="title">
           <span>{{ data.title }}</span>
-          <p>¥ {{ data.price }}</p>
+          <p>¥ {{ data.price * num }}</p>
         </div>
         <div v-if="data.tp != null">
           <el-select v-model="value" placeholder="请选择">
@@ -69,6 +69,7 @@
         <div class="div_2" v-html="data.ds"></div>
       </div>
     </div>
+    <my-footer></my-footer>
   </div>
 </template>
 <style  scoped>
@@ -190,7 +191,7 @@ export default {
       data: [],
       image: [],
       img: [],
-      pro_detail: '',
+      pro_detail: "",
       value: "1",
     };
   },

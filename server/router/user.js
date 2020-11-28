@@ -9,43 +9,47 @@ const pool = require('../pool.js');//引入上一级目录下的pool.js
 
 /* **************************接口配置***************************** */
 /* ***************************用户注册 */   /* 用戶名還是手機號和郵箱?????? */
-r.post("/userReg",(req,res) => {
-//获取用户名和密码
-  let username = req.body.username;
-  let password = req.body.password;
-  //查找用户是否存在
-  let sql = 'SELECT uid FROM ts_user WHERE username=?';
-  pool.query(sql, [username], (error, result) => {
-    if (error) throw error;
-    //如果用户不存在,则插入记录
-    if (result.length == 0) {
-      sql = 'INSERT INTO ts_user(username,password) VALUES(?,MD5(?))';
-      pool.query(sql, [username, password], (error, result) => {
-        if (error) throw error;
-        res.send({code: 1 });
-      })
-    } else { //否则产生合理的错误提示
-      res.send({code: 0 });
-    }
-  })
-});
+/* 用户名失去焦点是验证用户名 */ 
+r.get("/reguname",(req,res)=>{
+    let uname=req.query.uname;
+    let sql=`SELECT COUNT(uid) AS count FROM ts_user WHERE uname=?`;
+    pool.query(sql,[uname],(err,result)=>{
+      if (err)throw err;
+      if (result[0].count == 0){
+        res.send({code:0})
+      }else
+      {res.send({code:1})}
+    });
+  });
+  /* 用户注册 */
+  r.post("/reglogin",(req,res)=>{
+    let username=req.body.username;
+    let password=req.body.password;
+    let sql='INSERT INTO ts_user(uname,upwd) VALUES(?,MD5(?))'
+    pool.query(sql,[username,password],(err,result)=>{
+      if(err) throw err;
+     if(result.affectedRows>0){
+       res.send({code:1});
+     }else{
+       res.send({code:0});
+     };
+    });
+  });
 /* ***************************用户注册 */
 /* ***************************用户登录 */
-r.post("/userLog",(req,res) => {
-  //获取用户名和密码
-  let username = req.body.username;
-  let password = req.body.password;
-  //以用户名和密码为条件进行查找
-  let sql = 'SELECT uid,uname,phone,email,avatar,gender FROM ts_user WHERE username=? AND password=MD5(?)';
-  pool.query(sql, [username, password], (error, result) => {
-    if (error) throw error;
-    if (result.length == 0) {
-      res.send({ code: 0 });
-    } else {
-      res.send({code: 1, userInfo: result[0]});
-    }
+r.post("/login",(req,res)=>{
+    let username=req.body.username;
+    let password=req.body.password;
+    let sql='SELECT uid FROM ts_user WHERE uname=? AND upwd=MD5(?)';
+    pool.query(sql,[username,password],(err,result)=>{
+      if (err) throw err;
+        if(result.length>0){
+          res.send({code:1,result:result});
+        }else{
+          res.send({code:0});
+        };
+    });
   });
-});
 /* ***************************用户登录 */
 /* **************************接口配置***************************** */
 
