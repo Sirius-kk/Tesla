@@ -31,30 +31,30 @@
         <!-- 新增地址内容区 开始 -->
         <div>
           <!-- 标题 开始 -->
-          <div class="address_title">收货地址</div>
+          <div class="title">收货地址</div>
           <!-- 标题 结束 -->
           <!-- 地址内容 开始 -->
           <div class="address_cont">
             <!-- 地址显示内容 开始 -->
             <div
-              v-for="(item, index) of adr"
-              :key="index"
+              v-for="(item1, index1) of adrs"
+              :key="index1"
               class="new_address"
               v-show="true"
             >
               <!-- 循环生成部分: 如果数组为空则不显示,数组有内容则显示 -->
               <!-- 地址标题 开始 -->
               <div class="add_top">
-                <div>{{ item.name }}</div>
-                <div>{{ item.phone }}</div>
+                <div>{{ item1.name }}</div>
+                <div>{{ item1.phone }}</div>
               </div>
               <!-- 地址标题 结束 -->
               <!-- 详细地址 开始 -->
               <div>
-                <div>{{ item.province }}</div>
-                <div>{{ item.city }}</div>
-                <div>{{ item.area }}</div>
-                <div>{{ item.detail }}</div>
+                <div>{{ item1.province }}</div>
+                <div>{{ item1.city }}</div>
+                <div>{{ item1.area }}</div>
+                <div>{{ item1.detail }}</div>
               </div>
               <!-- 详细地址 结束 -->
             </div>
@@ -75,61 +75,47 @@
       <!-- 主体上部 -- 新增地址  结束 -->
       <!-- 主体中部 -- 商品信息  开始 -->
       <div class="body_middle">
-        <!-- 左侧部分 开始 -->
+        <!-- 商品部分 开始 -->
         <div class="middle_left body_cont">
-          <!-- 购物车内商品信息 开始 -->
-          <div class="left_cont">
+          <!-- 商品信息标题 开始 -->
+          <div class="title">商品信息</div>
+          <!-- 商品信息标题 结束 -->
+          <!-- 购物车内商品信息 开始  (循环生成商品的部分)-->
+          <div
+            class="left_cont"
+            v-for="(item2, index2) of pro_details"
+            :key="index2"
+          >
             <!-- 商品信息 开始 -->
             <div class="cont_top">
-              <div class="img">
-                图片
-                <!-- <img src="" alt=""> -->
+              <div class="pro_img">
+                <img :src="item2.img" alt="" />
               </div>
-              <div>商品名称</div>
-              <div>数量</div>
-              <div>价格</div>
+              <div class="pro_name">{{ item2.title }}</div>
+              <div class="pro_num">× {{ item2.count }}</div>
+              <div class="pro_price">¥ {{ item2.price }}</div>
+              <div class="pro_subtotal">小计: ¥ {{ item2.subtotal }}</div>
             </div>
             <!-- 商品信息 开始 -->
             <!-- 分割线 开始 -->
             <el-divider></el-divider>
-            <!-- 分割线 结束 -->
-            <!-- 发票信息 开始 -->
-            <div class="cont_bottom">
-              <div>发票信息</div>
-              <div>信息提示</div>
-            </div>
-            <!-- 发票信息 结束 -->
           </div>
           <!-- 购物车内商品信息 结束 -->
         </div>
-        <!-- 左侧部分 结束 -->
-        <!-- 右侧部分 开始 -->
-        <div class="middle_right body_cont">
-          <div class="right_top">商品由华为商城选择合作快递</div>
-          <div class="right_bottom">
-            <div class="r_bottom_left">
-              <div>商品总金额:</div>
-              <div>运费:</div>
-              <div>优惠金额:</div>
-              <div>结算金额:</div>
-            </div>
-            <div class="r_bottom_right">
-              <div>¥ 1</div>
-              <div>¥ 2</div>
-              <div>¥ 3</div>
-              <div>¥ 4</div>
-            </div>
-          </div>
-        </div>
-        <!-- 右侧部分 结束 -->
+        <!--商品部分 结束 -->
       </div>
       <!-- 主体中部 -- 商品信息  结束 -->
       <!-- 主体下部 -- 提交订单  开始 -->
-      <div class="body_bottom">
+      <div class="body_bottom body_cont">
+        <!-- 提交订单标题 开始 -->
+        <div class="title">提交订单</div>
+        <!-- 提交订单标题 开始 -->
         <!-- 提交主体 开始 -->
-        <div>
-          <div>应付金额: <span></span></div>
-          <div>地址为空的提示</div>
+        <div class="bottom_body">
+          <div>
+            应付金额 : <span>¥ {{ total }}</span>
+          </div>
+          <div v-show="true">地址为空的提示</div>
           <div>
             <button>提交订单</button>
           </div>
@@ -157,11 +143,11 @@
   padding: 6px 8px;
 }
 .body_cont {
-  padding: 18px 25px 22px;
+  padding: 32px 25px;
   margin-bottom: 15px;
   border-radius: 5px;
 
-  background: #f00;
+  background: #f6f2f2;
 }
 /* 整体样式 结束 */
 /* 头部样式 开始 */
@@ -194,9 +180,8 @@
 /* 头部样式 结束 */
 /* 主体部分 开始 */
 /* 主体上部 开始 */
-.address_title {
+.title {
   padding-bottom: 15px;
-  text-align: center;
   font-size: 22px;
 }
 .address_cont {
@@ -222,33 +207,70 @@
 .address_add button {
   width: 220px;
   height: 114px;
-  background: #f00;
+  background: #f6f2f2;
   border: 2px dotted;
   border-radius: 5px;
 }
 /* 主体上部 结束 */
 /* 主体中部 开始 */
 .middle_left {
-  width: 65%;
+  width: 100%;
+  box-sizing: border-box;
 }
-.middle_right {
+/* .middle_right {
   width: 35%;
-}
-.body_middle {
-  display: flex;
-  justify-content: space-between;
-}
+} */
 .cont_top {
   display: flex;
+  justify-content: space-around;
+  text-align: center;
 }
-.img {
-  width: 50px;
-  height: 50px;
+.cont_top > div:not(:first-child) {
+  line-height: 89px;
+}
+.pro_img {
+  width: 20%;
+  background: #0aa1ed;
+}
+.pro_img img {
+  height: 90px;
+}
+.pro_name {
+  width: 40%;
+  background: #eaa1ed;
+}
+.pro_num {
+  width: 13.3333%;
+  background: #8aa1ed;
+}
+.pro_price {
+  width: 13.3333%;
+  background: #caa1ed;
+}
+.pro_subtotal {
+  width: 13.3333%;
+  background: #caffed;
+  font-size: 16px;
+  font-weight: 600;
 }
 .el-divider--horizontal {
-  margin: 12px 0;
+  margin: 12px 0 12px;
 }
 /* 主体中部 结束 */
+/* 主体西部 开始 */
+.bottom_body > div:not(:last-child) {
+  margin-bottom: 12px;
+}
+.bottom_body {
+  text-align: right;
+  font-size: 16px;
+}
+.bottom_body span {
+  font-size: 18px;
+  font-weight: 700;
+  color: #f00;
+}
+/* 主体西部 结束 */
 /* 主体部分 结束 */
 </style>
 <script>
@@ -256,7 +278,8 @@ export default {
   data() {
     return {
       step: 0,
-      adr: [
+      /* 用户的地址容器 (有默认地址为默认地址,否则显示实时生成地址) */
+      adrs: [
         {
           name: "清欢",
           phone: "18020029511",
@@ -274,6 +297,27 @@ export default {
           detail: "徐汇公寓15栋",
         },
       ],
+      /* 商品详情容器(展示用户购物车提交的商品) */
+      pro_details: [
+        {
+          img:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606554734452&di=e8cfc64f4ca13d8bb2013a408b7b39d2&imgtype=0&src=http%3A%2F%2Fcdnimg103.lizhi.fm%2Falbum_cover%2F2015%2F01%2F05%2F17044033086163356_320x320.png",
+          title: "Tesla S 超级无敌跑车",
+          count: 2,
+          price: 800,
+          subtotal: 1600,
+        },
+        {
+          img:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606554734452&di=e8cfc64f4ca13d8bb2013a408b7b39d2&imgtype=0&src=http%3A%2F%2Fcdnimg103.lizhi.fm%2Falbum_cover%2F2015%2F01%2F05%2F17044033086163356_320x320.png",
+          title: "Tesla S 超级无敌跑车",
+          count: 2,
+          price: 800,
+          subtotal: 1600,
+        },
+      ],
+      /* 最终总价 */
+      total: "3200",
     };
   },
   methods: {
