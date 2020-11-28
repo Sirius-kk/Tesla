@@ -137,63 +137,75 @@
     <!-- secendStep 确认支付 开始 -->
     <div v-else-if="completeOrder == 2" class="cont">
       <!-- second 主体部分 开始 -->
-      <div class="pay_cont">
+      <div class="pay_cont body_cont">
         <!-- 提交成功提示 成功 -->
-        <div>
+        <div class="submit_tip">
           <!-- 图标 开始 -->
           <div>
             <img src="../assets/imgs/correct.svg" alt="" />
           </div>
           <!-- 图标 结束 -->
           <!-- 提示文字 开始 -->
-          <div>订单提交成功，只剩付款了 ~</div>
+          <div class="submit_text">订单提交成功，只剩付款了 ~</div>
           <!-- 提示文字 结束 -->
         </div>
         <!-- 提交成功提示 结束 -->
         <!-- 支付主体 开始 -->
-        <div>
+        <div class="pay_content">
           <!-- 订单号 开始 -->
           <div>
-            订单号: <span>{{ order_num }}</span>
+            订单号 : <span>{{ order_num }}</span>
           </div>
           <!-- 订单号 结束 -->
           <!-- 时间提示 开始 -->
           <div>
-            请在<span>{{ order_time }}</span
-            >内完成支付，否则订单将自动取消
+            <span>{{ order_time }}</span
+            >后订单将自动取消
           </div>
           <!-- 时间提示 结束 -->
           <!-- 支付按钮 开始 -->
-          <div>确认提交</div>
+          <div class="submit_btn"><button>确认提交</button></div>
           <!-- 支付按钮 结束 -->
+          <!-- 订单详情按钮 开始 -->
+          <div class="order_detail">订单详情</div>
+          <!-- 订单详情按钮 结束 -->
         </div>
         <!-- 支付主体 开始 -->
       </div>
       <!-- second 主体部分 结束 -->
       <!-- second 收货提示部分 开始 -->
-      <div>
+      <div class="recive_tip" v-show="tip_show">
         <!-- 收货人信息 开始 -->
-        <div>
+        <div class="recive_man">
+          <!-- 收货人信息标题 开始 -->
           <div class="recive_title">收货信息</div>
+          <!-- 收货人信息标题 结束 -->
+          <!-- 收货人内容 开始 -->
           <div class="recive_body">
-            <div>{{ reciveMan }}</div>
-            <div>{{ recivePhone }}</div>
+            <div>收货人 : {{ reciveMan }}</div>
+            <div>联系方式 : {{ recivePhone }}</div>
           </div>
+          <!-- 收货人内容 结束 -->
         </div>
         <!-- 收货人信息 结束 -->
         <div></div>
         <!-- 分割线 -->
         <!-- 购买商品信息 开始 -->
-        <div>
-          <!--  -->
+        <div class="recive_pro">
+          <!-- 商品信息标题 开始 -->
+          <div class="recive_title">商品信息</div>
+          <!-- 商品信息标题 结束 -->
+          <!-- 商品信息内容 开始 -->
+          <div class="recive_body">{{ pro_title }}</div>
+          <!-- 商品信息内容 结束 -->
         </div>
         <!-- 购买商品信息 结束 -->
         <div></div>
         <!-- 分割线 -->
         <!-- 购买时间信息 开始 -->
-        <div>
-          <div class="time_title">购买时间</div>
-          <div class="time_body">{{ timeBuy }}</div>
+        <div class="recive_time">
+          <div class="recive_title">购买时间</div>
+          <div class="recive_body">{{ timeBuy }}</div>
         </div>
         <!-- 购买时间信息 结束 -->
       </div>
@@ -204,7 +216,9 @@
     <div v-else></div>
     <!-- thirdStep 支付完成 结束 -->
     <!-- 尾部开始 -->
-    <my-footer></my-footer>
+    <div id="footer">
+      <my-footer class="footer"></my-footer>
+    </div>
     <!-- 尾部结束 -->
   </div>
 </template>
@@ -247,16 +261,17 @@
 }
 .head_left div {
   padding-left: 15px;
-  padding-top: 21px;
+  padding-top: 18px;
   color: #1c1c25;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 700;
 }
 .head_right > div {
   width: 300px;
   margin-top: 5px;
 }
 /* 头部样式 结束 */
-/* 主体部分 开始 */
+/* firstStep 主体部分 开始 */
 /* 主体上部 开始 */
 .title {
   padding-bottom: 15px;
@@ -335,7 +350,7 @@
   margin: 12px 0 12px;
 }
 /* 主体中部 结束 */
-/* 主体西部 开始 */
+/* 主体下部 开始 */
 .bottom_body > div:not(:last-child) {
   margin-bottom: 12px;
 }
@@ -381,8 +396,87 @@
 .bottom_body button:active {
   background: #666;
 }
-/* 主体西部 结束 */
-/* 主体部分 结束 */
+/* 主体下部 结束 */
+/* firstStep 主体部分 结束 */
+/* secondStep 主体部分 开始 */
+.pay_cont {
+  width: 45%;
+  margin: 0 auto;
+}
+.submit_tip {
+  display: flex;
+  justify-content: center;
+}
+.submit_tip img {
+  width: 72px;
+}
+.submit_text {
+  margin-left: 10px;
+  line-height: 72px;
+  font-size: 24px;
+  color: #241313;
+}
+.pay_content {
+  padding-top: 35px;
+  text-align: center;
+  font-size: 16px;
+}
+.pay_content > div:not(:last-child) {
+  margin-bottom: 20px;
+}
+.submit_btn button {
+  padding: 10px 32px;
+  border-radius: 5px;
+  outline: 0;
+  border: 2px solid #9a8f8f;
+  font-size: 16px;
+  font-weight: 600;
+  color: #4c2a2a;
+}
+.submit_btn button:active {
+  background: #666;
+}
+.order_detail {
+  text-align: right;
+  margin-top: 25px;
+  padding-right: 55px;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+}
+.recive_tip {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 15px;
+}
+.recive_man,
+.recive_time {
+  width: 30%;
+  background: forestgreen;
+}
+.recive_pro {
+  width: 40%;
+  background: fuchsia;
+}
+.recive_title {
+  padding: 24px 0 18px;
+  font-size: 16px;
+  font-weight: 700;
+  border-bottom: 2px solid #8d8686;
+}
+.recive_body {
+  padding: 45px;
+  box-sizing: border-box;
+}
+/* secondStep 主体部分 结束 */
+#footer {
+  position: fixed;
+  bottom: 0;
+}
+.footer {
+  width: 100%;
+}
 </style>
 <script>
 export default {
@@ -390,9 +484,10 @@ export default {
     return {
       /* 确认订单三步走 */
       // completeOrder: 1,
-      completeOrder: 1,
+      completeOrder: 2,
       /* 头部订单序号三步走 */
       step: 0,
+      // firstStep 开始
       /* 用户的地址容器 (有默认地址为默认地址,否则显示实时生成地址) */
       adrs: [
         {
@@ -433,6 +528,23 @@ export default {
       ],
       /* 最终总价 */
       total: "3200",
+      // firstStep 开始
+      // secendStep 开始
+      /* 订单号 */
+      order_num: "1234567890",
+      /* 订单持续时间 */
+      order_time: "2:00:00",
+      /* 收货人信息 */
+      reciveMan: "黄经理",
+      /* 收货信息详情 */
+      recivePhone: "4399678",
+      /* 商品内容信息 */
+      pro_title: "Tesla S 超级无敌跑车",
+      /* timeBuy */ 
+      timeBuy: "2020年11月28号",
+      /* 订单详情 */
+      tip_show: true,
+      // secendStep 结束
     };
   },
   methods: {
