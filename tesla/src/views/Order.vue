@@ -167,7 +167,7 @@
           <div class="submit_btn"><button>确认提交</button></div>
           <!-- 支付按钮 结束 -->
           <!-- 订单详情按钮 开始 -->
-          <div class="order_detail">订单详情</div>
+          <div class="order_detail" @click="orderShow">订单详情</div>
           <!-- 订单详情按钮 结束 -->
         </div>
         <!-- 支付主体 开始 -->
@@ -175,39 +175,43 @@
       <!-- second 主体部分 结束 -->
       <!-- second 收货提示部分 开始 -->
       <div class="recive_tip" v-show="tip_show">
-        <!-- 收货人信息 开始 -->
-        <div class="recive_man">
-          <!-- 收货人信息标题 开始 -->
-          <div class="recive_title">收货信息</div>
-          <!-- 收货人信息标题 结束 -->
-          <!-- 收货人内容 开始 -->
-          <div class="recive_body">
-            <div>收货人 : {{ reciveMan }}</div>
-            <div>联系方式 : {{ recivePhone }}</div>
+        <div class="recive_container body_cont">
+          <!-- 收货信息标题 开始 -->
+          <div class="recive_title">
+            <!-- 收货人信息标题 开始 -->
+            <div class="">收货信息</div>
+            <!-- 收货人信息标题 结束 -->
+            <!-- 商品信息标题 开始 -->
+            <div class="">商品信息</div>
+            <!-- 商品信息标题 结束 -->
+            <!-- 购买时间信息 开始 -->
+            <div class="">购买时间</div>
+            <!-- 购买时间信息 结束 -->
           </div>
-          <!-- 收货人内容 结束 -->
+          <!-- 收货信息标题 结束 -->
+          <!-- 收货信息详情 开始 -->
+          <div class="recive_detail">
+            <div class="">
+              <div>收货人 : {{ reciveMan }}</div>
+              <div>联系方式 : {{ recivePhone }}</div>
+            </div>
+            <!-- 商品信息内容 开始 -->
+            <div class="">
+              <div
+                class="recive_body"
+                v-for="(item3, index3) of pro_title"
+                :key="index3"
+              >
+                {{ item3 }}
+              </div>
+            </div>
+            <!-- 商品信息内容 结束 -->
+            <div class="">
+              <div class="recive_body">{{ timeBuy }}</div>
+            </div>
+          </div>
+          <!-- 收货信息详情 结束 -->
         </div>
-        <!-- 收货人信息 结束 -->
-        <div></div>
-        <!-- 分割线 -->
-        <!-- 购买商品信息 开始 -->
-        <div class="recive_pro">
-          <!-- 商品信息标题 开始 -->
-          <div class="recive_title">商品信息</div>
-          <!-- 商品信息标题 结束 -->
-          <!-- 商品信息内容 开始 -->
-          <div class="recive_body">{{ pro_title }}</div>
-          <!-- 商品信息内容 结束 -->
-        </div>
-        <!-- 购买商品信息 结束 -->
-        <div></div>
-        <!-- 分割线 -->
-        <!-- 购买时间信息 开始 -->
-        <div class="recive_time">
-          <div class="recive_title">购买时间</div>
-          <div class="recive_body">{{ timeBuy }}</div>
-        </div>
-        <!-- 购买时间信息 结束 -->
       </div>
       <!-- second 收货提示部分 结束 -->
     </div>
@@ -291,7 +295,7 @@
   padding: 15px 20px;
   width: 220px;
   border: 2px solid;
-  box-sizing: border-box;
+
   border-radius: 5px;
 }
 .add_top {
@@ -401,7 +405,7 @@
 /* secondStep 主体部分 开始 */
 .pay_cont {
   width: 45%;
-  margin: 0 auto;
+  margin: 75px auto 0;
 }
 .submit_tip {
   display: flex;
@@ -445,30 +449,60 @@
   cursor: pointer;
 }
 .recive_tip {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
+  margin: 0 auto;
   margin-top: 15px;
+  width: 850px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
-.recive_man,
-.recive_time {
+.recive_title > div,
+.recive_detail > div {
   width: 30%;
-  background: forestgreen;
 }
-.recive_pro {
+.recive_detail > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #241313;
+}
+.recive_detail > div > div {
+  padding: 4px 0;
+}
+.recive_title > div:nth-child(2),
+.recive_detail > div:nth-child(2) {
   width: 40%;
-  background: fuchsia;
+}
+.recive_title,
+.recive_detail {
+  display: flex;
+  justify-content: space-around;
+}
+.recive_detail {
+  padding-top: 15px;
 }
 .recive_title {
-  padding: 24px 0 18px;
-  font-size: 16px;
+  padding: 10px 10px 25px 10px;
+  border-bottom: 2px solid #cac5c5;
+  font-size: 18px;
   font-weight: 700;
-  border-bottom: 2px solid #8d8686;
 }
-.recive_body {
-  padding: 45px;
-  box-sizing: border-box;
+.recive_title > div:even {
+  background: #f00;
 }
+/* 订单详情的下拉效果 开始 */
+.recive_container {
+  position: absolute;
+  top: -244px;
+  left: 0;
+  width: 850px;
+  transition: top 0.5s;
+}
+.recive_container.on {
+  top: 0px;
+}
+
+/* 订单详情的下拉效果 开始 */
 /* secondStep 主体部分 结束 */
 #footer {
   position: fixed;
@@ -484,7 +518,7 @@ export default {
     return {
       /* 确认订单三步走 */
       // completeOrder: 1,
-      completeOrder: 2,
+      completeOrder: 1,
       /* 头部订单序号三步走 */
       step: 0,
       // firstStep 开始
@@ -539,9 +573,15 @@ export default {
       /* 收货信息详情 */
       recivePhone: "4399678",
       /* 商品内容信息 */
-      pro_title: "Tesla S 超级无敌跑车",
-      /* timeBuy */ 
-      timeBuy: "2020年11月28号",
+      pro_title: [
+        "Tesla S 超级无敌跑车",
+        "Tesla S 超级无敌跑车",
+        "Tesla S 超级无敌跑车",
+        "Tesla S 超级无敌跑车",
+        "Tesla S 超级无敌跑车",
+      ],
+      /* timeBuy */
+      timeBuy: "2020年11月28号14:25:30",
       /* 订单详情 */
       tip_show: true,
       // secendStep 结束
@@ -551,6 +591,37 @@ export default {
     nextStep() {
       this.step = 1;
       this.completeOrder = 2;
+    },
+    /* 下拉详情 */
+    orderShow() {
+      if (this.completeOrder == 2) {
+        /* 解决因为绝对定位而导致的父元素高度缺失和宽度问题 */
+        let reciveTitleHeight = document.getElementsByClassName(
+          "recive_title"
+        )[0].offsetHeight;
+        let reciveDetailHeight = document.getElementsByClassName(
+          "recive_detail"
+        )[0].offsetHeight;
+        let reciveContainerHeight = reciveTitleHeight + reciveDetailHeight;
+        document.getElementsByClassName("recive_container")[0].style.height =
+          reciveContainerHeight + "px";
+        /* 让动态容器高度和被绝对定位的父元素高度一样 */
+        document.getElementsByClassName("recive_tip")[0].style.height =
+          document.getElementsByClassName("recive_container")[0].offsetHeight +
+          "px";
+        /* 让动态容器宽度和被绝对定位的父元素宽度一样 */
+        document.getElementsByClassName("recive_tip")[0].style.width =
+          document.getElementsByClassName("recive_container")[0].offsetWidth +
+          "px";
+      }
+      let reciveContainer = document.getElementsByClassName(
+        "recive_container"
+      )[0];
+      if (reciveContainer.className == "recive_container body_cont") {
+        reciveContainer.className = "recive_container body_cont on";
+      } else {
+        reciveContainer.className = "recive_container body_cont";
+      }
     },
   },
   mounted() {},
