@@ -124,7 +124,7 @@
               </div>
             </div>
             <div>
-              <button @click="nextStep">提交订单</button>
+              <button @click="nextStep1">提交订单</button>
             </div>
           </div>
           <!-- 提交主体 结束 -->
@@ -157,6 +157,11 @@
             订单号 : <span>{{ order_num }}</span>
           </div>
           <!-- 订单号 结束 -->
+          <!-- 支付金额提醒 开始 -->
+          <div>
+            订单金额 : <span>{{ total }}</span>
+          </div>
+          <!-- 支付金额提醒 结束 -->
           <!-- 时间提示 开始 -->
           <div>
             <span>{{ order_time }}</span
@@ -164,7 +169,9 @@
           </div>
           <!-- 时间提示 结束 -->
           <!-- 支付按钮 开始 -->
-          <div class="submit_btn"><button>确认提交</button></div>
+          <div class="submit_btn">
+            <button @click="nextStep2">确认支付</button>
+          </div>
           <!-- 支付按钮 结束 -->
           <!-- 订单详情按钮 开始 -->
           <div class="order_detail" @click="orderShow">订单详情</div>
@@ -217,7 +224,26 @@
     </div>
     <!-- secendStep 确认支付 结束 -->
     <!-- thirdStep 支付完成 开始 -->
-    <div v-else></div>
+    <div v-else class="over">
+      <!-- 跳转提示 开始 -->
+      <div class="over_cont body_cont">
+        <!-- 跳转标题 开始 -->
+        <div>
+          <div>
+            <img src="../assets/imgs/correct.svg" alt="" />
+          </div>
+          <div class="submit_text">订单提交成功，只剩付款了 ~</div>
+        </div>
+        <!-- 跳转标题 结束 -->
+        <!-- 跳转主体 开始 -->
+        <div>
+          <div><span>{{ wait_time }}</span>后自动返回首页</div>
+          <div>返回首页</div>
+        </div>
+        <!-- 跳转主体 结束 -->
+      </div>
+      <!-- 跳转提示 结束 -->
+    </div>
     <!-- thirdStep 支付完成 结束 -->
     <!-- 尾部开始 -->
     <div id="footer">
@@ -501,9 +527,19 @@
 .recive_container.on {
   top: 0px;
 }
-
 /* 订单详情的下拉效果 开始 */
 /* secondStep 主体部分 结束 */
+/* thirdStep 开始 */
+.over {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 666;
+  background: rgba(00, 00, 00, 0.5);
+}
+/* thirdStep 结束 */
 #footer {
   position: fixed;
   bottom: 0;
@@ -585,12 +621,21 @@ export default {
       /* 订单详情 */
       tip_show: true,
       // secendStep 结束
+      // thirdStep 开始
+      wait_time: "10s"
+      // thirdStep 结束
     };
   },
   methods: {
-    nextStep() {
+    /* 从第一步到第二步 */
+    nextStep1() {
       this.step = 1;
       this.completeOrder = 2;
+    },
+    /* 从第一步到第二步 */
+    nextStep2() {
+      this.step = 2;
+      this.completeOrder = 3;
     },
     /* 下拉详情 */
     orderShow() {
