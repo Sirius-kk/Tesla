@@ -238,8 +238,7 @@
         <!-- 跳转主体 开始 -->
         <div class="overTip_cont">
           <div>
-            <span>{{ wait_time }}</span
-            > s后自动返回首页
+            <span>{{ wait_time }}</span> s后自动返回首页
           </div>
           <div class="overTip_footer">返回首页</div>
         </div>
@@ -547,6 +546,7 @@
   background: rgba(00, 00, 00, 0.5);
 }
 .over_cont {
+  width: 35%;
   position: absolute;
   top: 155px;
   left: 50%;
@@ -565,7 +565,7 @@
   flex-direction: column;
   align-items: center;
   font-size: 16px;
-  color:#3b3838;
+  color: #3b3838;
 }
 .overTip_cont > div:not(:first-child) {
   margin-top: 30px;
@@ -649,7 +649,7 @@ export default {
           count: 2,
           price: 800,
           subtotal: 1600,
-        },        
+        },
       ],
       /* 最终总价 */
       total: "3200",
@@ -690,7 +690,7 @@ export default {
       this.order_num = Math.ceil(Math.random() * 100000000000);
       /* 下单时间动态生成 */
       let order_time = new Date().toLocaleString();
-      this.timeBuy = order_time.replace(/\//g,"-");
+      this.timeBuy = order_time.replace(/\//g, "-");
       /* 结账倒计时 */
       // setInterval(,1000);
     },
@@ -698,6 +698,13 @@ export default {
     nextStep2() {
       this.step = 2;
       this.completeOrder = 3;
+      let timeF = setInterval(() => {
+        this.wait_time--;
+        if(this.wait_time == 0){
+          clearInterval(timeF);
+          // this.$routr.push("/");
+        }
+      },1000);
     },
     /* 下拉详情 */
     orderShow() {
@@ -731,6 +738,8 @@ export default {
       }
     },
   },
-  mounted() {},
+  mounted() {
+    
+  },
 };
 </script>
