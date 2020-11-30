@@ -228,17 +228,20 @@
       <!-- 跳转提示 开始 -->
       <div class="over_cont body_cont">
         <!-- 跳转标题 开始 -->
-        <div>
+        <div class="overTip_head">
           <div>
             <img src="../assets/imgs/correct.svg" alt="" />
           </div>
-          <div class="submit_text">订单提交成功，只剩付款了 ~</div>
+          <div class="submit_text">付款成功, 祝您生活愉快 ~</div>
         </div>
         <!-- 跳转标题 结束 -->
         <!-- 跳转主体 开始 -->
-        <div>
-          <div><span>{{ wait_time }}</span>后自动返回首页</div>
-          <div>返回首页</div>
+        <div class="overTip_cont">
+          <div>
+            <span>{{ wait_time }}</span
+            > s后自动返回首页
+          </div>
+          <div class="overTip_footer">返回首页</div>
         </div>
         <!-- 跳转主体 结束 -->
       </div>
@@ -426,6 +429,9 @@
 .bottom_body button:active {
   background: #666;
 }
+.body_bottom {
+  margin-bottom: 75px;
+}
 /* 主体下部 结束 */
 /* firstStep 主体部分 结束 */
 /* secondStep 主体部分 开始 */
@@ -527,7 +533,8 @@
 .recive_container.on {
   top: 0px;
 }
-/* 订单详情的下拉效果 开始 */
+
+/* 订单详情的下拉效果 结束 */
 /* secondStep 主体部分 结束 */
 /* thirdStep 开始 */
 .over {
@@ -538,6 +545,38 @@
   height: 100%;
   z-index: 666;
   background: rgba(00, 00, 00, 0.5);
+}
+.over_cont {
+  position: absolute;
+  top: 155px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.overTip_head {
+  display: flex;
+  justify-content: center;
+}
+.overTip_head img {
+  width: 72px;
+}
+.overTip_cont {
+  padding: 70px 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+  color:#3b3838;
+}
+.overTip_cont > div:not(:first-child) {
+  margin-top: 30px;
+}
+.overTip_cont span {
+  font-size: 30px;
+  color: #241313;
+}
+.overTip_footer {
+  text-decoration: underline;
+  cursor: pointer;
 }
 /* thirdStep 结束 */
 #footer {
@@ -595,6 +634,22 @@ export default {
           price: 800,
           subtotal: 1600,
         },
+        {
+          img:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606554734452&di=e8cfc64f4ca13d8bb2013a408b7b39d2&imgtype=0&src=http%3A%2F%2Fcdnimg103.lizhi.fm%2Falbum_cover%2F2015%2F01%2F05%2F17044033086163356_320x320.png",
+          title: "Tesla S 超级无敌跑车",
+          count: 2,
+          price: 800,
+          subtotal: 1600,
+        },
+        {
+          img:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606554734452&di=e8cfc64f4ca13d8bb2013a408b7b39d2&imgtype=0&src=http%3A%2F%2Fcdnimg103.lizhi.fm%2Falbum_cover%2F2015%2F01%2F05%2F17044033086163356_320x320.png",
+          title: "Tesla S 超级无敌跑车",
+          count: 2,
+          price: 800,
+          subtotal: 1600,
+        },        
       ],
       /* 最终总价 */
       total: "3200",
@@ -617,12 +672,12 @@ export default {
         "Tesla S 超级无敌跑车",
       ],
       /* timeBuy */
-      timeBuy: "2020年11月28号14:25:30",
+      timeBuy: "",
       /* 订单详情 */
       tip_show: true,
       // secendStep 结束
       // thirdStep 开始
-      wait_time: "10s"
+      wait_time: "5",
       // thirdStep 结束
     };
   },
@@ -631,8 +686,15 @@ export default {
     nextStep1() {
       this.step = 1;
       this.completeOrder = 2;
+      /* 订单号动态生成 */
+      this.order_num = Math.ceil(Math.random() * 100000000000);
+      /* 下单时间动态生成 */
+      let order_time = new Date().toLocaleString();
+      this.timeBuy = order_time.replace(/\//g,"-");
+      /* 结账倒计时 */
+      // setInterval(,1000);
     },
-    /* 从第一步到第二步 */
+    /* 从第二步到第三步 */
     nextStep2() {
       this.step = 2;
       this.completeOrder = 3;
