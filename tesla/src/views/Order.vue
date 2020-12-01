@@ -702,7 +702,7 @@ export default {
         this.wait_time--;
         if(this.wait_time == 0){
           clearInterval(timeF);
-          // this.$routr.push("/");
+          this.$router.push("/");
         }
       },1000);
     },
