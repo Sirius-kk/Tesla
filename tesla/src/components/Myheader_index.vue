@@ -42,7 +42,7 @@
         </div>
         <!-- 中间部分结束 -->
       </el-col>
-      <el-col :span="7" :offset="2">
+      <el-col :span="8" :offset="1">
         <!-- 右侧部分开始 -->
         <div class="right">
           <div class="shopping">
@@ -71,7 +71,14 @@
               placeholder="搜索"
             />
           </div>
-          <div @click="login">登录</div>
+          <div id="log" v-if="this.$store.state.isLogined == 1">
+            <router-link to="/userlist"
+              >您好,{{ this.$store.state.userInfo.uname }}</router-link
+            >
+            <span class="division">|</span>
+            <span @click="logout">注销</span>
+          </div>
+          <div @click="login" v-else>登录</div>
         </div>
         <!-- 右侧部分结束 -->
       </el-col>
@@ -270,7 +277,7 @@ export default {
       input_show: true,
       shop_car: true,
       search_s: true,
-      inp_value: ""
+      inp_value: "",
     };
   },
   methods: {
@@ -299,7 +306,7 @@ export default {
     /* 搜索商品 */
     input_Show() {
       // 獲取當前輸入框的值然後跳轉并傳值到search頁面
-      if(this.inp_value.length !=0 ) {
+      if (this.inp_value.length != 0) {
         this.$router.push(`/select/${this.inp_value}`);
       }
     },
@@ -322,8 +329,14 @@ export default {
     },
     /* 一級導航的跳轉 */
     /* 二級導航跳轉 */
-
+    // ******
     /* 二級導航跳轉 */
+    /* 注销 开始 */
+    logout() {
+      this.$store.commit("logout_out_mu");
+      localStorage.clear();
+    },
+    /* 注销 结束 */
     /* 登錄跳轉 */
     login() {
       this.$router.push("/log");
@@ -346,13 +359,16 @@ export default {
         headerEle.style.color = "#000";
         shopping_tipEle.style.background = "#000";
         shopping_tipEle.style.color = "#fff";
+        document.querySelector("a").style.color = "#000";
         this.search_s = false;
         this.shop_car = false;
+        
       } else {
         headerEle.style.background = "rgba(255,255,255,0)";
         headerEle.style.color = "#fff";
         shopping_tipEle.style.background = "#fff";
         shopping_tipEle.style.color = "#000";
+        document.querySelector("a").style.color = "#fff";
         this.search_s = true;
         this.shop_car = true;
       }
@@ -367,31 +383,40 @@ export default {
       headerEle.style.color = "#000";
       shopping_tipEle.style.background = "#000";
       shopping_tipEle.style.color = "#fff";
+      document.querySelector("a").style.color = "#000";
       this.search_s = false;
       this.shop_car = false;
     },
-    h_hide() {
-      let headerEle = document.getElementsByClassName("head_index")[0];
-      let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
-      document.getElementsByClassName("sousuo_inp")[0].style.color = "#fff";
-      headerEle.style.background = "rgba(255,255,255,0)";
-      shopping_tipEle.style.background = "#fff";
-      shopping_tipEle.style.color = "#000";
-      headerEle.style.color = "#fff";
-      this.search_s = true;
-      this.shop_car = true;
+    h_hide() {// 当滚动距离超过50px后，就不需要鼠标移出的隐藏了
+      // 获取超出页面上方的距离
+      let scrollTop =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      if( scrollTop <= 50 ){
+        let headerEle = document.getElementsByClassName("head_index")[0];
+        let shopping_tipEle = document.getElementsByClassName("shopping_tip")[0];
+        document.getElementsByClassName("sousuo_inp")[0].style.color = "#fff";
+        headerEle.style.background = "rgba(255,255,255,0)";
+        shopping_tipEle.style.background = "#fff";
+        shopping_tipEle.style.color = "#000";
+        headerEle.style.color = "#fff";
+        document.querySelector("a").style.color = "#fff";
+        this.search_s = true;
+        this.shop_car = true;
+      }
     },
     /* 頭部鼠標懸停顯示 */
   },
   mounted() {
     window.addEventListener("scroll", this.top_lable);
     console.log(document.getElementsByClassName("sousuo_inp")[0]);
-    document.getElementsByClassName("sousuo_inp")[0].addEventListener("keyup",e => {
-      console.log(12132546);
-      if(e.keyCode == 13) {
-        this.input_Show();
-      }
-    });
+    document
+      .getElementsByClassName("sousuo_inp")[0]
+      .addEventListener("keyup", (e) => {
+        console.log(12132546);
+        if (e.keyCode == 13) {
+          this.input_Show();
+        }
+      });
   },
   destroyed() {
     window.removeEventListener("scroll", this.top_lable);
@@ -415,7 +440,7 @@ export default {
 /* 设置公共头部整体高度 */
 .el-col-9,
 .el-col-6,
-.el-col-7 {
+.el-col-8 {
   height: 50px;
   line-height: 58px;
 }
@@ -538,6 +563,9 @@ h1,
 .right > div img {
   width: 21px;
   margin-bottom: 4px;
+}
+.right .division {
+  padding: 0 8px;
 }
 .shopping,
 .search {

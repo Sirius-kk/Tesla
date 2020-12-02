@@ -2,7 +2,7 @@
   <div class="contenter">
     <el-tabs v-model="activeName">
       <el-tab-pane label="个人资料" name="1">
-        <div class="div-1">您好，老王</div>
+        <div class="div-1">您好，{{ this.$store.state.userInfo.uname }}</div>
         <div class="div-2">
           <div class="div-2-1">
             <p style="color: #000; font-size: 24px">账户信息</p>
@@ -32,7 +32,7 @@
                     <div style="width: 250px">
                       <el-input
                         suffix-icon="el-icon-edit"
-                        :disabled="xiugai"
+                        :disabled="modify"
                         v-model="name"
                         placeholder="请输入内容"
                       ></el-input>
@@ -41,11 +41,14 @@
                   <div style="width: 50%">
                     <p style="margin-bottom: 10px; padding: 10px">性别</p>
                     <div style="margin-top: 25px">
-                      <el-radio v-model="size" :disabled="xiugai" label="1"
+                      <el-radio v-model="gender" :disabled="modify" label="1"
                         >男</el-radio
                       >
-                      <el-radio v-model="size" :disabled="xiugai" label="2"
+                      <el-radio v-model="gender" :disabled="modify" label="0"
                         >女</el-radio
+                      >
+                      <el-radio v-model="gender" :disabled="modify" label="2"
+                        >保密</el-radio
                       >
                     </div>
                   </div>
@@ -55,9 +58,9 @@
                     <p style="margin-bottom: 20px">生日</p>
                     <div style="width: 250px">
                       <el-date-picker
-                        v-model="birsday"
+                        v-model="birthday"
                         type="date"
-                        :disabled="xiugai"
+                        :disabled="modify"
                         placeholder="选择日期"
                         format="yyyy 年 MM 月 dd 日"
                       >
@@ -69,7 +72,7 @@
                     <div style="width: 250px">
                       <el-input
                         v-model="zhiye"
-                        :disabled="xiugai"
+                        :disabled="modify"
                         placeholder="请输入内容"
                       ></el-input>
                     </div>
@@ -252,10 +255,10 @@ export default {
     return {
       activeName: "1",
       iphone: "13721625428",
-      size: "1",
-      birsday: "1999-11-05",
+      gender: "2",
+      birthday: "1999-11-05",
       z: "编辑",
-      xiugai: true,
+      modify: true,
       name: "葛大爷",
       zhiye: "抠脚",
       a: "none",
@@ -270,10 +273,10 @@ export default {
   methods: {
     bianji() {
       if (this.z == "编辑") {
-        this.xiugai = false;
+        this.modify = false;
         this.z = "保存";
       } else {
-        this.xiugai = true;
+        this.modify = true;
         this.z = "编辑";
       }
     },

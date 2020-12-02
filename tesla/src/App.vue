@@ -15,7 +15,9 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
+#log a {
+  color: #1d0909;
+}
 #nav {
   padding: 30px;
 }
