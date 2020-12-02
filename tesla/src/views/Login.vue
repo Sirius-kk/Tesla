@@ -195,16 +195,20 @@ export default {
     login() {
       // 保存参数变量str中
       let str = "username=" + this.username + "&password=" + this.password;
+      // 验证用户名和密码的操作放到store中
+      /* 调用store中的分发的 actions */
+      this.$store.dispatch('login_on_ac',str);
+
       // 用post发送请求
-      this.axios.post("/user/login", str).then((res) => {
-        if (res.data.code == 1) {
-          // 如果后台响应一弹出登陆成功 并跳转首页
-          this.$message.success("登录失败，用户名或密码错误");
-          this.$router.push("/");
-        } else {
-          this.$message.error("登录失败，用户名或密码错误");
-        }
-      });
+      // this.axios.post("/user/login", str).then((res) => {
+      //   if (res.data.code == 1) {
+      //     // 如果后台响应一弹出登陆成功 并跳转首页
+      //     this.$message.success("登陆成功");
+      //     this.$router.push("/");
+      //   } else {
+      //     this.$message.error("登录失败，用户名或密码错误");
+      //   }
+      // });
     },
   },
 };

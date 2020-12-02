@@ -283,7 +283,7 @@ export default {
       ) {
         // 如果都正确就向后台发送post请求
         let str = "username=" + this.username + "&password=" + this.password;
-        this.axios.post("/user/reglogin", str).then((res) => {
+        this.axios.post("/user/register", str).then((res) => {
           // 如果后台响应为1 代表注册成功别切修改遮罩层不现实
           if (res.data.code == 1) {
             this.m = "";
