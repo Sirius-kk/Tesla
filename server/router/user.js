@@ -12,7 +12,7 @@ const pool = require('../pool.js');//引入上一级目录下的pool.js
 /* 输入用户名时的失去焦点，验证用户名 */ 
 r.get("/reguname",(req,res)=>{
     let uname=req.query.uname;
-    let sql=`SELECT COUNT(uid) AS count FROM ts_user WHERE uname=?`;
+    let sql=`SELECT COUNT(id) AS count FROM ts_user WHERE uname=?`;
     pool.query(sql,[uname],(err,result)=>{
       if (err)throw err;
       if (result[0].count == 0){
@@ -38,28 +38,23 @@ r.get("/reguname",(req,res)=>{
 /* ***************************用户注册 */
 /* ***************************用户登录 */
 r.post("/login",(req,res)=>{
-    let username=req.body.username;
-    let password=req.body.password;
-    let sql1='SELECT uid,uname FROM ts_user WHERE uname=? AND upwd=MD5(?)';
     let userInfo = {};
-    function log(sql) {
-        pool.query(sql,[username,password],(err,result)=>{
+    let uname = req.body.username;
+    let pwd = req.body.password;
+    let sql1 = "SELECT id,uname FROM ts_user WHERE uname=? AND upwd=MD5(?)";
+    function s1(sql) {
+        pool.query(sql,[uname,pwd],(err,result)=>{
           if (err) throw err;
             if(result.length>0){
+              console.log(result);
               res.send({code: 1,userInfo: result[0]});
-              /* 储存uid用于查询购物车编号和订单编号 */
-      //         userInfo = result[0];
-      //         log_orderAndShop(userInfo.uid);
+              /* 储存id用于查询购物车编号和订单编号 */
             }else{
               res.send({code:0});
             };
         });
     };
-    /* 查询购物车编号及其订单编号 同时发送到前台 */
-    // function log_orderAndShop(sql) {
-
-    // }
-    log(sql1);
+    s1(sql1);
   });
 /* ***************************用户登录 */
 /* **************************接口配置***************************** */

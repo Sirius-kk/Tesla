@@ -21,9 +21,9 @@ USE tesla;
 DROP TABLE IF EXISTS ts_index_rotationPicture;
 /*创建主页轮播图片数据表'ts_index_rotationPicture'*/
 CREATE TABLE ts_index_rotationPicture (
-  indexr_id TINYINT PRIMARY KEY AUTO_INCREMENT,          #主页轮播图片详情编号
+  indexr_id INT PRIMARY KEY AUTO_INCREMENT,          #主页轮播图片详情编号
   indexr_tables VARCHAR(30),    #图片来源数据表
-  indexr_pid TINYINT            #产品详情编号
+  indexr_pid INT            #产品详情编号
 );
 /* ************************************* */
 
@@ -32,27 +32,29 @@ CREATE TABLE ts_index_rotationPicture (
 DROP TABLE IF EXISTS ts_user;
 /*创建用户信息数据表'ts_user'*/
 CREATE TABLE ts_user (
-  uid TINYINT PRIMARY KEY AUTO_INCREMENT,          #用户编号
+  id INT PRIMARY KEY AUTO_INCREMENT,          #用户编号
   uname VARCHAR(32),            #用户名
   upwd VARCHAR(32),             #用户密码
   email VARCHAR(64),            #用户邮箱
   phone VARCHAR(11),            #用户手机号
   nickname VARCHAR(32),         #用户昵称
   avatar VARCHAR(128),          #用户头像
-  gender TINYINT                #用户性别
+  gender INT                #用户性别
 );
 /*丢弃数据表，如果存在数据表'ts_receiver_address'*/
 DROP TABLE IF EXISTS ts_receiver_address;
 /*创建用户收货地址数据表'ts_receiver_address'*/
 CREATE TABLE ts_receiver_address (
-  uid TINYINT PRIMARY KEY AUTO_INCREMENT,          #用户编号
+  id INT PRIMARY KEY AUTO_INCREMENT,           #地址编号
+  uid INT,                  #用户编号
   receiver VARCHAR(16),         #收货人姓名
   province VARCHAR(16),         #省
   city VARCHAR(16),             #市
   county VARCHAR(16),           #县
   address VARCHAR(128),         #详细地址
   postcode CHAR(6),             #邮编
-  is_default BOOLEAN            #是否为默认收货地址
+  is_default INT,            #是否为默认收货地址
+  FOREIGN KEY(uid) REFERENCES ts_user(id)
 );
 /* *************************用户模块数据表******************* */
 
@@ -61,11 +63,12 @@ CREATE TABLE ts_receiver_address (
 DROP TABLE IF EXISTS ts_shopping_cart;
 /*创建用购物车数据表'ts_shopping_cart'*/
 CREATE TABLE ts_shopping_cart (
-  id TINYINT PRIMARY KEY AUTO_INCREMENT,          #购物车编号
+  id INT PRIMARY KEY AUTO_INCREMENT,          #购物车编号
   uid INT,                      #用户编号
   pid INT,                      #商品编号
   pcount INT,                   #购买数量
-  is_checked BOOLEAN            #是否勾选 
+  is_checked INT,            #是否勾选 
+  FOREIGN KEY(uid) REFERENCES ts_user(id)
 );
 /* **************************购物车模块数据表**************** */
 
@@ -74,7 +77,7 @@ CREATE TABLE ts_shopping_cart (
 DROP TABLE IF EXISTS ts_order;
 /*创建用购物车数据表'ts_order'*/
 CREATE TABLE ts_order (
-  id TINYINT PRIMARY KEY AUTO_INCREMENT,          #订单编号
+  id INT PRIMARY KEY AUTO_INCREMENT,          #订单编号
   uid INT,                      #用户编号
   pid INT,                      #商品编号
   pcount INT,                   #购买数量
@@ -82,7 +85,9 @@ CREATE TABLE ts_order (
   order_time BIGINT,            #下单时间
   pay_time BIGINT,              #付款时间
   deliver_time BIGINT,          #发货时间
-  recived_time BIGINT           #签收时间
+  recived_time BIGINT,           #签收时间
+  FOREIGN KEY(uid) REFERENCES ts_user(id)
+
 );
 /* *****************************订单模块数据表*************** */
 
@@ -94,7 +99,7 @@ CREATE TABLE ts_order (
 -- DROP TABLE IF EXISTS ts_product;
 -- /*创建商品主类表数据表'ts_product'*/
 -- CREATE TABLE ts_product (
---   product_id TINYINT PRIMARY KEY AUTO_INCREMENT,        #类目编号
+--   product_id INT PRIMARY KEY AUTO_INCREMENT,        #类目编号
 --   product_tp VARCHAR(30)    #类目名称
 -- );
 
@@ -148,7 +153,7 @@ DROP TABLE IF EXISTS ts_activity_product;
 /*店铺活动详情数据表'ts_activity_product'*/
 CREATE TABLE ts_activity_product(
   pid INT PRIMARY KEY AUTO_INCREMENT,  #店铺活动详情编号
-  family_id TINYINT,         #所属型号家族编号
+  family_id INT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类
   title VARCHAR(30),         #主标题
   price INT,         #价格
@@ -159,14 +164,15 @@ CREATE TABLE ts_activity_product(
   pic VARCHAR(50),           #图片
   pic2 VARCHAR(50),          #切换图片
   pic_detais VARCHAR(400),    #详情图片
-  mian TINYINT               #家族
+  mian INT,               #家族
+  FOREIGN KEY(family_id) REFERENCES ts_activity_family(id)
 );
 /*丢弃数据表，如果存在数据表'ts_charge_product'*/
 DROP TABLE IF EXISTS ts_charge_product;
 /*充电产品详情数据表'ts_charge_product'*/
 CREATE TABLE ts_charge_product(
   pid INT PRIMARY KEY AUTO_INCREMENT,  #充电产品详情编号
-  family_id TINYINT,         #所属型号家族编号
+  family_id INT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类
   title VARCHAR(30),         #主标题
   price INT,         #价格
@@ -177,14 +183,15 @@ CREATE TABLE ts_charge_product(
   pic VARCHAR(50),           #图片
   pic2 VARCHAR(50),          #切换图片
   pic_detais VARCHAR(400),    #详情图片
-  mian TINYINT               #家族
+  mian INT,               #家族
+  FOREIGN KEY(family_id) REFERENCES ts_charge_family(id)
 );
 /*丢弃数据表，如果存在数据表'ts_part_product'*/
 DROP TABLE IF EXISTS ts_part_product;
 /*优选配件详情数据表'ts_part_product'*/
 CREATE TABLE ts_part_product(
   pid INT PRIMARY KEY AUTO_INCREMENT,  #优选配件详情编号
-  family_id TINYINT,         #所属型号家族编号
+  family_id INT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类1
   title VARCHAR(30),         #主标题
   price INT,         #价格
@@ -195,14 +202,15 @@ CREATE TABLE ts_part_product(
   pic VARCHAR(50),           #图片
   pic2 VARCHAR(50),          #切换图片
   pic_detais VARCHAR(400),    #详情图片
-  mian TINYINT               #家族
+  mian INT,               #家族
+  FOREIGN KEY(family_id) REFERENCES ts_part_family(id)
 );
 /*丢弃数据表，如果存在数据表'ts_dress_product'*/
 DROP TABLE IF EXISTS ts_dress_product;
 /*精品服饰详情数据表'ts_dress_product'*/
 CREATE TABLE ts_dress_product(
   pid INT PRIMARY KEY AUTO_INCREMENT,  #精品服饰详情编号
-  family_id TINYINT,         #所属型号家族编号
+  family_id INT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类
   title VARCHAR(30),         #主标题
   price INT,         #价格
@@ -213,14 +221,15 @@ CREATE TABLE ts_dress_product(
   pic VARCHAR(50),           #图片
   pic2 VARCHAR(50),          #切换图片
   pic_detais VARCHAR(400),    #详情图片
-  mian TINYINT               #家族
+  mian INT,               #家族
+  FOREIGN KEY(family_id) REFERENCES ts_dress_family(id)
 );
 /*丢弃数据表，如果存在数据表'ts_surround_product'*/
 DROP TABLE IF EXISTS ts_surround_product;
 /*周边精品详情数据表'ts_surround_product'*/
 CREATE TABLE ts_surround_product(
   pid INT PRIMARY KEY AUTO_INCREMENT,  #周边精品详情编号
-  family_id TINYINT,         #所属型号家族编号
+  family_id INT,         #所属型号家族编号
   class VARCHAR(10),         #产品分类
   title VARCHAR(30),         #主标题
   price INT,         #价格
@@ -231,7 +240,8 @@ CREATE TABLE ts_surround_product(
   pic VARCHAR(50),           #图片
   pic2 VARCHAR(50),          #切换图片
   pic_detais VARCHAR(400),    #详情图片
-  mian TINYINT               #家族
+  mian INT,               #家族
+  FOREIGN KEY(family_id) REFERENCES ts_surround_family(id)
 );
 
 

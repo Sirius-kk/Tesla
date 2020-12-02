@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 /* 引入axios模块 */
-import axios from "axios"
+import axios from "axios";
 /* 引入router模块 */
 import router from '../router'
+/* 引入Message */
+import { Message } from 'element-ui';
 
 Vue.use(Vuex)
 
@@ -45,16 +47,20 @@ export default new Vuex.Store({
 
     /* 登陆，发送异步请求，成功 则更改登陆状态，否则进行相应提示 */
     login_on_ac(context, payload) {/* 在登陆时被调用 */
-      this.axios.post("/user/login", payload).then((res) => {
+      axios.post("/user/login", payload).then((res) => {
         if (res.data.code == 1) {
           // 提交Mutations
           context.commit('login_on_mu',res.data.userInfo);
           // 
+          localStorage.setItem("islogined",1);
+          localStorage.setItem("userInfo",JSON.stringify(res.data.userInfo));
           // 如果后台响应一弹出登陆成功 并跳转首页
-          this.$message.success("登陆成功");
-          this.$router.push("/");
+          Message.success(`欢迎 ${res.data.userInfo.uname}`);
+          router.push("/");
+          console.log(res.data.userInfo);
         } else {
-          this.$message.error("登录失败，用户名或密码错误");
+          // Message.error("登录失败，用户名或密码错误");
+          console.log("000000000000");
         }
       });
     },
