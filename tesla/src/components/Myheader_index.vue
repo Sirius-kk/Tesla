@@ -5,7 +5,7 @@
         <!-- 左侧部分开始 -->
         <div class="left" @click="jumpIndex">
           <div class="img_logo">
-            <img src="../assets/img/header/logo.jpg" />
+            <img src="../assets/img/header/logo.png" />
           </div>
           <div></div>
           <div>在线商城</div>
