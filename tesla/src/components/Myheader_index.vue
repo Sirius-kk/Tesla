@@ -5,7 +5,7 @@
         <!-- 左侧部分开始 -->
         <div class="left" @click="jumpIndex">
           <div class="img_logo">
-            <img src="../assets/img/header/logo.png" />
+            <img :src="img" />
           </div>
           <div></div>
           <div>在线商城</div>
@@ -278,6 +278,7 @@ export default {
       shop_car: true,
       search_s: true,
       inp_value: "",
+      img: require("../assets/img/header/logo2.png")
     };
   },
   methods: {
@@ -362,7 +363,7 @@ export default {
         document.querySelector("a").style.color = "#000";
         this.search_s = false;
         this.shop_car = false;
-        
+        this.img = require("../assets/img/header/logo1.png");
       } else {
         headerEle.style.background = "rgba(255,255,255,0)";
         headerEle.style.color = "#fff";
@@ -371,6 +372,7 @@ export default {
         document.querySelector("a").style.color = "#fff";
         this.search_s = true;
         this.shop_car = true;
+        this.img = require("../assets/img/header/logo2.png");
       }
     },
     /* 主頁頭部的變色設置 */
@@ -386,6 +388,7 @@ export default {
       document.querySelector("a").style.color = "#000";
       this.search_s = false;
       this.shop_car = false;
+      this.img = require("../assets/img/header/logo1.png");
     },
     h_hide() {// 当滚动距离超过50px后，就不需要鼠标移出的隐藏了
       // 获取超出页面上方的距离
@@ -402,6 +405,7 @@ export default {
         document.querySelector("a").style.color = "#fff";
         this.search_s = true;
         this.shop_car = true;
+        this.img = require("../assets/img/header/logo2.png");
       }
     },
     /* 頭部鼠標懸停顯示 */
